@@ -7,6 +7,7 @@ import ElementUI from 'element-ui'	// 添加
 import 'element-ui/lib/theme-chalk/index.css'	// 添加
 import axios from 'axios'	// 添加
 import home from './pages/home.vue'
+import process from './pages/process.vue'
 
 axios.defaults.baseURL = 'http://127.0.0.1:8000'	// 指定后端的地址，也就是django运行的地址
 Vue.prototype.$http = axios	// 添加
@@ -20,6 +21,11 @@ const router = new VueRouter({
       path: '/home',
       name: 'home',
       component: home
+    },
+    {
+      path: '/process',
+      name: 'process',
+      component: process
     }
   ],
   mode: 'history'

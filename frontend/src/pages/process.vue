@@ -3,7 +3,7 @@
     <top-nav></top-nav>
     <el-container height= "100%">
       <el-header>
-        <span>我是主页</span>
+        <span>我是主流程页</span>
       </el-header>
       <el-container>
         <el-aside width="300px" >

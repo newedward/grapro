@@ -3,10 +3,9 @@
     <el-header style="text-align: center;border-radius: 15px;box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)">
       <el-avatar :src='avatar' style="margin-left: 50px"></el-avatar>
 
-        <el-button type="text" style="margin-left: 200px"  @click.native="jumpTo($event)" id="主页">主页</el-button>
-        <el-button type="text" style="margin-left: 100px"  @click.native="jumpTo($event)" id="个人主页">个人主页</el-button>
-        <el-button type="text" style="margin-left: 100px"  @click.native="jumpTo($event)" id="好友动态">好友动态</el-button>
-     <el-input placeholder="搜索点什么" prefix-icon="el-icon-search" v-model="input1" @keyup.enter.native="onSearch" style="margin-left:100px;width: 200px"></el-input>
+        <el-button type="text" style="margin-left: 200px"  @click.native="jumpTo($event)" id="个人信息">个人信息</el-button>
+        <el-button type="text" style="margin-left: 100px"  @click.native="jumpTo($event)" id="流程管理">流程管理</el-button>
+        <el-button type="text" style="margin-left: 100px"  @click.native="jumpTo($event)" id="校园动态">校园动态</el-button>
         <el-button type="text" icon="el-icon-bell" circle style="margin-left: 50px;"  @click="checkMessage"></el-button>
 
     <el-dropdown style="margin-left: 50px" @command="userSettings" v-if="userId!=0">
@@ -78,10 +77,10 @@ export default {
       },
       jumpTo: function(e){
           var name=e.currentTarget.id;
-          if(name=="主页"){
+          if(name=="个人信息"){
               window.location.href="/index";
           }
-          else if(name=="个人主页"){
+          else if(name=="流程管理"){
               if(this.userId==0){
                   this.$message({type:'error',message:"请先登录！",duration:600})
               }
@@ -89,7 +88,7 @@ export default {
                   window.location.href="/person/"+this.userId;
               }
           }
-          else if(name=="好友动态"){
+          else if(name=="校园动态"){
               if(this.userId==0){
                   this.$message({type:'error',message:"请先登录！",duration:600})
               }
