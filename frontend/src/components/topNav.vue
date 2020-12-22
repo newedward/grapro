@@ -1,24 +1,13 @@
 <template>
   <div id="topNav">
-    <el-header style="text-align: center;border-radius: 15px;box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)">
-      <el-avatar :src='avatar' style="margin-left: 50px"></el-avatar>
+    <el-header height="80px" >
+      <el-avatar :src='avatar' style="margin-left: 100px;margin-top: 2%"></el-avatar>
 
         <el-button type="text" style="margin-left: 200px"  @click.native="jumpTo($event)" id="个人信息">个人信息</el-button>
-        <el-button type="text" style="margin-left: 100px"  @click.native="jumpTo($event)" id="流程管理">流程管理</el-button>
-        <el-button type="text" style="margin-left: 100px"  @click.native="jumpTo($event)" id="校园动态">校园动态</el-button>
-        <el-button type="text" icon="el-icon-bell" circle style="margin-left: 50px;"  @click="checkMessage"></el-button>
-
-    <el-dropdown style="margin-left: 50px" @command="userSettings" v-if="userId!=0">
-        <span class="el-dropdown-link"><i class="el-icon-user"/><i class="el-icon-arrow-down el-icon--right"/></span>
-        <el-dropdown-menu slot="dropdown"  >
-    <el-dropdown-item  command="setting">设置个人信息</el-dropdown-item>
-    <el-dropdown-item command="logout">退出登录</el-dropdown-item>
-  </el-dropdown-menu>
-</el-dropdown>
-        <el-button type="primary" @click="toLogin" v-if="userId==0" style="margin-left: 50px">登录</el-button>
-
-
-
+        <el-button type="text" style="margin-left: 200px"  @click.native="jumpTo($event)" id="流程管理">流程管理</el-button>
+        <el-button type="text" style="margin-left: 200px"  @click.native="jumpTo($event)" id="校园动态">校园动态</el-button>
+        <el-button type="text" icon="el-icon-bell" circle style="margin-left: 200px;"  @click="checkMessage"></el-button>
+        <el-button type="primary" @click="toLogin" v-if="userId==0" style="margin-left: 200px">登录</el-button>
     </el-header>
   </div>
 </template>
@@ -81,12 +70,8 @@ export default {
               window.location.href="/index";
           }
           else if(name=="流程管理"){
-              if(this.userId==0){
-                  this.$message({type:'error',message:"请先登录！",duration:600})
-              }
-              else{
-                  window.location.href="/person/"+this.userId;
-              }
+
+                  window.location.href="/process";
           }
           else if(name=="校园动态"){
               if(this.userId==0){
@@ -122,5 +107,14 @@ export default {
 </script>
 
 <style>
-
+  .el-header{
+    background-color: #0b0b0b;
+    color: 	#FFFFFF;
+    margin-top: -15px;
+    margin-left: -15px;
+    margin-right: -15px;
+    width: 1536px;
+    /*box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);*/
+    text-align: center;
+  }
 </style>
