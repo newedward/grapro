@@ -1,10 +1,11 @@
 <template>
-  <el-header height="80px">
+<el-header height="60px">
     <div id="topNav" >
-      <el-row type="flex"  justify="center">
+
+      <el-row type="flex"  justify="center" align="middle" >
         <el-col span="20" class="row-tn" >
           <el-avatar :src='avatar' style="margin-left:10%" ></el-avatar>
-        <el-button type="text" style="margin-left: 10%"  @click.native="jumpTo($event)" id="主页">主页</el-button>
+        <el-button type="text"  style="margin-left: 10%"  @click.native="jumpTo($event)" id="主页">主页</el-button>
         <el-button type="text" style="margin-left: 10%"  @click.native="jumpTo($event)" id="流程管理">流程管理</el-button>
         <el-button type="text"  style="margin-left: 10%" @click.native="jumpTo($event)" id="学校动态">学校动态</el-button>
           <el-button type="text" style="margin-left: 10%"  @click.native="jumpTo($event)" id="个人信息">个人信息</el-button>
@@ -13,8 +14,7 @@
         </el-col>
 
         </el-row>
-      </div>
-    </el-header>
+    </div></el-header>
 </template>
 
 <script>
@@ -72,23 +72,31 @@ export default {
       jumpTo: function(e){
           var name=e.currentTarget.id;
           if(name=="主页"){
-              window.location.href="/index";
+              window.location.href="/home";
           }
-          else if(name=="个人主页"){
-              if(this.userId==0){
-                  this.$message({type:'error',message:"请先登录！",duration:600})
-              }
-              else{
-                  window.location.href="/person/"+this.userId;
-              }
+          else if(name=="流程管理"){
+              // if(this.userId==0){
+              //     this.$message({type:'error',message:"请先登录！",duration:600})
+              // }
+              // else{
+                  window.location.href="process";
+              // }
           }
-          else if(name=="好友动态"){
-              if(this.userId==0){
-                  this.$message({type:'error',message:"请先登录！",duration:600})
-              }
-              else{
+          else if(name=="学校动态"){
+              // if(this.userId==0){
+              //     this.$message({type:'error',message:"请先登录！",duration:600})
+              // }
+              // else{
                   window.location.href="/home";
-              }
+              // }
+          }
+          else if(name=="个人信息"){
+              // if(this.userId==0){
+              //     this.$message({type:'error',message:"请先登录！",duration:600})
+              // }
+              // else{
+                  window.location.href="/personinfo";
+              // }
           }
       },
       checkMessage: function() {
@@ -117,8 +125,12 @@ export default {
 
 <style>
   .el-header {
-  /*background-color: #B3C0D1;*/
+  background-color: rgb(254, 253, 252);
     width: 100%;
+  }
+  .el-avatar{
+
+    vertical-align:middle;
   }
   #topNav{
     margin: 8px;
