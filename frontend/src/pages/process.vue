@@ -1,11 +1,12 @@
 <template>
   <div id = "home">
-    <top-nav></top-nav>
-    <el-container height= "100%">
-      <el-header>
-        <span>我是主流程页</span>
-      </el-header>
+
+    <el-container height= "100%" direction="vertical">
+      <topNav></topNav>
       <el-container>
+        <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
+        <flowTea></flowTea>
+      </el-aside>
         <el-main>
           <div class="block">
   <el-timeline>
@@ -28,11 +29,33 @@
       </el-card>
     </el-timeline-item>
   </el-timeline>
-</div>
+             </div>
+  <div id="stu">
+    <el-table
+    :data="tableData"
+    style="width: 100%"
+    :row-class-name="tableRowClassName">
+    <el-table-column
+      prop="number"
+      label="学号"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="name"
+      label="姓名"
+      width="180">
+    </el-table-column>
+    <el-table-column
+      prop="status"
+      label="状态">
+    </el-table-column>
+  </el-table>
+  </div>
+
         </el-main>
       </el-container>
     </el-container>
-  </div> 
+</div>
 </template>
 
 <style>
@@ -60,14 +83,57 @@
   .infinite-list-wrapper{
     height: 100vh;
   }
+  .el-table .warning-row {
+    background: oldlace;
+  }
+  #stu{
+    margin:8px 10px;
+  }
+
+  .el-table .success-row {
+    background: #f97880;
+  }
 </style>
 
 <script>
 import topNav from '../components/topNav'
+import flowTea from '../components/flowTea'
   export default {
     name: 'home',
     components: {
       topNav,
+      flowTea,
+    },
+    methods: {
+      tableRowClassName({row, rowIndex}) {
+        if (rowIndex === 1) {
+          return 'warning-row';
+        } else if (rowIndex === 2) {
+          return 'success-row';
+        }
+        return '';
+      }
+    },
+    data() {
+      return {
+        tableData: [{
+          number: '171110133',
+          name: '朱振南',
+          status: '选择题目 毕业设计全流程管理系统',
+        }, {
+          number: '171110114',
+          name: '航子',
+          status: '完成题目'
+        }, {
+          number: '182210922',
+          name: '王小虎',
+          status: '选择题目',
+        }, {
+          number: '198764522',
+          name: '王小虎',
+          status: '结题'
+        }]
+      }
     }
   }
 </script>
