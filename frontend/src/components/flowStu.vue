@@ -1,10 +1,10 @@
 <template>
-    <el-menu >
-     <el-menu-item index="1-1"><i class="el-icon-star-on">主流程</i></el-menu-item>
+    <el-menu router="true" >
+     <el-menu-item index="/process"><i class="el-icon-star-on">主流程</i></el-menu-item>
       <el-submenu index="1">
         <template slot="title"><i class="el-icon-monitor"></i>开题阶段</template>
         <el-menu-item-group>
-          <el-menu-item index="1-1">导师选择</el-menu-item>
+          <el-menu-item index="/selectTea">导师选择</el-menu-item>
           <el-menu-item index="1-2">题目选择</el-menu-item>
           <el-menu-item index="1-3">进行开题</el-menu-item>
         </el-menu-item-group>

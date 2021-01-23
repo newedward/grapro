@@ -1,14 +1,14 @@
 <template>
-    <el-menu >
-     <el-menu-item index="1-1"><i class="el-icon-star-on">主流程</i></el-menu-item>
+    <el-menu router="true">
+     <el-menu-item index="/process"><i class="el-icon-star-on">主流程</i></el-menu-item>
       <el-submenu index="1">
         <template slot="title"><i class="el-icon-monitor"></i>开题阶段</template>
         <el-menu-item-group>
            <el-submenu index="1-1">
           <template slot="title">学生选择</template>
-          <el-menu-item index="1-4-1">我的学生</el-menu-item>
-             <el-menu-item index="1-4-1">等待队列</el-menu-item>
-             <el-menu-item index="1-4-1">申请列表</el-menu-item>
+          <el-menu-item index="1-1-1">我的学生</el-menu-item>
+             <el-menu-item index="1-1-2">等待队列</el-menu-item>
+             <el-menu-item  index="/selectstu">申请列表</el-menu-item>
         </el-submenu>
           <el-menu-item index="1-2">题目发布</el-menu-item>
           <el-menu-item index="1-3">开题查验</el-menu-item>
@@ -39,7 +39,10 @@
 
 <script>
     export default {
-        name: "flowTea"
+        name: "flowTea",
+      methods:{
+
+      }
     }
 </script>
 

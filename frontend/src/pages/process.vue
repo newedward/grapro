@@ -25,7 +25,7 @@
     <el-timeline-item timestamp="2020/12/2" placement="top">
       <el-card>
         <h4>开题报告修正</h4>
-        <p>朱振南 提交于 2020/12/2 20:46</p>
+        <p>何清刚 老师 提出修改意见</p>
       </el-card>
     </el-timeline-item>
   </el-timeline>
