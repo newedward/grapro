@@ -11,6 +11,7 @@ import process from './pages/process.vue'
 import personinfo from './pages/personinfo'
 import selectstu from './pages/selectstu'
 import selectTea from './pages/selectTea'
+import mystudents from './pages/mystudents'
 
 axios.defaults.baseURL = 'http://127.0.0.1:8000'	// 指定后端的地址，也就是django运行的地址
 Vue.prototype.$http = axios	// 添加
@@ -44,6 +45,11 @@ const router = new VueRouter({
       path: '/selectTea',
       name: 'selectTea',
       component: selectTea
+    },
+    {
+      path: '/mystudents',
+      name: 'mystudents',
+      component: mystudents
     }
   ],
   mode: 'history'

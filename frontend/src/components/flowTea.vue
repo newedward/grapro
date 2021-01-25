@@ -6,8 +6,7 @@
         <el-menu-item-group>
            <el-submenu index="1-1">
           <template slot="title">学生选择</template>
-          <el-menu-item index="1-1-1">我的学生</el-menu-item>
-             <el-menu-item index="1-1-2">等待队列</el-menu-item>
+          <el-menu-item index="/mystudents">我的学生</el-menu-item>
              <el-menu-item  index="/selectstu">申请列表</el-menu-item>
         </el-submenu>
           <el-menu-item index="1-2">题目发布</el-menu-item>
