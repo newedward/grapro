@@ -4,7 +4,7 @@
       <topNav></topNav>
       <el-container >
         <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-        <flowTea></flowTea>
+        <flowStu></flowStu>
       </el-aside>
         <el-main>
           <el-row type="flex"  justify="center" align="middle">
@@ -43,12 +43,12 @@
 
 <script>
   import topNav from '../components/topNav'
-import flowTea from '../components/flowTea'
+import flowStu from '../components/flowStu'
     export default {
         name: "selectTea",
       components: {
       topNav,
-      flowTea,
+      flowStu,
     },
       data(){
            return {
