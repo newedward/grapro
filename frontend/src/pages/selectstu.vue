@@ -27,9 +27,9 @@
             <el-card class="student">
               <div slot="header" >
     <span >{{item.code + "-" + item.name}}</span>
-    <el-button style="float: right; padding: 3px 0;margin-left:10px;color:#228B22" type="text">同意</el-button>
-                <el-button style="float: right; padding: 3px 0;color: #FF0000" type="text">拒绝</el-button>
-                <el-button style="float: right; padding: 3px 0" type="text">放入等待队列</el-button>
+    <el-button style="float: right; padding: 3px 0;margin-left:10px;color:#228B22" type="text" @click="accpetreq(item.uid,item.appId)">同意</el-button>
+                <el-button style="float: right; padding: 3px 0;color: #FF0000" type="text" @click="refusereq(item.uid,item.appId)">拒绝</el-button>
+                <el-button style="float: right; padding: 3px 0" type="text" @click="putinqueue(item.uid,item.appId)">放入等待队列</el-button>
   </div>
               <el-avatar :size="80" shape="circle" :src="item.avater"></el-avatar>
               <span class="intro">{{item.intro}}</span>
@@ -54,12 +54,12 @@ import flowTea from '../components/flowTea'
       data(){
           return {
            data: [
-             {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110133",name:"张三",intro:"不忘初心"},
-            {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110133",name:"陈斌",intro:"不忘初心"},
-            {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110133",name:"马化腾",intro:"不忘初心"},
-            {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110133",name:"李四",intro:"不忘初心"},
-          {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110133",name:"马云",intro:"不忘初心"},
-             {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110133",name:"马云",intro:"不忘初心"},
+          //    {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110133",name:"张三",intro:"不忘初心"},
+          //   {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110133",name:"陈斌",intro:"不忘初心"},
+          //   {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110133",name:"马化腾",intro:"不忘初心"},
+          //   {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110133",name:"李四",intro:"不忘初心"},
+          // {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110133",name:"马云",intro:"不忘初心"},
+          //    {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110133",name:"马云",intro:"不忘初心"},
            ],
             list:[],
             totalPage: [],
@@ -68,13 +68,34 @@ import flowTea from '../components/flowTea'
       // 共几页
       pageNum: 1,
       // 当前显示的数据
-      currentPage: 0
+      currentPage: 0,
+            watchId:1
     }
       },
       mounted(){
-          this.getpage();
+          this.getdata();
       },
       methods:{
+          getdata(){
+            this.$http.post('/api/getApplicationByTeacher/',{'teacherId':this.watchId},{emulateJSON:true})
+              .then(function(response){
+                    var res1 = JSON.parse(response.bodyText);
+                    if(res1['err_code']==0) {
+                      for (var i = 0; i < res1['apps'].length; i++) {
+                        this.data.push({avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+                        ,name:res1['ulist'][i]['fields']['name'],intro:"一期测试"
+                        ,'uid':res1['ulist'][i]['pk'],code:res1['slist'][i]['fields']['code']
+                        ,appid:res1['apps'][i]['pk']})
+                        //uid指的是学生的id
+                      }
+                      this.getpage();
+                    }
+                    else{
+                      this.$message.error("获取申请信息失败")
+                    }
+
+              })
+          },
           getpage(){
     // 根据后台数据的条数和每页显示数量算出一共几页,得0时设为1 ;
     this.pageNum = Math.ceil(this.data.length / this.pageSize) || 1;
@@ -98,6 +119,34 @@ import flowTea from '../components/flowTea'
         jumpPage(val){
             console.log(val);
             this.list = this.totalPage[val-1];
+        },
+        accpetreq(val,appid){
+            for (var i = 0; i < this.data.length; i++) {
+                if (this.data[i]['uid'] == val) {
+                  this.data.splice(i, 1);
+                }
+               }
+            this.$http.post('/api/acceptStu/',{'teacherId':this.watchId,'stuId':val,'appId':appid},{emulateJSON:true})
+              .then(function(response){
+                    var res1 = JSON.parse(response.bodyText);
+                    if(res1['err_code']==0) {
+                      this.$message.error("成功选择学生！")
+                    }
+                    else if (res1['err_code']==2){
+                      this.$message.error("该学生已经找到其他导师了，请刷新页面")
+                    }
+                    else{
+                      this.$message.error("请求失败")
+                    }
+
+              })
+
+        },
+        refusereq(val,appid){
+
+        },
+        putinqueue(val,appid){
+
         }
       }
     }

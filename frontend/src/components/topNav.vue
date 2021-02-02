@@ -30,7 +30,7 @@ export default {
   components: {
   },
     mounted: function(){
-        this.getCurUserID()
+        // this.getCurUserID()
     },
     data(){
       return {

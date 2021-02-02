@@ -18,12 +18,14 @@ import mediumStu from "./pages/mediumStu";
 import endStu from "./pages/endStu";
 import mediunTea from "./pages/mediunTea";
 import endTea from "./pages/endTea";
+import VueResource from 'vue-resource';
 
 axios.defaults.baseURL = 'http://127.0.0.1:8000'	// 指定后端的地址，也就是django运行的地址
-Vue.prototype.$http = axios	// 添加
+Vue.prototype.$axios = axios	// 添加
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 Vue.use(ElementUI)	// 添加
 Vue.use(VueRouter)
+Vue.use(VueResource)
 Vue.config.productionTip = false
 const router = new VueRouter({
   routes: [
