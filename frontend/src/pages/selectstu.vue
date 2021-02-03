@@ -27,9 +27,9 @@
             <el-card class="student">
               <div slot="header" >
     <span >{{item.code + "-" + item.name}}</span>
-    <el-button style="float: right; padding: 3px 0;margin-left:10px;color:#228B22" type="text" @click="accpetreq(item.uid,item.appId)">同意</el-button>
-                <el-button style="float: right; padding: 3px 0;color: #FF0000" type="text" @click="refusereq(item.uid,item.appId)">拒绝</el-button>
-                <el-button style="float: right; padding: 3px 0" type="text" @click="putinqueue(item.uid,item.appId)">放入等待队列</el-button>
+    <el-button style="float: right; padding: 3px 0;margin-left:10px;color:#228B22" type="text" @click="accpetreq(item.uid,item.appid)">同意</el-button>
+                <el-button style="float: right; padding: 3px 0;color: #FF0000" type="text" @click="refusereq(item.uid,item.appid)">拒绝</el-button>
+                <el-button style="float: right; padding: 3px 0" type="text" @click="putinqueue(item.uid,item.appid)">放入等待队列</el-button>
   </div>
               <el-avatar :size="80" shape="circle" :src="item.avater"></el-avatar>
               <span class="intro">{{item.intro}}</span>
@@ -84,11 +84,12 @@ import flowTea from '../components/flowTea'
                       for (var i = 0; i < res1['apps'].length; i++) {
                         this.data.push({avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
                         ,name:res1['ulist'][i]['fields']['name'],intro:"一期测试"
-                        ,'uid':res1['ulist'][i]['pk'],code:res1['slist'][i]['fields']['code']
+                        ,uid:res1['ulist'][i]['pk'],code:res1['slist'][i]['fields']['code']
                         ,appid:res1['apps'][i]['pk']})
                         //uid指的是学生的id
                       }
                       this.getpage();
+                      console.log(this.data);
                     }
                     else{
                       this.$message.error("获取申请信息失败")
@@ -126,14 +127,18 @@ import flowTea from '../components/flowTea'
                   this.data.splice(i, 1);
                 }
                }
+            this.getpage();
             this.$http.post('/api/acceptStu/',{'teacherId':this.watchId,'stuId':val,'appId':appid},{emulateJSON:true})
               .then(function(response){
                     var res1 = JSON.parse(response.bodyText);
                     if(res1['err_code']==0) {
-                      this.$message.error("成功选择学生！")
+                      this.$message({
+                      type: 'info',
+                      message: '成功选择学生'
+                        });
                     }
                     else if (res1['err_code']==2){
-                      this.$message.error("该学生已经找到其他导师了，请刷新页面")
+                      this.$message.error("抱歉，该学生已经找到其他导师了")
                     }
                     else{
                       this.$message.error("请求失败")
@@ -143,10 +148,52 @@ import flowTea from '../components/flowTea'
 
         },
         refusereq(val,appid){
+            for (var i = 0; i < this.data.length; i++) {
+                if (this.data[i]['uid'] == val) {
+                  this.data.splice(i, 1);
+                }
+               }
+            this.getpage();
+            this.$http.post('/api/refuseStu/',{'appId':appid},{emulateJSON:true})
+              .then(function(response){
+                    var res1 = JSON.parse(response.bodyText);
+                    if(res1['err_code']==0) {
+                      this.$message({
+                      type: 'info',
+                      message: '已拒绝'
+                        });
+                    }
+                    else{
+                      this.$message.error("请求失败")
+                    }
+
+              })
 
         },
         putinqueue(val,appid){
+            for (var i = 0; i < this.data.length; i++) {
+                if (this.data[i]['uid'] == val) {
+                  this.data.splice(i, 1);
+                }
+               }
+            this.getpage();
+            this.$http.post('/api/addTeaQueue/',{'teacherId':this.watchId,'stuId':val,'appId':appid},{emulateJSON:true})
+              .then(function(response){
+                    var res1 = JSON.parse(response.bodyText);
+                    if(res1['err_code']==0) {
+                      this.$message({
+                      type: 'info',
+                      message: '添加队列成功'
+                        });
+                    }
+                    else if (res1['err_code']==2){
+                      this.$message.error("抱歉，该学生已经找到其他导师了")
+                    }
+                    else{
+                      this.$message.error("请求失败")
+                    }
 
+              })
         }
       }
     }

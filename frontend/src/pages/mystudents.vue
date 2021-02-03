@@ -9,12 +9,13 @@
         <el-main>
           <el-row type="flex" justify="center">
             <span class="title">等待队列</span>
+            <el-button @click="store">保存</el-button>
           </el-row>
           <el-row>
 <draggable  v-model="groups" @chang="change" @start="start" @end="end" :move="move">
     <el-card v-for="item in groups" :key=index class="stu">
       <el-avatar shape="circle" :src="item.avater"></el-avatar>
-      <span >{{item.code + "-" + item.name}}</span>
+      <span >{{item.code + "-" + item.name + item.uid}}</span>
       <el-button style="float: right" icon="el-icon-close">移除</el-button>
     </el-card>
 </draggable>
@@ -51,14 +52,16 @@ import flowTea from '../components/flowTea'
       data(){
            return {
              groups: [
-        {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110133",name:"张三",intro:"不忘初心"},
-            {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110133",name:"陈斌",intro:"不忘初心"},
-            {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110133",name:"马化腾",intro:"不忘初心"},
-            {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110133",name:"李四",intro:"不忘初心"},
-          {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110133",name:"马云",intro:"不忘初心"},
-             {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110133",name:"马云",intro:"不忘初心"},
+        // {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110133",name:"张三",intro:"不忘初心"},
+        //     {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110133",name:"陈斌",intro:"不忘初心"},
+        //     {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110133",name:"马化腾",intro:"不忘初心"},
+        //     {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110133",name:"李四",intro:"不忘初心"},
+        //   {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110133",name:"马云",intro:"不忘初心"},
+        //      {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110133",name:"马云",intro:"不忘初心"},
       ],
+             queue:[],
              rownumber:5,
+             watchId:1,
            list: [
              {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110134",name:"朱振南",intro:"不忘初心"},
             {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110135",name:"朱振南",intro:"不忘初心"},
@@ -71,6 +74,7 @@ import flowTea from '../components/flowTea'
     }
       },
       mounted() {
+          this.getdata();
           this.getRow();
       },
       methods:{
@@ -98,7 +102,49 @@ import flowTea from '../components/flowTea'
           }
          }
         this.branch = arr;
-       }
+       },
+        getdata(){
+            this.$http.post('/api/getTeaQueue/',{'teacherId':this.watchId},{emulateJSON:true})
+              .then(function(response){
+                    var res1 = JSON.parse(response.bodyText);
+                    if(res1['err_code']==0) {
+                      for (var i = 0; i < res1['ulist'].length; i++) {
+                        this.groups.push({avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+                        ,name:res1['ulist'][i]['fields']['name'],intro:"一期测试"
+                        ,uid:res1['ulist'][i]['pk'],code:res1['slist'][i]['fields']['code']
+                        })
+                        //uid指的是学生的id
+                      }
+                    }
+                    else{
+                      this.$message.error("获取队列信息失败")
+                    }
+
+              })
+        },
+        store(){
+            for (var i=0;i<this.groups.length;i++){
+              this.queue.push(this.groups[i].uid)
+            }
+            console.log(this.queue);
+            var conque = this.queue
+            this.queue = [];
+            this.$http.post('/api/storeTeaQueue/',{'queue':JSON.stringify(conque),'teaid':this.watchId},{emulateJSON:true})
+              .then(function(response){
+                    var res1 = JSON.parse(response.bodyText);
+                    if(res1['err_code']==0) {
+                      this.$message({
+                      type: 'info',
+                      message: '保存成功'
+                        });
+
+                    }
+                    else{
+                      this.$message.error("保存失败")
+                    }
+
+              })
+        }
       }
     }
 </script>

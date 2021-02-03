@@ -25,7 +25,7 @@ class Teacher(models.Model):
         related_name='user_tea',
     )
     requirement = models.TextField()
-    queue = models.TextField(null=True,default="NULL")
+    queue = models.TextField(null=True)
 
 class Student(models.Model):
     code = models.CharField(max_length=10,default="0000000")

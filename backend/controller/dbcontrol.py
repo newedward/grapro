@@ -85,6 +85,7 @@ def checkapplication(appid):
     try:
         app = Application.objects.get(id=appid)
         app.check = True
+        app.save()
     except :
         return ("failed")
     else :
@@ -94,12 +95,55 @@ def followteacher(stuid,teaid):
     # 如果老师直接同意了请求，学生马上fol他，删除其他请求
     # 相反说，其他老师在操作前，要判断这个学生是不是fol了
     # 其他老师，是的话应该返回
+
     try:
         student = Student.objects.get(user_stu_id=stuid)
         if student.teacher_fol != None:
             return ("has")
         else:
             student.teacher_fol_id = teaid
+            student.save()
             return("succeed")
     except:
         return ("failed")
+
+def addteaqueue(stuid,teaid):
+    try:
+        student = Student.objects.get(user_stu_id=stuid)
+        if student.teacher_fol != None:
+            return ("has")
+        else:
+            teacher = Teacher.objects.get(user_tea_id=teaid)
+            teacher.queue += str(stuid) + ","
+            teacher.save()
+            return("succeed")
+    except:
+        return ("failed")
+
+def getteaqueue(teaid):
+    try:
+        queuestr = Teacher.objects.get(user_tea_id=teaid).queue
+    except:
+        return ("failed","",[],[])
+    else:
+        queue = queuestr.split(',')
+        ulist = []
+        slist = []
+        queue.pop()
+        for q in queue:
+            q = int(q)
+            ulist.append(User.objects.get(id=q))
+            slist.append(Student.objects.get(user_stu_id=q))
+        return ("succeed",queuestr,ulist,slist)
+
+def storeteaqueue(teaid,str):
+    try:
+        tea = Teacher.objects.get(user_tea_id=teaid)
+        tea.queue = str
+        tea.save()
+    except:
+        return ("failed")
+    else:
+        return ("succeed")
+
+

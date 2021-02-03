@@ -52,14 +52,16 @@ def getApplicationByTeacher(req):
     else:
         response['Msg'] = 'failed'
         response['err_code'] = 1
+    # print(response)
     return JsonResponse(response)
 
 def acceptStu(req):
     teacher = req.POST.get('teacherId')
     student = req.POST.get('stuId')
     app = req.POST.get('appId')
+    # print(student,teacher,app)
     dbcontrol.checkapplication(app)
-    info = dbcontrol.followteacher(teacher, student)
+    info = dbcontrol.followteacher(student, teacher)
     response = {}
     if info == "succeed":
         response["Msg"] = "succeed"
@@ -71,6 +73,71 @@ def acceptStu(req):
         response['Msg'] = 'failed'
         response['err_code'] = 1
     return JsonResponse(response)
+
+def refuseStu(req):
+    app = req.POST.get('appId')
+    info = dbcontrol.checkapplication(app)
+    response = {}
+    if info == "succeed":
+        response["Msg"] = "succeed"
+        response["err_code"] = 0
+    else:
+        response['Msg'] = 'failed'
+        response['err_code'] = 1
+    return JsonResponse(response)
+
+def addTeaQueue(req):
+    teacher = req.POST.get('teacherId')
+    student = req.POST.get('stuId')
+    app = req.POST.get('appId')
+    dbcontrol.checkapplication(app)
+    info = dbcontrol.addteaqueue(student,teacher)
+    response = {}
+    if info == "succeed":
+        response["Msg"] = "succeed"
+        response["err_code"] = 0
+    elif info == "has":
+        response['Msg'] = 'has'
+        response['err_code'] = 2
+    else:
+        response['Msg'] = 'failed'
+        response['err_code'] = 1
+    return JsonResponse(response)
+
+def getTeaQueue(req):
+    teacher = req.POST.get('teacherId')
+    info,queuestr,ulist,slist = dbcontrol.getteaqueue(teacher)
+    response = {}
+    if info == "succeed":
+        queue = queuestr.split(',')
+        response["queue"] = queue
+        response["ulist"] = json.loads(serializers.serialize("json", ulist))
+        response["slist"] = json.loads(serializers.serialize("json", slist))
+        response["err_code"] = 0
+    else:
+        response['Msg'] = 'failed'
+        response['err_code'] = 1
+    return JsonResponse(response)
+
+def storeTeaQueue(req):
+    queue = req.POST.get('queue')
+    teacher = req.POST.get('teaid')
+    str = queue[1:-1]
+    str += ","
+    print(str)
+    info = dbcontrol.storeteaqueue(teacher,str)
+    response = {}
+    if info == "succeed":
+        response["Msg"] = "succeed"
+        response["err_code"] = 0
+    else:
+        response['Msg'] = 'failed'
+        response['err_code'] = 1
+    return JsonResponse(response)
+
+
+
+
 
 
 

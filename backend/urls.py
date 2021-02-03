@@ -8,4 +8,8 @@ urlpatterns = [
     path('applyTeacher/', views.applyTeacher, name = 'applyTeacher'),
     path('getApplicationByTeacher/', views.getApplicationByTeacher, name = 'getApplicationByTeacher'),
     path('acceptStu/', views.acceptStu, name = 'acceptStu'),
+    path('refuseStu/', views.refuseStu, name = 'refuseStu'),
+    path('addTeaQueue/', views.addTeaQueue, name = 'addTeaQueue'),
+    path('storeTeaQueue/', views.storeTeaQueue, name = 'storeTeaQueue'),
+    path('getTeaQueue/', views.getTeaQueue, name = 'getTeaQueue')
 ]
