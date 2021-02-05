@@ -7,8 +7,7 @@
       <change beforePath="$PROJECT_DIR$/backend/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/mystudents.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/mystudents.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/selectstu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/selectstu.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/pages/startStu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/startStu.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,22 +35,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="62">
-              <caret line="12" column="72" selection-start-line="12" selection-start-column="72" selection-end-line="12" selection-end-column="72" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/frontend/src/pages/selectstu.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-102">
-              <caret line="165" column="8" selection-start-line="165" selection-start-column="8" selection-end-line="165" selection-end-column="8" />
+            <state relative-caret-position="830">
+              <caret line="169" column="16" selection-start-line="156" selection-start-column="12" selection-end-line="169" selection-end-column="16" />
               <folding>
                 <element signature="n#style#0;n#el-aside#0;n#el-container#0;n#el-container#0;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#el-button#1;n#el-row#0;n#el-main#0;n#el-container#0;n#el-container#0;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -64,42 +51,12 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/frontend/src/pages/mediunTea.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="35">
-              <caret line="1" column="21" selection-start-line="1" selection-start-column="21" selection-end-line="1" selection-end-column="21" />
-              <folding>
-                <element signature="n#style#0;n#el-row#0;n#el-main#0;n#el-container#0;n#el-container#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#el-row#0;n#el-tab-pane#0;n#el-tabs#0;n#el-row#0;n#el-main#0;n#el-container#0;n#el-container#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#el-upload#0;n#el-tab-pane#0;n#el-tabs#0;n#el-row#0;n#el-main#0;n#el-container#0;n#el-container#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/controller/dbcontrol.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="444">
-              <caret line="146" column="24" selection-start-line="146" selection-start-column="24" selection-end-line="146" selection-end-column="24" />
+            <state relative-caret-position="99">
+              <caret line="169" column="44" selection-start-line="169" selection-start-column="44" selection-end-line="169" selection-end-column="44" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/migrations/0002_auto_20210131_1834.py">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/frontend/src/router/index.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <folding>
-                <element signature="e#0#21#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -108,8 +65,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/backend/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="129">
-              <caret line="135" column="33" lean-forward="true" selection-start-line="135" selection-start-column="33" selection-end-line="135" selection-end-column="33" />
+            <state relative-caret-position="183">
+              <caret line="193" column="20" selection-start-line="193" selection-start-column="20" selection-end-line="193" selection-end-column="20" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -118,10 +75,49 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontend/src/pages/startStu.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-595">
+              <caret line="62" column="11" selection-start-line="62" selection-start-column="6" selection-end-line="62" selection-end-column="11" />
+              <folding>
+                <element signature="n#style#0;n#el-row#0;n#el-main#0;n#el-container#0;n#el-container#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#1;n#el-col#2;n#el-row#0;n#el-main#0;n#el-container#0;n#el-container#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/tests.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontend/src/App.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="70">
+              <caret line="2" column="32" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/backend/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="353">
+              <caret line="17" column="18" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="18" />
+              <folding>
+                <element signature="e#0#32#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/frontend/src/pages/mystudents.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-68">
-              <caret line="131" column="80" selection-start-line="131" selection-start-column="80" selection-end-line="131" selection-end-column="80" />
+            <state relative-caret-position="318">
+              <caret line="112" column="55" selection-start-line="112" selection-start-column="47" selection-end-line="112" selection-end-column="55" />
               <folding>
                 <element signature="n#style#0;n#el-aside#0;n#el-container#0;n#el-container#0;n#div#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#el-button#0;n#el-card#0;n#draggable#0;n#el-row#1;n#el-main#0;n#el-container#0;n#el-container#0;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -133,7 +129,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/frontend/src/pages/selectTea.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="248">
+            <state relative-caret-position="5390">
               <caret line="155" column="37" selection-start-line="155" selection-start-column="37" selection-end-line="155" selection-end-column="37" />
               <folding>
                 <element signature="n#style#0;n#el-aside#0;n#el-container#0;n#el-container#0;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -146,8 +142,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="91">
-              <caret line="27" column="38" selection-start-line="27" selection-start-column="38" selection-end-line="27" selection-end-column="38" />
+            <state relative-caret-position="453">
+              <caret line="74" column="40" selection-start-line="74" selection-start-column="40" selection-end-line="74" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -186,7 +182,6 @@
         <option value="$PROJECT_DIR$/frontend/src/pages/mediunTea.vue" />
         <option value="$PROJECT_DIR$/frontend/src/pages/endTea.vue" />
         <option value="$PROJECT_DIR$/frontend/src/components/flowTea.vue" />
-        <option value="$PROJECT_DIR$/frontend/src/pages/startStu.vue" />
         <option value="$PROJECT_DIR$/frontend/src/components/flowStu.vue" />
         <option value="$PROJECT_DIR$/backend/migrations/0001_initial.py" />
         <option value="$PROJECT_DIR$/grapro/urls.py" />
@@ -195,18 +190,19 @@
         <option value="$PROJECT_DIR$/frontend/src/main.js" />
         <option value="$PROJECT_DIR$/frontend/src/pages/selectTea.vue" />
         <option value="$PROJECT_DIR$/frontend/src/pages/selectstu.vue" />
+        <option value="$PROJECT_DIR$/frontend/src/pages/mystudents.vue" />
+        <option value="$PROJECT_DIR$/backend/urls.py" />
         <option value="$PROJECT_DIR$/backend/models.py" />
         <option value="$PROJECT_DIR$/backend/controller/dbcontrol.py" />
-        <option value="$PROJECT_DIR$/backend/urls.py" />
-        <option value="$PROJECT_DIR$/frontend/src/pages/mystudents.vue" />
+        <option value="$PROJECT_DIR$/frontend/src/pages/startStu.vue" />
         <option value="$PROJECT_DIR$/backend/views.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="947" />
-    <option name="width" value="980" />
-    <option name="height" value="1050" />
+    <option name="x" value="952" />
+    <option name="width" value="977" />
+    <option name="height" value="1038" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -214,7 +210,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -266,6 +261,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -367,7 +363,10 @@
       <workItem from="1612088480250" duration="1181000" />
       <workItem from="1612143461432" duration="19715000" />
       <workItem from="1612228208587" duration="17245000" />
-      <workItem from="1612317882904" duration="13685000" />
+      <workItem from="1612317882904" duration="13765000" />
+      <workItem from="1612399854688" duration="733000" />
+      <workItem from="1612415458442" duration="1511000" />
+      <workItem from="1612498247751" duration="15959000" />
     </task>
     <task id="LOCAL-00001" summary="熟悉环境">
       <created>1604737576114</created>
@@ -394,7 +393,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="180610000" />
+    <option name="totallyTimeSpent" value="198893000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -408,7 +407,7 @@
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18273093" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16331995" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -422,7 +421,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.58732396" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50066936" side_tool="true" weight="0.80704224" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49933067" visible="true" weight="0.5788732" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49933067" visible="true" weight="0.65633804" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.71971834" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -614,9 +613,6 @@
     <entry file="file://$PROJECT_DIR$/backend/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/tests.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/admin.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -675,84 +671,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/App.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="70">
-          <caret line="2" column="32" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/pages/startStu.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="6" column="16" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
-          <folding>
-            <element signature="n#style#0;n#el-row#0;n#el-main#0;n#el-container#0;n#el-container#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#el-upload#0;n#el-col#1;n#el-row#0;n#el-main#0;n#el-container#0;n#el-container#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grapro/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="665">
           <caret line="21" column="16" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
           <folding>
             <element signature="e#630#662#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/migrations/0002_auto_20210131_1834.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/router/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#21#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="91">
-          <caret line="27" column="38" selection-start-line="27" selection-start-column="38" selection-end-line="27" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/pages/selectTea.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="155" column="37" selection-start-line="155" selection-start-column="37" selection-end-line="155" selection-end-column="37" />
-          <folding>
-            <element signature="n#style#0;n#el-aside#0;n#el-container#0;n#el-container#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#el-button#0;n#div#0;n#el-card#0;n#el-row#1;n#el-main#0;n#el-container#0;n#el-container#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="62">
-          <caret line="12" column="72" selection-start-line="12" selection-start-column="72" selection-end-line="12" selection-end-column="72" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/pages/selectstu.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-102">
-          <caret line="165" column="8" selection-start-line="165" selection-start-column="8" selection-end-line="165" selection-end-column="8" />
-          <folding>
-            <element signature="n#style#0;n#el-aside#0;n#el-container#0;n#el-container#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#el-button#1;n#el-row#0;n#el-main#0;n#el-container#0;n#el-container#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#el-button#0;n#div#0;n#el-card#0;n#el-row#1;n#el-main#0;n#el-container#0;n#el-container#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#el-button#1;n#div#0;n#el-card#0;n#el-row#1;n#el-main#0;n#el-container#0;n#el-container#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#el-button#2;n#div#0;n#el-card#0;n#el-row#1;n#el-main#0;n#el-container#0;n#el-container#0;n#div#0;n#template#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -769,10 +693,54 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/backend/migrations/0002_auto_20210131_1834.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/router/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#21#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/pages/selectTea.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5390">
+          <caret line="155" column="37" selection-start-line="155" selection-start-column="37" selection-end-line="155" selection-end-column="37" />
+          <folding>
+            <element signature="n#style#0;n#el-aside#0;n#el-container#0;n#el-container#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#el-button#0;n#div#0;n#el-card#0;n#el-row#1;n#el-main#0;n#el-container#0;n#el-container#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/App.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="70">
+          <caret line="2" column="32" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/pages/selectstu.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="830">
+          <caret line="169" column="16" selection-start-line="156" selection-start-column="12" selection-end-line="169" selection-end-column="16" />
+          <folding>
+            <element signature="n#style#0;n#el-aside#0;n#el-container#0;n#el-container#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#el-button#1;n#el-row#0;n#el-main#0;n#el-container#0;n#el-container#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#el-button#0;n#div#0;n#el-card#0;n#el-row#1;n#el-main#0;n#el-container#0;n#el-container#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#el-button#1;n#div#0;n#el-card#0;n#el-row#1;n#el-main#0;n#el-container#0;n#el-container#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#el-button#2;n#div#0;n#el-card#0;n#el-row#1;n#el-main#0;n#el-container#0;n#el-container#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/src/pages/mystudents.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-68">
-          <caret line="131" column="80" selection-start-line="131" selection-start-column="80" selection-end-line="131" selection-end-column="80" />
+        <state relative-caret-position="318">
+          <caret line="112" column="55" selection-start-line="112" selection-start-column="47" selection-end-line="112" selection-end-column="55" />
           <folding>
             <element signature="n#style#0;n#el-aside#0;n#el-container#0;n#el-container#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#el-button#0;n#el-card#0;n#draggable#0;n#el-row#1;n#el-main#0;n#el-container#0;n#el-container#0;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -780,10 +748,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/backend/tests.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="453">
+          <caret line="74" column="40" selection-start-line="74" selection-start-column="40" selection-end-line="74" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="353">
+          <caret line="17" column="18" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/pages/startStu.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-595">
+          <caret line="62" column="11" selection-start-line="62" selection-start-column="6" selection-end-line="62" selection-end-column="11" />
+          <folding>
+            <element signature="n#style#0;n#el-row#0;n#el-main#0;n#el-container#0;n#el-container#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#1;n#el-col#2;n#el-row#0;n#el-main#0;n#el-container#0;n#el-container#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/backend/controller/dbcontrol.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="444">
-          <caret line="146" column="24" selection-start-line="146" selection-start-column="24" selection-end-line="146" selection-end-column="24" />
+        <state relative-caret-position="99">
+          <caret line="169" column="44" selection-start-line="169" selection-start-column="44" selection-end-line="169" selection-end-column="44" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
@@ -792,8 +791,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="135" column="33" lean-forward="true" selection-start-line="135" selection-start-column="33" selection-end-line="135" selection-end-column="33" />
+        <state relative-caret-position="183">
+          <caret line="193" column="20" selection-start-line="193" selection-start-column="20" selection-end-line="193" selection-end-column="20" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>

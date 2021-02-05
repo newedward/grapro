@@ -6,6 +6,8 @@ from django.core import serializers
 
 from backend.models import *
 from backend.controller import dbcontrol
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Create your views here.
 def getTeacher(req):
     response = {}
@@ -134,6 +136,97 @@ def storeTeaQueue(req):
         response['Msg'] = 'failed'
         response['err_code'] = 1
     return JsonResponse(response)
+
+def addWorkTitle(req):
+    title = req.POST.get('title')
+    student = req.POST.get('stuId')
+    info,workid = dbcontrol.addworkbytitle(title=title,stuid=student)
+    response = {}
+    if info == "succeed":
+        response["Msg"] = "succeed"
+        response["err_code"] = 0
+        response["workid"] = workid
+    else:
+        response['Msg'] = 'failed'
+        response['err_code'] = 1
+    return JsonResponse(response)
+
+def getRecordTitle(req):
+    student = req.POST.get("stuId")
+    info,stu = dbcontrol.getStuById(student)
+    info,relist =dbcontrol.getrecordbystu(student)
+    response = {}
+    if stu.work != None and info == "succeed":
+        response['rlist'] = json.loads(serializers.serialize("json", relist))
+        response['title'] = stu.work.title
+        response['workid'] = stu.work.id
+        response["Msg"] = "succeed"
+        response["err_code"] = 0
+    elif stu.work == None and info == "succeed":
+        response['rlist'] = json.loads(serializers.serialize("json", relist))
+        response['title'] = "null"
+        response["Msg"] = "succeed"
+        response["err_code"] = 0
+    else:
+        response['Msg'] = 'failed'
+        response['err_code'] = 1
+    return JsonResponse(response)
+
+def addRecordStu(req):
+    stuid = req.POST.get("stuId")
+    workid = req.POST.get("workId")
+    process = req.POST.get("process")
+    path = req.POST.get("path")
+    info = dbcontrol.addrecordstu(stuid,workid,path,process)
+    response = {}
+    if info == "succeed":
+        response["Msg"] = "succeed"
+        response["err_code"] = 0
+    else:
+        response['Msg'] = 'failed'
+        response['err_code'] = 1
+    return JsonResponse(response)
+
+
+
+def uploadfile(req):
+    work = req.FILES.get('work',None)
+    dataf = req.POST.get('next')
+    print("dataf", dataf)
+    username = 21
+    head_path = BASE_DIR + "\\media\\{}".format(username).replace(" ", "")
+    print("head_path", head_path)
+    if not os.path.exists(head_path):
+        os.makedirs(head_path)
+    suffix = work.name.split(".")[1]
+    print("图片后缀", suffix)  # 图片后缀 png
+    work_path = head_path + "\\"+work.name
+    work_path = work_path.replace(" ", "")
+    response = {}
+    try:
+        with open(work_path, 'wb') as f:
+            for chunk in work.chunks():
+                f.write(chunk)
+    except:
+        response['Msg'] = 'failed'
+        response['err_code'] = 1
+    else:
+        response["Msg"] = "succeed"
+        response["err_code"] = 0
+        response["path"] = work_path
+    return JsonResponse(response)
+
+        # # 图片后缀
+        # head_suffix = file_obj.name.split(".")[1]
+        # print("图片后缀", head_suffix)  # 图片后缀 png
+        #
+        # # 储存路径
+        # file_path = head_path + "\\{}".format("head." + head_suffix)
+        # file_path = file_path.replace(" ", "")
+        # print("储存路径", file_path)  # C:\Users\user\Desktop\DownTest\media\username\head\head.png
+
+
+
 
 
 

@@ -145,5 +145,35 @@ def storeteaqueue(teaid,str):
         return ("failed")
     else:
         return ("succeed")
+def addworkbytitle(stuid,title):
+    try:
+        work = Work(title=title)
+        work.save()
+        stu = Student.objects.get(user_stu_id=stuid)
+        stu.work = work
+        stu.save()
+    except:
+        return ("failed",-1)
+    else:
+        return ("succeed",work.id)
+
+def getrecordbystu(stuid):
+    try:
+        rlist = Record.objects.filter(student_id=stuid)
+    except:
+        return ("failed",[])
+    else:
+        return ("succeed",rlist)
+
+def addrecordstu(studentid,workid,path,process):
+    try:
+        print(workid,studentid,path,process)
+        record = Record(work_id=workid,student_id=studentid,path=path,process=process,content="暂无评价")
+        record.save()
+    except:
+        return ("failed")
+    else:
+        return ("succeed")
+
 
 

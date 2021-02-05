@@ -11,5 +11,11 @@ urlpatterns = [
     path('refuseStu/', views.refuseStu, name = 'refuseStu'),
     path('addTeaQueue/', views.addTeaQueue, name = 'addTeaQueue'),
     path('storeTeaQueue/', views.storeTeaQueue, name = 'storeTeaQueue'),
-    path('getTeaQueue/', views.getTeaQueue, name = 'getTeaQueue')
+    path('getTeaQueue/', views.getTeaQueue, name = 'getTeaQueue'),
+    path('uploadfile/', views.uploadfile, name = 'uploadfile'),
+    path('addWorkTitle/', views.addWorkTitle, name = 'addWorkTitle'),
+path('getRecordTitle/', views.getRecordTitle, name = 'getRecordTitle'),
+path('addRecordStu/', views.addRecordStu, name = 'addRecordStu'),
+
+
 ]
