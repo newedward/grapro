@@ -1,5 +1,5 @@
 from backend.models import *
-
+from backend.controller import Util
 from django.utils import timezone
 # user_tea = models.OneToOneField(
 #         User,
@@ -9,20 +9,35 @@ from django.utils import timezone
 #     )
 #     requirement = models.TextField()
 #     queue = models.TextField(null=True,default="NULL")
-def addTeacher():
-    for i in range(1,20):
-        user = User(username="11101",password="12345",name="张山",email="test@hit.com",isAdmin=False,uni="工业大学",school="计算学院")
-        user.save()
-        newtea = Teacher(user_tea=user,requirement="我喜欢努力的学生")
-        newtea.save()
 
-def addStudent():
-    for i in range(20):
-        user = User(username="171110133", password="12345", name="李四", email="test@hit.stu.com", isAdmin=False, uni="工业大学",
-                    school="计算学院")
+def addUser(username,password,name,email,avater,uni,school):
+    password = Util.cryToMD5(password)
+    print(username,password,name,email,avater,uni,school)
+    user = User(username=username,password=password,name=name,email=email,avater=avater,uni=uni,school=school)
+    try:
         user.save()
-        newStu = Student(user_stu=user,code="171110133")
+    except:
+        return ("failed",'')
+    else:
+        return ("succeed",user)
+
+def addTeacher(user,requirement):
+    newtea = Teacher(user_tea_id=user,requirement=requirement)
+    try:
+        newtea.save()
+    except:
+        return ("failed")
+    else:
+        return ("succeed")
+
+def addStudent(user,code):
+    newStu = Student(user_stu=user,code=code)
+    try:
         newStu.save()
+    except:
+        return ("failed")
+    else:
+        return ("succeed")
 
 def getStuById(stuid):
     try:
@@ -41,6 +56,15 @@ def getTeaById(teaid):
     else:
         return ("succeed",teacher)
 
+def getAvaterByID(userid):
+    try:
+        path = User.objects.get(id=userid).avater
+        # with open( path, 'r' ) as file:
+        #     avater = URL.createObjectURL(file.raw)
+    except:
+        return ("avater error",None)
+    else:
+        return ("succeed",path)
 
 def getTeaByStu(userid):
     try:
@@ -52,6 +76,14 @@ def getTeaByStu(userid):
         return ("succeed",tea,users)
     except:
         return ("no teacher find!",[],[])
+
+def getStuByTea(teaid):
+    try:
+        slist = Student.objects.filter(teacher_fol_id=teaid)
+    except:
+        return ("failed",[])
+    else:
+        return ("succeed",slist)
 
 def addapplication(teaid,stuid):
     try:
@@ -174,6 +206,15 @@ def addrecordstu(studentid,workid,path,process):
         return ("failed")
     else:
         return ("succeed")
+
+def getlatstrecordbystu(stu):
+    try:
+        reclist = Record.objects.filter(student=stu).order_by('id')
+        rec = reclist[-1]
+    except:
+        return ("failed",None)
+    else:
+        return ("succeed", rec)
 
 
 

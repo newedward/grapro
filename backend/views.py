@@ -6,9 +6,39 @@ from django.core import serializers
 
 from backend.models import *
 from backend.controller import dbcontrol
+from backend.controller import Util
 import os
+import time
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Create your views here.
+
+def getCurUserID(req):
+    response = {}
+    err, curUser = Util.getUserIDBySession(req)
+    if err == 'succeed':
+        response['userID'] = curUser
+        response['msg'] = 'succeed'
+        response['err_num'] = 0
+    else:
+        response['err_num'] = 1
+        response['msg'] = 'error'
+    return JsonResponse(response)
+
+def getUserAvaterByID(req):
+    userid = req.POST.get('watchId')
+    print("ss",userid)
+    info,avater = dbcontrol.getAvaterByID(userid)
+    response = {}
+    if info == "succeed":
+        response['Msg'] = 'succeed'
+        response['err_code'] = 0
+        response['avater'] = avater
+    else :
+        response['Msg'] = 'failed'
+        response['err_code'] = 1
+    print(response)
+    return JsonResponse(response)
+
 def getTeacher(req):
     response = {}
     user = str(req.POST.get('userId'))
@@ -191,17 +221,16 @@ def addRecordStu(req):
 
 def uploadfile(req):
     work = req.FILES.get('work',None)
-    dataf = req.POST.get('next')
-    print("dataf", dataf)
-    username = 21
-    head_path = BASE_DIR + "\\media\\{}".format(username).replace(" ", "")
+    nextnum = req.POST.get('next')
+    username = req.POST.get('stuid')
+    head_path = BASE_DIR + "\\media\\{}\\{}".format(username,nextnum).replace(" ", "")
     print("head_path", head_path)
     if not os.path.exists(head_path):
         os.makedirs(head_path)
     suffix = work.name.split(".")[1]
-    print("图片后缀", suffix)  # 图片后缀 png
     work_path = head_path + "\\"+work.name
     work_path = work_path.replace(" ", "")
+    print("路径",work_path)
     response = {}
     try:
         with open(work_path, 'wb') as f:
@@ -224,6 +253,83 @@ def uploadfile(req):
         # file_path = head_path + "\\{}".format("head." + head_suffix)
         # file_path = file_path.replace(" ", "")
         # print("储存路径", file_path)  # C:\Users\user\Desktop\DownTest\media\username\head\head.png
+
+def getStudentStartbyTea(req):
+    teaid = req.POST.get("teaId")
+    info,slist = dbcontrol.getStuByTea(teaid)
+    response = {}
+    if info == "succeed":
+        response["Msg"] = "succeed"
+        response["err_code"] = 0
+        response["slist"] = slist
+        reclist = []
+        for s in slist:
+            rec = dbcontrol.getlatstrecordbystu(s)
+            reclist.append(rec)
+        response["rlist"] = reclist
+    else:
+        response['Msg'] = 'failed'
+        response['err_code'] = 1
+    return JsonResponse(response)
+
+def createUser(req):
+    userName = str(req.POST.get('userName'))
+    password = str(req.POST.get('password'))
+    name = str(req.POST.get('name'))
+    email = str(req.POST.get('email'))
+    avatarpath = str(req.POST.get('avatarpath'))
+    uni = str(req.POST.get('uni'))
+    school = str(req.POST.get('school'))
+    role = str(req.POST.get('role'))
+    requirement = str(req.POST.get('req'))
+    code = str(req.POST.get('code'))
+    print("路径",avatarpath)
+    info,user = dbcontrol.addUser(userName,password,name,email,avatarpath,uni,school)
+    if info == "succeed":
+        if role == "学生":
+            info = dbcontrol.addStudent(user,code)
+            if info == "succeed":
+                print(Util.setUserForSession(req, user.id))
+                return HttpResponse("注册成功!")
+            else:
+                print("学生失败")
+                return HttpResponse("注册失败!")
+        else :
+            info = dbcontrol.addTeacher(user,requirement)
+            if info == "succeed":
+                print(Util.setUserForSession(req, user.id))
+                return HttpResponse("注册成功!")
+            else:
+                print("教师失败")
+                return HttpResponse("注册失败!")
+    else:
+        print("用户失败")
+        return HttpResponse("注册失败!")
+
+
+def uploadAvater(req):
+    avater = req.FILES.get('avater', None)
+    timestamp = time.time()
+    head_path = BASE_DIR + "\\media\\{}".format(timestamp).replace(" ", "")
+    if not os.path.exists(head_path):
+        os.makedirs(head_path)
+    suffix = avater.name.split(".")[1]
+    work_path = head_path + "\\" + avater.name
+    ava_path = work_path.replace(" ", "")
+    print("路径0", ava_path)
+    response = {}
+    try:
+        with open(ava_path, 'wb') as f:
+            for chunk in avater.chunks():
+                f.write(chunk)
+    except:
+        response['Msg'] = 'failed'
+        response['err_code'] = 1
+    else:
+        response["Msg"] = "succeed"
+        response["err_code"] = 0
+        response["path"] = ava_path
+    return JsonResponse(response)
 
 
 

@@ -18,6 +18,8 @@ import mediumStu from "./pages/mediumStu";
 import endStu from "./pages/endStu";
 import mediunTea from "./pages/mediunTea";
 import endTea from "./pages/endTea";
+import register from "./pages/register";
+import login from "./pages/login"
 import VueResource from 'vue-resource';
 
 axios.defaults.baseURL = 'http://127.0.0.1:8000'	// 指定后端的地址，也就是django运行的地址
@@ -88,6 +90,16 @@ const router = new VueRouter({
       path: '/endTea',
       name: 'endTea',
       component: endTea
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: register
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: login
     }
   ],
   mode: 'history'

@@ -4,13 +4,15 @@
 
       <el-row type="flex"  justify="center" align="middle" >
         <el-col span="20" class="row-tn" >
-          <el-avatar :src='avatar' style="margin-left:10%" ></el-avatar>
+          <el-avatar v-if="watchId" :src=avatar  style="margin-left:10%" ></el-avatar>
+
         <el-button type="text"  style="margin-left: 10%"  @click.native="jumpTo($event)" id="主页">主页</el-button>
         <el-button type="text" style="margin-left: 10%"  @click.native="jumpTo($event)" id="流程管理">流程管理</el-button>
         <el-button type="text"  style="margin-left: 10%" @click.native="jumpTo($event)" id="学校动态">学校动态</el-button>
           <el-button type="text" style="margin-left: 10%"  @click.native="jumpTo($event)" id="个人信息">个人信息</el-button>
         <el-button type="text" icon="el-icon-bell" style="margin-left: 10%"  @click="checkMessage"></el-button>
-<el-button type="primary" @click="toLogin" v-if="userId==0" style="margin-left: 10%">登录</el-button>
+<el-button type="primary" @click="toLogin" v-if="!watchId" style="margin-left: 10%">登录</el-button>
+          <el-button type="primary" @click="toLogin" v-if="watchId" style="margin-left: 10%">登出</el-button>
         </el-col>
 
         </el-row>
@@ -25,38 +27,34 @@
  */
 
 export default {
-  name: 'topNav',
 
+  name: 'topNav',
+  props:{
+    watchId:{
+      type: String,
+      default: ''
+    }
+  },
   components: {
   },
     mounted: function(){
-        // this.getCurUserID()
+        this.getUserAvater()
     },
     data(){
       return {
           input1:'',
           avatar:'',
-          userId:0
     }
     },
 
   methods:{
-      getCurUserID(){
-        this.$http.get('/api/getCurUserID')
-                  .then((response)=>{
-                    var res1 = JSON.parse(response.bodyText)
-                      if(res1['err_num']==0){
-                          this.userId=res1['userID'];
-                          this.getCurUser()
-                      }
-              })
-      },
-      getCurUser(){
-          this.$http.post('/api/getUserByID/',{'userId':this.userId},{emulateJSON:true})
+      getUserAvater(){
+          this.$http.post('/api/getUserAvaterByID/',{'watchId':this.watchId},{emulateJSON:true})
               .then(function(response){
                     var res1 = JSON.parse(response.bodyText);
                     if(res1['err_num']==0){
-                        this.avatar = res1["user"][0]["fields"]["avatar"];
+                        this.avatar = res1["avater"];
+                        console.log(this.avatar);
                     }
 
               })

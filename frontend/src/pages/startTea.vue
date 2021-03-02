@@ -11,27 +11,16 @@
             <el-tabs   type="card" @tab-click="handleClick">
     <el-tab-pane v-for="item in list" :label="item.name">
       <el-row style="margin: 10px">
-        <el-col span="6"><span>{{item.file}}</span></el-col>
-        <el-col span="6"><el-button plain size="small">下载最新提交</el-button></el-col>
+        <el-col span="6"><span>{{item.exp}}</span></el-col>
+        <el-col span="6"><el-button plain size="small" @click="downloadfile(item.path)">下载最新提交</el-button></el-col>
       </el-row>
       <el-divider content-position="left">我的评阅</el-divider>
       <el-input
   type="textarea"
   :rows="20"
   placeholder="请输入内容"
-  v-model="textarea">
+  v-model="item.com">
 </el-input>
-      <el-upload
-     accept=".doc, .docx, .pdf"
-      action="#"
-      :before-upload="beforeAvatarUpload"
-      :http-request="getfileUpload"
-      :on-change="getValChange"
-      :file-list="fileList"
-      >
-      <el-button size="small" type="primary">点击上传</el-button>
-      <span style="margin-left:10px">支持.doc/.docx/.pdf文件</span>
-</el-upload>
       <el-divider></el-divider>
       <el-button plain>提交</el-button>
     </el-tab-pane>
@@ -58,50 +47,44 @@ import flowTea from '../components/flowTea'
       data(){
           return {
       fileList: [],
-            textarea:"",
             list:[
-              {code:"171110133",name:"朱振南2",file:"balaa"},
-              {code:"171110133",name:"朱振南4",file:"balaa"},
-              {code:"171110133",name:"朱振南3",file:"balaa"},
-              {code:"171110133",name:"朱振南1",file:"balaa"},
+              // {code:"171110133",name:"朱振南2",file:"balaa",exp:"修改了",com:"szyd"},
+              // {code:"171110133",name:"朱振南4",file:"balaa"},
+              // {code:"171110133",name:"朱振南3",file:"balaa"},
+              // {code:"171110133",name:"朱振南1",file:"balaa"},
             ],
             currentdata:[],
+            watchId:1,
   }
       },
+      created(){
+        this.getdata();
+        this.getstufile();
+      },
     methods: {
-          fileUpload(data){
-    let url = '/card/scrapApply/uploadScrapCards';
-    return postResponse(url,data,{contentType:'form'})
- },
-      // 上传触发前 对文件格式的校验只校验了excel文件
- beforeAvatarUpload(file) {
-      let FileExt = file.name.replace(/.+\./, "").toLowerCase();
-      let flag = ["doc", "docx","pdf"].includes(FileExt);
-      if (!flag) this.$message.error("只能上传doc\\docx\\pdf文件!");
-      return flag;
-    },
-// 文件值改变时触发 change事件
-    getValChange(file, fileList) {
-      if (fileList.length > 0) {
-        this.fileList = [fileList[fileList.length - 1]]
-      }else{
-        this.fileList = fileList[0]
+          getdata(){
+            this.$http.post('/api/getStudentbyTea/',{'teaId':this.watchId},{emulateJSON:true})
+              .then(function(response){
+                    var res1 = JSON.parse(response.bodyText);
+                    if(res1['err_code']==0) {
+                      for (var i = 0; i < res1['slist'].length; i++) {
+                        this.list.push({code:res1['slist'][i]['fields']['code']
+                        ,name:res1['slist'][i]['fields']['name']
+                        ,file:res1['rlist'][i]['fields']['path']}
+                        ,)
+                      }
+                    }
+                    else{
+                      this.$message.error("获取学生信息失败")
+                    }
+              })
+          },
+      downloadfile(path){
+
       }
-    },
-  // 上传调用后台接口
-  getfileUpload() {
-      let formData = new FormData();
-      formData.append("file",  this.fileList[0].raw);
-      this.fileUpload(formData).then((res) => {
-        this.$message.success("上传成功!");
-      });
-    },
-      handleClick(){
-            //更改currentuser,上传给不同的人
-        this.textarea = "";
       }
     }
-    }
+
 </script>
 
 <style scoped>

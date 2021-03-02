@@ -1,7 +1,7 @@
 <template >
   <div id = "home">
     <el-container direction="vertical">
-      <topNav></topNav>
+      <topNav v-bind:watchId="watchId"></topNav>
        <el-container>
       <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
         <flowStu></flowStu>
@@ -72,8 +72,12 @@ import flowStu from '../components/flowStu'
           // {id:"11",user:{name:"张三"},title:"毕设1",content:"管理系统",},
           // {id:"12",user:{name:"张三"},title:"毕设1",content:"管理系统",},
          ],
-        loading: false
+        loading: false,
+        watchId:'',
       }
+    },
+    mounted: function () {
+      this.getCurUserID()
     },
     computed:{
       noMore () {
@@ -90,6 +94,15 @@ import flowStu from '../components/flowStu'
           this.list.push({id:this.list.length+1,user:{name:"张三"},title:"毕设1",content:"管理系统",})
           this.loading = false
         }, 1000)
+      },
+      getCurUserID(){
+        this.$http.get('/api/getCurUserID')
+                .then((response) => {
+                  var res1 = JSON.parse(response.bodyText)
+                  if (res1['err_num'] == 0) {
+                    this.watchId = res1['userID'];
+                  }
+                })
       }
     }
   }

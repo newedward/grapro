@@ -14,8 +14,11 @@ urlpatterns = [
     path('getTeaQueue/', views.getTeaQueue, name = 'getTeaQueue'),
     path('uploadfile/', views.uploadfile, name = 'uploadfile'),
     path('addWorkTitle/', views.addWorkTitle, name = 'addWorkTitle'),
-path('getRecordTitle/', views.getRecordTitle, name = 'getRecordTitle'),
-path('addRecordStu/', views.addRecordStu, name = 'addRecordStu'),
-
-
+    path('getRecordTitle/', views.getRecordTitle, name = 'getRecordTitle'),
+    path('addRecordStu/', views.addRecordStu, name = 'addRecordStu'),
+    path('getStudentStartbyTea/', views.getStudentStartbyTea, name = 'getStudentStartbyTea'),
+    path('createUser/', views.createUser, name = 'createUser'),
+    path('uploadAvater/', views.uploadAvater, name = 'uploadAvater'),
+    path('getCurUserID/', views.getCurUserID, name = 'getCurUserID'),
+    path('getUserAvaterByID/', views.getUserAvaterByID, name = 'getUserAvaterByID'),
 ]

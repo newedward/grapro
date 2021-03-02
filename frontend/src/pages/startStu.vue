@@ -140,6 +140,8 @@ import flowStu from '../components/flowStu'
                         this.list.push({content:res1['rlist'][i]['fields']['content']})
                       }
                       this.dataf['next'] = this.list.length + 1;
+                      this.dataf['stuid'] = this.watchId;
+                      console.log(this.dataf);
                     }
                     else{
                       this.$message.error("获取信息失败")
