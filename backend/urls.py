@@ -21,4 +21,6 @@ urlpatterns = [
     path('uploadAvater/', views.uploadAvater, name = 'uploadAvater'),
     path('getCurUserID/', views.getCurUserID, name = 'getCurUserID'),
     path('getUserAvaterByID/', views.getUserAvaterByID, name = 'getUserAvaterByID'),
+    path('login/', views.login, name = 'login'),
+    path('validateUserName/', views.validateUserName, name = 'validateUserName'),
 ]

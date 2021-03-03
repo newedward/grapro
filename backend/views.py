@@ -26,7 +26,6 @@ def getCurUserID(req):
 
 def getUserAvaterByID(req):
     userid = req.POST.get('watchId')
-    print("ss",userid)
     info,avater = dbcontrol.getAvaterByID(userid)
     response = {}
     if info == "succeed":
@@ -36,7 +35,7 @@ def getUserAvaterByID(req):
     else :
         response['Msg'] = 'failed'
         response['err_code'] = 1
-    print(response)
+    # print("到这",response)
     return JsonResponse(response)
 
 def getTeacher(req):
@@ -267,6 +266,32 @@ def getStudentStartbyTea(req):
             rec = dbcontrol.getlatstrecordbystu(s)
             reclist.append(rec)
         response["rlist"] = reclist
+    else:
+        response['Msg'] = 'failed'
+        response['err_code'] = 1
+    return JsonResponse(response)
+
+def login(req):
+    userName = str( req.POST.get('userName') )
+    password = str( req.POST.get('password') )
+
+    err, curUser = dbcontrol.login(userName, password)
+    print(err)
+    if (err!="succeed"):
+        return HttpResponse(err)
+
+    Util.setUserForSession(req, curUser.id)
+
+    return HttpResponse(err)
+
+def validateUserName(req):
+    username = req.POST.get('username')
+    info = dbcontrol.validateUser(username)
+    print(info)
+    response = {}
+    if info == "succeed":
+        response["Msg"] = "succeed"
+        response["err_code"] = 0
     else:
         response['Msg'] = 'failed'
         response['err_code'] = 1

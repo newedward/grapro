@@ -88,7 +88,7 @@ export default {
             this.$axios.post('/api/login/', params)
             .then(re => {
               if(re.data=='succeed'){
-              window.location.href = "/index";
+              window.location.href = "/home";
             }
             else{
               this.$message({type:'error',message:"用户名或密码有误！",duration:600})

@@ -38,7 +38,8 @@ export default {
   components: {
   },
     mounted: function(){
-        this.getUserAvater()
+        this.getCurUserID();
+
     },
     data(){
       return {
@@ -52,12 +53,23 @@ export default {
           this.$http.post('/api/getUserAvaterByID/',{'watchId':this.watchId},{emulateJSON:true})
               .then(function(response){
                     var res1 = JSON.parse(response.bodyText);
-                    if(res1['err_num']==0){
+                    if(res1['err_code']==0){
+                      // this.avater = URL.createObjectURL(res1["avater"].raw);
                         this.avatar = res1["avater"];
                         console.log(this.avatar);
                     }
 
               })
+      },
+    getCurUserID(){
+        this.$http.get('/api/getCurUserID')
+                .then((response) => {
+                  var res1 = JSON.parse(response.bodyText)
+                  if (res1['err_num'] == 0) {
+                    this.watchId = res1['userID'];
+                    this.getUserAvater()
+                  }
+                })
       },
       onSearch: function(){
           if(this.input1==''){

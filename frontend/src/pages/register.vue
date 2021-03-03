@@ -107,13 +107,20 @@ export default {
       };
       var validateUsername = (rule, value, callback) => {
         var uPattern = /^[a-zA-Z0-9_-]{4,16}$/;
-           if (!uPattern.test(value))
-          {
-            callback(new Error('用户名不合要求'));
-          }
-          else {
-              callback();
-            }
+        if (!uPattern.test(value)) {
+          callback(new Error('用户名不合要求'));
+        } else {
+          this.$http.post('/api/validateUserName/', {'username': value}, {emulateJSON: true})
+            .then(function (response) {
+              var res1 = JSON.parse(response.bodyText);
+              if (res1['err_code'] == 0) {
+                callback();
+              } else {
+                callback(new Error('用户名已存在'));
+              }
+
+            })
+        }
       };
       var validateName = (rule, value, callback) => {
           if (value.length>20) {
@@ -122,8 +129,9 @@ export default {
           {
             callback(new Error('昵称不能为空'));
           }else {
-              callback();
-            }
+            callback();
+          }
+
       };
       var validateuni = (rule, value, callback) => {
            if(value.length<=0)
