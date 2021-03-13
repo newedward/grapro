@@ -1,101 +1,103 @@
 <template>
-    <!-- data初始化为空，原来的数据以placeholder的形式给出 -->
-  <div id="edituser" >
-    <el-container direction="vertical">
-      <topNav> </topNav>
-
+  <div id="personinfo" >
+    <el-row type="flex" justify="center">
+      <el-image :src= "require('@/assets/icon.jpg')" fit="fill"></el-image>
+    </el-row>
     <el-row type="flex" justify="center">
     <el-col :span="8" type="flex" justify="start">
   <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" >
-    <!--<el-form-item label="昵称" prop="nikename">-->
-    <!--<el-input  v-model="ruleForm.nikename" autocomplete="off" clearable ></el-input>-->
-  <!--</el-form-item>-->
-    <el-form-item label="姓名" prop="username">
-    <el-input  v-model="ruleForm.username" autocomplete="off" clearable ></el-input>
+    <el-form-item label="姓名" prop="name" >
+    <el-input placeholder="请输入姓名" v-model="ruleForm.name" autocomplete="off" clearable readonly="editable"></el-input>
   </el-form-item>
-  <el-form-item label="性别" prop="sex">
-   <el-select   v-model="ruleForm.sex">
-    <el-option
-      v-for="item in ruleForm.options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
-  </el-select>
+    <el-form-item label="用户名" prop="username" >
+    <el-input placeholder="用户名4到16位（字母，数字，下划线，减号）组成" v-model="ruleForm.username" autocomplete="off" clearable readonly="true"></el-input>
   </el-form-item>
+  <el-form-item label="所属学校" prop="uni" >
+    <el-input placeholder="请输入所属学校" v-model="ruleForm.uni" autocomplete="off" clearable readonly="true"></el-input>
+  </el-form-item>
+  <el-form-item label="所属学院" prop="school" >
+    <el-input placeholder="请输入所属学院" v-model="ruleForm.school" autocomplete="off" clearable readonly="true"></el-input>
+  </el-form-item>
+
+    <el-form-item v-if="ruleForm.role==1" label="学号" prop="code" v-show="ruleForm.role=='学生'">
+      <el-input placeholder="请输入学号" v-model="ruleForm.code" autocomplete="off" clearable readonly="true"></el-input>
+    </el-form-item>
+
+    <el-form-item v-if="ruleForm.role==2" label="要求" prop="req" v-show="ruleForm.role=='教师'">
+      <el-input placeholder="请输入招生要求（可为空）" v-model="ruleForm.req" autocomplete="off" clearable readonly="editable"></el-input>
+    </el-form-item>
+
     <el-form-item label="电子邮箱" prop="email">
-    <el-input  v-model="ruleForm.email" autocomplete="off" clearable ></el-input>
+    <el-input placeholder="请输入电子邮箱(非必填)" v-model="ruleForm.email" autocomplete="off" clearable readonly="true"></el-input>
   </el-form-item>
     <el-form-item label="头像" prop="avater">
+
       <el-col :span ="10">
-    <el-input   v-model="ruleForm.avater" autocomplete="off" clearable></el-input>
-      </el-col>
-      <el-col :span ="10">
-      <el-avatar :src= "ruleForm.avater"></el-avatar>
-        </el-col>
-  </el-form-item>
-    <el-form-item label="密码" prop="pass">
-    <el-input placeholder="请输入密码" type="password" v-model="ruleForm.pass" autocomplete="off" clearable></el-input>
-  </el-form-item>
-  <el-form-item label="确认密码" prop="checkPass">
-    <el-input placeholder="请重复输入密码" type="password" v-model="ruleForm.checkPass" autocomplete="off" clearable></el-input>
-  </el-form-item>
-      <el-form-item label="原来的密码" prop="formalpass">
-    <el-input placeholder="请输入原来的密码" type="password" v-model="ruleForm.formalpass" autocomplete="off" clearable></el-input>
+
+    <el-upload
+  class="avatar-uploader"
+  name = "avater"
+     accept=".jpg, .jpeg, .png"
+  action='/api/uploadAvater/'
+  :show-file-list="false"
+  :on-success="handleAvatarSuccess"
+  :before-upload="beforeAvatarUpload">
+  <img v-if="avater" :src="avater" class="avatar">
+  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+</el-upload>
+    </el-col>
+      </el-form-item>
+    <el-form-item>
+      <el-button type="primary" v-show="editable" @click="edit">编辑</el-button>
+      <el-button type="primary" v-show="!editable" @click="submitForm('ruleForm')">确定</el-button>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="submitForm('ruleForm')">修改</el-button>
-    <el-button @click="resetForm('ruleForm')">重置</el-button>
+    <el-link href="/home" type="primary">回到首页</el-link>
   </el-form-item>
 </el-form>
     </el-col>
       </el-row>
-      </el-container>
   </div>
 
 </template>
 
 <script>
-import topNav from '../components/topNav'
+
 export default {
-  name: 'edituser',
-  components: {topNav},
+  name: 'register',
+  components: {},
   data() {
-      var validatePass = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请输入密码'));
-        } else {
-          if (this.ruleForm.checkPass !== '') {
-            this.$refs.ruleForm.validateField('checkPass');
-          }
-          callback();
-        }
-      };
-      var validatePass2 = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请再次输入密码'));
-        } else if (value !== this.ruleForm.pass) {
-          callback(new Error('两次输入密码不一致!'));
-        } else {
-          callback();
-        }
-      };
-      var validateUsername = (rule, value, callback) => {
-        var uPattern = /^[a-zA-Z0-9_-]{4,16}$/;
-           if (!uPattern.test(value))
-          {
-            callback(new Error('用户名不合要求'));
-          }
-          else {
-              callback();
-            }
-      };
-      var validateUsernike = (rule, value, callback) => {
-          if (value.length>10) {
-            callback(new Error('昵称长度不能大于10'));
+      var validateName = (rule, value, callback) => {
+          if (value.length>20) {
+            callback(new Error('姓名长度不能大于20'));
           } else if(value.length<=0)
           {
             callback(new Error('昵称不能为空'));
+          }else {
+            callback();
+          }
+
+      };
+      var validateuni = (rule, value, callback) => {
+           if(value.length<=0)
+          {
+            callback(new Error('学校不能为空'));
+          }else {
+              callback();
+            }
+      };
+      var validateschool = (rule, value, callback) => {
+           if(value.length<=0)
+          {
+            callback(new Error('学院不能为空'));
+          }else {
+              callback();
+            }
+      };
+      var validatecode = (rule, value, callback) => {
+           if(value.length<=0)
+          {
+            callback(new Error('学号不能为空'));
           }else {
               callback();
             }
@@ -103,44 +105,28 @@ export default {
       var validatedefault = (rule, value, callback) => {
               callback();
       };
-      var validatedeformalpass = (rule, value, callback) => {
-        //TODO:进行以前密码的测试
-        this.$http.post('/api/validatepwd/',{'userId':this.watchId,'pwd':value.toString()},{emulateJSON:true})
-                  .then((response)=> {
-                      var res1 = JSON.parse(response.bodyText)
-                      if (res1['err_num'] == 0) {
-
-                         callback();
-                      } else {
-                          callback(new Error('密码错误'));
-                      }
-                  });
-      };
       return {
+        res: '',
         watchId:'',
+        editable:true,
+        role:'',
         ruleForm: {
-            formalpass:'',
-          avater:'',
-          nikename:'',
-          username:'',
-          pass: '',
-          checkPass: '',
+          uni:'',
+          req:'',
+          school:'',
+          name:'',
           email:'',
-          options: [{
-          value: '男',
-          label: '男'
-        }, {
-          value: '女',
-          label: '女'
-        }],
-        sex: ''
+          code:'',
         },
         rules: {
-            formalpass: [
-            { validator: validatedeformalpass, trigger: 'blur' }
+          name: [
+            { validator: validateName, trigger: 'blur' }
           ],
-          sex: [
-            { validator: validatedefault, trigger: 'blur' }
+          uni: [
+            { validator: validateuni, trigger: 'blur' }
+          ],
+          school: [
+            { validator: validateschool, trigger: 'blur' }
           ],
           avater: [
             { validator: validatedefault, trigger: 'blur' }
@@ -148,92 +134,110 @@ export default {
           email: [
             { validator: validatedefault, trigger: 'blur' }
           ],
-          nikename: [
-            { validator: validateUsernike, trigger: 'blur' }
-          ],
-          username: [
-            { validator: validateUsername, trigger: 'blur' }
-          ],
-          pass: [
-            { validator: validatePass, trigger: 'blur' }
-          ],
-          checkPass: [
-            { validator: validatePass2, trigger: 'blur' }
+          code: [
+            { validator: validatecode, trigger: 'blur' }
           ]
         }
       };
     },
-   created: function() {
-      this.getcur();
-
-  },
-    computed:{
-
-
-    },
-
+  mounted() {
+          this.getCurUserID();
+      },
     methods: {
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
 
             var params = new URLSearchParams();
-            params.append('userId', this.watchId);
             params.append('userName', this.ruleForm.username);
-            params.append('nickName', this.ruleForm.nikename);
-            params.append('password', this.ruleForm.pass);
-            params.append('sex', this.ruleForm.sex);
+            params.append('name', this.ruleForm.name);
             params.append('email', this.ruleForm.email);
-            params.append('avatar', this.ruleForm.avater);
+            params.append('avatarpath', this.avaterpath);
+            params.append('code', this.ruleForm.code);
+            params.append('req', this.ruleForm.req);
 
             this.$axios.post('/api/changeInfo/', params)
             .then(res => {
-              if(res.data.toString() == "succeed")
-              {
-               alert('修改成功');
-              window.location.href = "/index";
-              }else{
-                alert('修改失败');
-            }
-            });}
-           else {
-            console.log('修改失败');
+              this.res = res
+                this.$message({
+                  type: 'success',
+                  message: res.data
+                });
+              this.editable = true;
+            }, err => {
+              this.$message({
+                type: 'info',
+                message: '注册失败!\n' + err
+              });
+            });
+          } else {
+            console.log('error submit!!');
+
+            this.$message({
+                type: 'success',
+                message: 'error'
+              });
             return false;
           }
-
-      });},
+        });
+      },
+      getdata(){
+        this.$http.post('/api/getUser/',{'watchId':this.watchId},{emulateJSON:true})
+                .then((response) => {
+                  var res1 = JSON.parse(response.bodyText)
+                  if (res1['err_num'] == 0) {
+                    this.ruleForm.name = res1["name"]
+                    this.ruleForm.username = res1["username"]
+                    this.ruleForm.uni = res1["uni"]
+                    this.ruleForm.school = res1["school"]
+                    this.ruleForm.email = res1["email"]
+                  }
+                })
+      },
+      getCurUserID(){
+        this.$http.get('/api/getCurUserID')
+                .then((response) => {
+                  var res1 = JSON.parse(response.bodyText)
+                  if (res1['err_num'] == 0) {
+                    this.watchId = res1['userID'];
+                    this.ruleForm.role = res1['role'];
+                    this.getdata();
+                  }
+                  else{
+                      this.$message.error("系统错误")
+                    }
+                })
+      },
       resetForm(formName) {
         this.$refs[formName].resetFields();
       },
-      getcur: function  () {
-        this.$http.get('/api/getCurUserID')
-                  .then((response)=> {
-                      var res1 = JSON.parse(response.bodyText);
-                      if (res1['err_num'] == 0) {
-                          this.watchId = res1['userID'].toString()
-                      } else {
-                          this.$message.error("初始化失败")
-                      }
-                      this.initial();
-                  });
-      },
-      initial:function(){
-        this.$http.post('/api/getUserByID/',{'userId':this.watchId},{emulateJSON:true})
-              .then(function(response){
-                    var res1 = JSON.parse(response.bodyText);
-                    this.ruleForm.username = res1["user"][0]["fields"]["userName"];
-                    // alert(res1["user"][0]["fields"]["userName"])
-                    this.ruleForm.nikename = res1["user"][0]["fields"]["nickName"];
-                    if (res1["user"][0]["fields"]["gender"]){
-                      this.ruleForm.sex = "男"
-                    }else{
-                      this.ruleForm.sex = "女"
+      handleAvatarSuccess(res, file) {
+        this.avater = URL.createObjectURL(file.raw);
+        console.log(res);
+        if(res['err_code']==0) {
+                      this.$message({
+                      type: 'info',
+                      message: '上传成功'
+                        });
+                      this.avaterpath = res["path"];
                     }
-                    this.ruleForm.avater = res1["user"][0]["fields"]["avatar"];
-                    this.ruleForm.email = res1["user"][0]["fields"]["email"];
-              })
+                    else{
+                      this.$message.error("添加失败")
+                    }
+
+      },
+      beforeAvatarUpload(file) {
+        const isLt2M = file.size / 1024 / 1024 < 2;
+        if (!isLt2M) {
+          this.$message.error('上传头像图片大小不能超过 2MB!');
+        }
+        return isLt2M;
+      },
+      edit(){
+        this.editable = false;
       }
     }
+
 }
 </script>
 

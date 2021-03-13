@@ -12,7 +12,7 @@
           <el-button type="text" style="margin-left: 10%"  @click.native="jumpTo($event)" id="个人信息">个人信息</el-button>
         <el-button type="text" icon="el-icon-bell" style="margin-left: 10%"  @click="checkMessage"></el-button>
 <el-button type="primary" @click="toLogin" v-if="!watchId" style="margin-left: 10%">登录</el-button>
-          <el-button type="primary" @click="toLogin" v-if="watchId" style="margin-left: 10%">登出</el-button>
+          <el-button type="primary" @click="toLogout" v-if="watchId" style="margin-left: 10%">登出</el-button>
         </el-col>
 
         </el-row>
@@ -127,7 +127,16 @@ export default {
           }
           else window.location.href = "/edituser";      },
       toLogin: function () {
-          window.location.href = "/login";      }
+          window.location.href = "/login";      },
+      toLogout: function () {
+         this.$http.get('/api/logout')
+                .then((response) => {
+                  var res1 = JSON.parse(response.bodyText)
+                  if (res1['err_code'] == 0) {
+                    location.reload()
+                  }
+                })
+      }
 
   }
 }

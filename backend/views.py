@@ -15,13 +15,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 def getCurUserID(req):
     response = {}
     err, curUser = Util.getUserIDBySession(req)
+    info,role = dbcontrol.getUserRole(curUser)
     if err == 'succeed':
         response['userID'] = curUser
         response['msg'] = 'succeed'
+        response['role'] = role
         response['err_num'] = 0
     else:
         response['err_num'] = 1
         response['msg'] = 'error'
+    # print(response)
     return JsonResponse(response)
 
 def getUserAvaterByID(req):
@@ -123,6 +126,7 @@ def addTeaQueue(req):
     app = req.POST.get('appId')
     dbcontrol.checkapplication(app)
     info = dbcontrol.addteaqueue(student,teacher)
+    print("add",info)
     response = {}
     if info == "succeed":
         response["Msg"] = "succeed"
@@ -222,6 +226,7 @@ def uploadfile(req):
     work = req.FILES.get('work',None)
     nextnum = req.POST.get('next')
     username = req.POST.get('stuid')
+    print("下一个文件",nextnum)
     head_path = BASE_DIR + "\\media\\{}\\{}".format(username,nextnum).replace(" ", "")
     print("head_path", head_path)
     if not os.path.exists(head_path):
@@ -252,23 +257,39 @@ def uploadfile(req):
         # file_path = head_path + "\\{}".format("head." + head_suffix)
         # file_path = file_path.replace(" ", "")
         # print("储存路径", file_path)  # C:\Users\user\Desktop\DownTest\media\username\head\head.png
-
-def getStudentStartbyTea(req):
-    teaid = req.POST.get("teaId")
-    info,slist = dbcontrol.getStuByTea(teaid)
+def getMyStudent(req):
+    teaid = req.POST.get("teacherId")
+    info,slist,ulist = dbcontrol.getStuByTea(teaid)
     response = {}
     if info == "succeed":
         response["Msg"] = "succeed"
         response["err_code"] = 0
-        response["slist"] = slist
-        reclist = []
-        for s in slist:
-            rec = dbcontrol.getlatstrecordbystu(s)
-            reclist.append(rec)
-        response["rlist"] = reclist
+        response["slist"] = json.loads(serializers.serialize("json", slist))
+        response["ulist"] = json.loads(serializers.serialize("json", ulist))
     else:
         response['Msg'] = 'failed'
         response['err_code'] = 1
+    # print("my",response)
+    return JsonResponse(response)
+
+
+def getStudentStartbyTea(req):
+    teaid = req.POST.get("teaId")
+    info,slist,ulist = dbcontrol.getStuByTea(teaid)
+    response = {}
+    if info == "succeed":
+        response["Msg"] = "succeed"
+        response["err_code"] = 0
+        response["ulist"] = json.loads(serializers.serialize("json", ulist))
+        reclist = []
+        for s in slist:
+            info,rec = dbcontrol.getlatstrecordbystu(s)
+            reclist.append(rec)
+        response["rlist"] =json.loads(serializers.serialize("json", reclist))
+    else:
+        response['Msg'] = 'failed'
+        response['err_code'] = 1
+    # print(response)
     return JsonResponse(response)
 
 def login(req):
@@ -284,10 +305,20 @@ def login(req):
 
     return HttpResponse(err)
 
+def logout(req):
+    info = Util.delUserForSession(req)
+    response = {}
+    if info == "succeed":
+        response["Msg"] = "succeed"
+        response["err_code"] = 0
+    else:
+        response['Msg'] = 'failed'
+        response['err_code'] = 1
+    return JsonResponse(response)
+
 def validateUserName(req):
     username = req.POST.get('username')
     info = dbcontrol.validateUser(username)
-    print(info)
     response = {}
     if info == "succeed":
         response["Msg"] = "succeed"
@@ -312,6 +343,8 @@ def createUser(req):
     info,user = dbcontrol.addUser(userName,password,name,email,avatarpath,uni,school)
     if info == "succeed":
         if role == "学生":
+            user.credit = 1
+            user.save()
             info = dbcontrol.addStudent(user,code)
             if info == "succeed":
                 print(Util.setUserForSession(req, user.id))
@@ -320,6 +353,8 @@ def createUser(req):
                 print("学生失败")
                 return HttpResponse("注册失败!")
         else :
+            user.credit = 2
+            user.save()
             info = dbcontrol.addTeacher(user,requirement)
             if info == "succeed":
                 print(Util.setUserForSession(req, user.id))
@@ -354,6 +389,26 @@ def uploadAvater(req):
         response["Msg"] = "succeed"
         response["err_code"] = 0
         response["path"] = ava_path
+    return JsonResponse(response)
+
+def changeInfo(req):
+    pass
+
+def getUser(req):
+    userid = req.POST.get('watchId')
+    info,user = dbcontrol.getUser(userid)
+    response = {}
+    if info == "succeed":
+        response["Msg"] = "succeed"
+        response["err_num"] = 0
+        response["name"] = user.name
+        response["username"] = user.username
+        response["uni"] = user.uni
+        response["school"] = user.school
+        response["email"] = user.email
+    else:
+        response['Msg'] = 'failed'
+        response['err_num'] = 1
     return JsonResponse(response)
 
 

@@ -22,5 +22,9 @@ urlpatterns = [
     path('getCurUserID/', views.getCurUserID, name = 'getCurUserID'),
     path('getUserAvaterByID/', views.getUserAvaterByID, name = 'getUserAvaterByID'),
     path('login/', views.login, name = 'login'),
+    path('logout/', views.logout, name = 'logout'),
+    path('getUser/', views.getUser, name = 'getUser'),
+    path('getMyStudent/', views.getMyStudent, name = 'getMyStudent'),
+    path('changeInfo/', views.changeInfo, name = 'changeInfo'),
     path('validateUserName/', views.validateUserName, name = 'validateUserName'),
 ]

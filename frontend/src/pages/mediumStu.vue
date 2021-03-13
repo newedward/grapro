@@ -56,8 +56,14 @@ import flowStu from '../components/flowStu'
               {content:"现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；"},
               {content:"简化流程：设计简洁直观的操作流程清晰明确：语言表达清晰且表意明确，让用户快速理解进而作出决策帮助用户识别：界面简单直白，让用户快速识别而非回忆，减少用户记忆负担"},
               {content:"太好了"}
-            ]
+            ],
+            watchId:'',
+            role:'',
   }
+      },
+      created(){
+
+        this.getCurUserID()
       },
     methods: {
           fileUpload(data){
@@ -87,6 +93,16 @@ import flowStu from '../components/flowStu'
         this.$message.success("上传成功!");
       });
     },
+      getCurUserID(){
+        this.$http.get('/api/getCurUserID')
+                .then((response) => {
+                  var res1 = JSON.parse(response.bodyText)
+                  if (res1['err_num'] == 0) {
+                    this.watchId = res1['userID'];
+                    this.role = res1['role'];
+                  }
+                })
+      }
     }
     }
 </script>

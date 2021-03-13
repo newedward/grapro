@@ -2,6 +2,7 @@ from backend.models import *
 from backend.controller import Util
 from django.utils import timezone
 import base64
+import os
 
 # user_tea = models.OneToOneField(
 #         User,
@@ -24,6 +25,22 @@ def login(username, password):
         else:
             return ("wrong password for user " + username, None)
 
+def getUserRole(user):
+    try:
+        role = User.objects.get(id=user).credit
+    except:
+        return ("failed", 0)
+    else:
+        return ("succeed", role)
+
+def getUser(userid):
+    try:
+        user = User.objects.get(id=userid)
+    except:
+        return ("failed",None)
+    else:
+        return ("succeed",user)
+
 def validateUser(username):
     findUser = User.objects.filter(username=username)
     if findUser:
@@ -43,7 +60,7 @@ def addUser(username, password, name, email, avater, uni, school):
 
 
 def addTeacher(user, requirement):
-    newtea = Teacher(user_tea_id=user, requirement=requirement)
+    newtea = Teacher(user_tea=user, requirement=requirement,queue="")
     try:
         newtea.save()
     except:
@@ -84,12 +101,16 @@ def getAvaterByID(userid):
     try:
         path = User.objects.get(id=userid).avater
         print(path)
+        pathnow = os.getcwd()
+        print(pathnow)
+        pathres = path.replace(pathnow,'')
+        print(pathres)
         # with open( path, 'rb' ) as file:
         #     avater = file
     except:
         return ("avater error", None)
     else:
-        return ("succeed", path)
+        return ("succeed", pathres)
 
 
 def getTeaByStu(userid):
@@ -107,10 +128,13 @@ def getTeaByStu(userid):
 def getStuByTea(teaid):
     try:
         slist = Student.objects.filter(teacher_fol_id=teaid)
+        ulist = []
+        for s in slist:
+            ulist.append(s.user_stu)
     except:
-        return ("failed", [])
+        return ("failed", [],[])
     else:
-        return ("succeed", slist)
+        return ("succeed", slist,ulist)
 
 
 def addapplication(teaid, stuid):
@@ -178,6 +202,7 @@ def addteaqueue(stuid, teaid):
             return ("has")
         else:
             teacher = Teacher.objects.get(user_tea_id=teaid)
+            print("后台", teacher)
             teacher.queue += str(stuid) + ","
             teacher.save()
             return ("succeed")
@@ -248,8 +273,8 @@ def addrecordstu(studentid, workid, path, process):
 
 def getlatstrecordbystu(stu):
     try:
-        reclist = Record.objects.filter(student=stu).order_by('id')
-        rec = reclist[-1]
+        reclist = Record.objects.filter(student=stu).order_by('-id')
+        rec = reclist[0]
     except:
         return ("failed", None)
     else:

@@ -66,8 +66,13 @@ import flowTea from '../components/flowTea'
               {code:"171110133",name:"朱振南1",file:"balaa"},
             ],
             currentdata:[],
+            watchId:"",
+            role:"",
   }
       },
+      created: function() {
+      this.getCurUserID();
+  },
     methods: {
           fileUpload(data){
     let url = '/card/scrapApply/uploadScrapCards';
@@ -99,7 +104,17 @@ import flowTea from '../components/flowTea'
       handleClick(){
             //更改currentuser,上传给不同的人
         this.textarea = "";
-      }
+      },
+      getCurUserID(){
+        this.$http.get('/api/getCurUserID')
+                .then((response) => {
+                  var res1 = JSON.parse(response.bodyText)
+                  if (res1['err_num'] == 0) {
+                    this.watchId = res1['userID'];
+                    this.role = res1['role'];
+                  }
+                })
+      },
     }
     }
 </script>

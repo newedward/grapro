@@ -69,11 +69,12 @@ import flowStu from '../components/flowStu'
       pageNum: 1,
       // 当前显示的数据
       currentPage: 0,
-             watchId:20
+             watchId:'',
+             role:'',
     }
       },
     created: function() {
-      // this.getcur();
+      this.getCurUserID();
   },
       mounted() {
           this.getdata();
@@ -163,7 +164,21 @@ import flowStu from '../components/flowStu'
                       this.$message.error("申请失败")
                     }
               })
-        }
+        },
+        getCurUserID(){
+        this.$http.get('/api/getCurUserID')
+                .then((response) => {
+                  var res1 = JSON.parse(response.bodyText)
+                  if (res1['err_num'] == 0) {
+                    this.watchId = res1['userID'];
+                    this.role = res1['role'];
+                    this.getdata();
+                  }
+                  else{
+                      this.$message.error("系统错误")
+                    }
+                })
+      },
       }
     }
 </script>

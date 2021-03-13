@@ -61,21 +61,22 @@ import flowTea from '../components/flowTea'
       ],
              queue:[],
              rownumber:5,
-             watchId:1,
+             watchId:'',
+             role:'',
            list: [
-             {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110134",name:"朱振南",intro:"不忘初心"},
-            {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110135",name:"朱振南",intro:"不忘初心"},
-            {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110133",name:"朱振南",intro:"不忘初心"},
-            {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110132",name:"朱振南",intro:"不忘初心"},
-          {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110131",name:"朱振南",intro:"不忘初心"},
-             {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110130",name:"朱振南",intro:"不忘初心"},
+          //    {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110134",name:"朱振南",intro:"不忘初心"},
+          //   {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110135",name:"朱振南",intro:"不忘初心"},
+          //   {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110133",name:"朱振南",intro:"不忘初心"},
+          //   {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110132",name:"朱振南",intro:"不忘初心"},
+          // {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110131",name:"朱振南",intro:"不忘初心"},
+          //    {avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png",code:"171110130",name:"朱振南",intro:"不忘初心"},
            ],
              branch:[],
     }
       },
       mounted() {
-          this.getdata();
-          this.getRow();
+          this.getCurUserID();
+
       },
       methods:{
           change (event) {
@@ -119,9 +120,20 @@ import flowTea from '../components/flowTea'
                     else{
                       this.$message.error("获取队列信息失败")
                     }
-
               })
         },
+        getCurUserID(){
+        this.$http.get('/api/getCurUserID')
+                .then((response) => {
+                  var res1 = JSON.parse(response.bodyText)
+                  if (res1['err_num'] == 0) {
+                    this.watchId = res1['userID'];
+                    this.role = res1['role'];
+                    this.getdata();
+                    this.getlist();
+                  }
+                })
+      },
         store(){
             for (var i=0;i<this.groups.length;i++){
               this.queue.push(this.groups[i].uid)
@@ -143,6 +155,24 @@ import flowTea from '../components/flowTea'
                       this.$message.error("保存失败")
                     }
 
+              })
+        },
+        getlist(){
+            this.$http.post('/api/getMyStudent/',{'teacherId':this.watchId},{emulateJSON:true})
+              .then(function(response){
+                    var res1 = JSON.parse(response.bodyText);
+                    if(res1['err_code']==0) {
+
+                      for (var i = 0; i < res1['slist'].length; i++) {
+                        this.list.push({avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+                        ,name:res1['ulist'][i]['fields']['name'],code:res1['slist'][i]['fields']['code']
+                        ,uid:res1['slist'][i]['pk']})
+                      }
+                      this.getRow();
+                    }
+                    else{
+                      this.$message.error("获取我的学生信息失败")
+                    }
               })
         }
       }

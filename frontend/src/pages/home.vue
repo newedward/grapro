@@ -4,7 +4,8 @@
       <topNav v-bind:watchId="watchId"></topNav>
        <el-container>
       <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-        <flowStu></flowStu>
+        <flowStu v-if="role==1" ></flowStu>
+        <flowTea v-if="role==2" ></flowTea>
       </el-aside>
 
       <el-main style="height: 1000px;">
@@ -50,11 +51,13 @@
 <script>
 import topNav from '../components/topNav'
 import flowStu from '../components/flowStu'
+import flowTea from '../components/flowTea'
   export default {
     name: 'home',
     components: {
       topNav,
       flowStu,
+      flowTea,
     },
     data() {
       return {
@@ -74,6 +77,7 @@ import flowStu from '../components/flowStu'
          ],
         loading: false,
         watchId:'',
+        role:0,
       }
     },
     mounted: function () {
@@ -101,6 +105,7 @@ import flowStu from '../components/flowStu'
                   var res1 = JSON.parse(response.bodyText)
                   if (res1['err_num'] == 0) {
                     this.watchId = res1['userID'];
+                    this.role = res1['role']
                   }
                 })
       }

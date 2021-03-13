@@ -69,13 +69,25 @@ import flowTea from '../components/flowTea'
       pageNum: 1,
       // 当前显示的数据
       currentPage: 0,
-            watchId:1
+            watchId:'',
+            role:''
     }
       },
       mounted(){
-          this.getdata();
+          this.getCurUserID();
       },
       methods:{
+          getCurUserID(){
+        this.$http.get('/api/getCurUserID')
+                .then((response) => {
+                  var res1 = JSON.parse(response.bodyText)
+                  if (res1['err_num'] == 0) {
+                    this.watchId = res1['userID'];
+                    this.role = res1['role'];
+                    this.getdata();
+                  }
+                })
+      },
           getdata(){
             this.$http.post('/api/getApplicationByTeacher/',{'teacherId':this.watchId},{emulateJSON:true})
               .then(function(response){

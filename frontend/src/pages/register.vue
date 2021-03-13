@@ -174,7 +174,7 @@ export default {
           pass: '',
           checkPass: '',
           email:'',
-          code:'',
+          code:'请输入学号',
         options: [{
           value: '教师',
           label: '教师'

@@ -1,0 +1,253 @@
+{\rtf1\ansi\ansicpg936\uc1\deflang1033\adeflang1033\deflangfe1033\deff10\stshfloch11\stshfhich11\stshfbi11\stshfdbch11
+{\fonttbl
+{\f0\fswiss\fcharset134 Microsoft YaHei;}
+{\f1\fswiss\fcharset0 Microsoft YaHei;}
+{\f2\fswiss\fcharset134 Arial Unicode MS;}
+{\f3\fswiss\fcharset0 Arial Unicode MS;}
+{\f4\fmodern\fcharset134 FangSong;}
+{\f5\fmodern\fcharset0 FangSong;}
+{\f6\fswiss\fcharset134 Franklin Gothic Book;}
+{\f7\fswiss\fcharset0 Franklin Gothic Book;}
+{\f8\froman\fcharset134 Book Antiqua;}
+{\f9\froman\fcharset0 Book Antiqua;}
+{\f10\fnil\fcharset134 \u23435 ?\u20307 ?;}
+{\f11\fnil\fcharset0 \u23435 ?\u20307 ?;}
+}
+{\colortbl
+;
+\red0\green0\blue0
+;
+\red0\green0\blue255
+;
+\red0\green255\blue255
+;
+\red0\green255\blue0
+;
+\red255\green0\blue255
+;
+\red255\green0\blue0
+;
+\red255\green255\blue0
+;
+\red255\green255\blue255
+;
+\red0\green0\blue128
+;
+\red0\green128\blue128
+;
+\red0\green128\blue0
+;
+\red128\green0\blue128
+;
+\red128\green0\blue0
+;
+\red128\green128\blue0
+;
+\red128\green128\blue128
+;
+\red192\green192\blue192
+;
+\red0\green102\blue204
+;
+}
+{\*\defchp\fs24\afs24\loch\af11\hich\af11\dbch\af11}
+{\*\defpap\aspalpha\aspnum\faauto\adjustright\cgrid\li0\ri0\ltrpar\ql\fi0\sb0\sa0\sl240\slmult1}
+{\stylesheet
+{\aspalpha\aspnum\faauto\adjustright\cgrid\li0\ri0\ltrpar\ql\fi0\sb0\sa0\sl240\slmult1\lang1033\langfe1033\f11\fs24\afs24\charscalex100
+\expndtw0\cf1\dn0 Normal;}
+{\*\cs10\additive Default Paragraph Font;}
+{\*\cs15\additive\ul\cf17\sbasedon10 Hyperlink;}
+{\*\cs16\additive\lang2052\langfe2052\f0\b0\i0\ul0\strike0\scaps0\fs16\afs16\expndtw20\sbasedon10\slink36 \u27491 ?\u25991 ?\u25991 ?\u26412 ?
+ (3)_;}
+{\*\cs17\additive\lang2052\langfe2052\f2\b0\i0\ul0\strike0\scaps0\fs17\afs17\expndtw0\sbasedon16 \u27491 ?\u25991 ?\u25991 ?\u26412 ?
+ (3) + Arial Unicode MS,8.5 pt,\u-27148 ?\u-29219 ? 0 pt;}
+{\*\cs18\additive\lang2052\langfe2052\f0\b0\i0\ul0\strike0\scaps0\fs16\afs16\expndtw50\sbasedon10\slink37 \u27491 ?\u25991 ?\u25991 ?\u26412 ?
+ (4)_;}
+{\*\cs19\additive\f3\b0\i0\ul0\strike0\scaps0\fs21\afs21\charscalex60\expndtw0\sbasedon18 \u27491 ?\u25991 ?\u25991 ?\u26412 ?
+ (4) + Arial Unicode MS,10.5 pt,\u-27148 ?\u-29219 ? 0 pt,\u32553 ?\u25918 ? 60%;}
+{\*\cs20\additive\lang2052\langfe2052\f0\b0\i0\ul0\strike0\scaps0\fs16\afs16\expndtw20\sbasedon18 \u27491 ?\u25991 ?\u25991 ?\u26412 ?
+ (4) + \u-27148 ?\u-29219 ? 1 pt;}
+{\*\cs21\additive\lang2052\langfe2052\f0\b0\i\ul0\strike0\scaps0\fs17\afs17\expndtw10\sbasedon18 \u27491 ?\u25991 ?\u25991 ?\u26412 ?
+ (4) + 8.5 pt,\u26012 ?\u20307 ?,\u-27148 ?\u-29219 ? 0 pt;}
+{\*\cs22\additive\f5\b0\i\ul0\strike0\scaps0\fs34\afs34\expndtw0\sbasedon18 \u27491 ?\u25991 ?\u25991 ?\u26412 ? (4) + FangSong,17
+ pt,\u26012 ?\u20307 ?,\u-27148 ?\u-29219 ? 0 pt;}
+{\*\cs23\additive\f3\b0\i0\ul0\strike0\scaps0\fs20\afs20\sbasedon10\slink38 \u27491 ?\u25991 ?\u25991 ?\u26412 ? (2)_;}
+{\*\cs24\additive\lang2052\langfe2052\f0\b0\i0\ul0\strike0\scaps0\fs18\afs18\expndtw10\sbasedon23 \u27491 ?\u25991 ?\u25991 ?\u26412 ?
+ (2) + Microsoft YaHei,9 pt,\u-27148 ?\u-29219 ? 0 pt;}
+{\*\cs25\additive\f3\b0\i0\ul0\strike0\scaps0\fs28\afs28\sbasedon23 \u27491 ?\u25991 ?\u25991 ?\u26412 ? (2) + 14 pt;}
+{\*\cs26\additive\f1\b0\i0\ul0\strike0\scaps0\fs18\afs18\expndtw60\sbasedon23 \u27491 ?\u25991 ?\u25991 ?\u26412 ? (2) +
+ Microsoft YaHei,9 pt,\u-27148 ?\u-29219 ? 3 pt;}
+{\*\cs27\additive\f7\b0\i0\ul0\strike0\scaps0\fs26\afs26\charscalex100\expndtw-10\sbasedon10\slink39 \u26631 ?\u-26472 ?
+ #1_;}
+{\*\cs28\additive\lang2052\langfe2052\f0\b0\i\ul0\strike0\scaps0\fs17\afs17\expndtw10\sbasedon10\slink40 \u27491 ?\u25991 ?\u25991 ?\u26412 ?
+ (5)_;}
+{\*\cs29\additive\f3\b0\i0\ul0\strike0\scaps0\fs17\afs17\sbasedon10\slink41 \u27491 ?\u25991 ?\u25991 ?\u26412 ? (6)_;}
+{\*\cs30\additive\f9\b0\i0\ul0\strike0\scaps0\fs17\afs17\sbasedon10\slink42 \u27491 ?\u25991 ?\u25991 ?\u26412 ? (7)_;}
+{\*\cs31\additive\f3\b0\i0\ul0\strike0\scaps0\fs17\afs17\sbasedon30 \u27491 ?\u25991 ?\u25991 ?\u26412 ? (7) + Arial Unicode
+ MS;}
+{\*\cs32\additive\f3\b0\i0\ul0\strike0\scaps0\fs20\afs20\sbasedon10\slink43 \u26631 ?\u-26472 ? #2_;}
+{\*\cs33\additive\f9\b0\i0\ul0\strike0\scaps0\fs22\afs22\sbasedon10\slink44 \u26631 ?\u-26472 ? #2 (2)_;}
+{\*\cs34\additive\f3\b0\i0\ul0\strike0\scaps0\fs20\afs20\sbasedon29 \u27491 ?\u25991 ?\u25991 ?\u26412 ? (6) + 10 pt;}
+{\*\cs35\additive\f1\b0\i0\ul0\strike0\scaps0\fs11\afs11\sbasedon30 \u27491 ?\u25991 ?\u25991 ?\u26412 ? (7) + Microsoft
+ YaHei,5.5 pt;}
+{\s36\aspalpha\aspnum\faauto\adjustright\cgrid\cbpat8\sa60\sl0\slmult0\lang2052\langfe2052\f0\b0\i0\ul0\strike0\scaps0\fs16\afs16\expndtw20
+\sbasedon0\slink16 \u27491 ?\u25991 ?\u25991 ?\u26412 ? (3);}
+{\s37\aspalpha\aspnum\faauto\adjustright\cgrid\cbpat8\fi-380\sb60\sl-264\slmult0\lang2052\langfe2052\f0\b0\i0\ul0\strike0\scaps0\fs16\afs16
+\expndtw50\sbasedon0\slink18 \u27491 ?\u25991 ?\u25991 ?\u26412 ? (4);}
+{\s38\aspalpha\aspnum\faauto\adjustright\cgrid\cbpat8\sl-264\slmult0\f3\b0\i0\ul0\strike0\scaps0\fs20\afs20\sbasedon0\slink23
+\u27491 ?\u25991 ?\u25991 ?\u26412 ? (2);}
+{\s39\aspalpha\aspnum\faauto\adjustright\cgrid\cbpat8\fi180\sb60\sl0\slmult0\outlinelevel0\f7\b0\i0\ul0\strike0\scaps0\fs26\afs26\charscalex100
+\expndtw-10\sbasedon0\slink27 \u26631 ?\u-26472 ? #1;}
+{\s40\aspalpha\aspnum\faauto\adjustright\cgrid\cbpat8\sb60\sl-264\slmult0\lang2052\langfe2052\f0\b0\i\ul0\strike0\scaps0\fs17\afs17\expndtw10
+\sbasedon0\slink28 \u27491 ?\u25991 ?\u25991 ?\u26412 ? (5);}
+{\s41\aspalpha\aspnum\faauto\adjustright\cgrid\cbpat8\sl-264\slmult0\f3\b0\i0\ul0\strike0\scaps0\fs17\afs17\sbasedon0\slink29
+\u27491 ?\u25991 ?\u25991 ?\u26412 ? (6);}
+{\s42\aspalpha\aspnum\faauto\adjustright\cgrid\cbpat8\sl-264\slmult0\f9\b0\i0\ul0\strike0\scaps0\fs17\afs17\sbasedon0\slink30
+\u27491 ?\u25991 ?\u25991 ?\u26412 ? (7);}
+{\s43\aspalpha\aspnum\faauto\adjustright\cgrid\cbpat8\sa60\sl0\slmult0\outlinelevel1\f3\b0\i0\ul0\strike0\scaps0\fs20\afs20\sbasedon0\slink32
+\u26631 ?\u-26472 ? #2;}
+{\s44\aspalpha\aspnum\faauto\adjustright\cgrid\cbpat8\sb60\sa60\sl0\slmult0\outlinelevel1\f9\b0\i0\ul0\strike0\scaps0\fs22\afs22\sbasedon0
+\slink33 \u26631 ?\u-26472 ? #2 (2);}
+}
+{\info
+{\title}
+{\subject}
+{\author}
+{\keywords}
+}
+\paperw11909\paperh16834\margl2360\margr3002\margt4717\margb4717\gutter0\viewkind1\viewzk1\fet2\splytwnine\ftnlytwnine\htmautsp\useltbaln
+\alntblind\lytcalctblwd\lyttblrtgr\lnbrkrule\nobrkwrptbl\snaptogridincell\allowfieldendsel\wrppunct\asianbrkrule\newtblstyruls\nogrowautofit
+\usenormstyforlist\noindnmbrts\felnbrelev\nocxsptable\indrlsweleven\noafcnsttbl\afelev\utinl\hwelev\spltpgpar\notcvasp\notvatxbx\krnprsnet
+\cachedcolbal\noxlattoyen\noultrlspc\dntblnsbdb\nospaceforul\nolnhtadjtbl\notbrkcnstfrctbl\dgmargin\dghspace181\dgvspace181\dghshow1\dgvshow1
+\sectd\ltrsect\headery0\footery3\colsx720\sectlinegrid360\sftnbj\sftnrstcont
+\pard\plain\sl-170\slmult0\wrapdefault\s36\aspalpha\aspnum\faauto\adjustright\cgrid\lang2052\langfe2052\f0\b0\i0\ul0\strike0\scaps0\fs16
+\afs16\expndtw20
+{\cs16\lang2052\langfe2052\b0\i0\ul0\strike0\scaps0\fs16\afs16\charscalex100\expndtw20\cf1\dn0 \u22395 ?\u27714 ?\u-230 ?\u23545 ?\u22914 ?}
+{\cs17\lang2052\langfe2052\f2\b0\i0\ul0\strike0\scaps0\fs17\afs17\charscalex100\expndtw0\cf1\dn0 _}
+{\cs16\lang2052\langfe2052\b0\i0\ul0\strike0\scaps0\fs16\afs16\charscalex100\expndtw20\cf1\dn0 \u21340 ?}
+{\cs17\lang2052\langfe2052\f2\b0\i0\ul0\strike0\scaps0\fs17\afs17\charscalex100\expndtw0\cf1\dn0 1}
+{\cs16\lang2052\langfe2052\b0\i0\ul0\strike0\scaps0\fs16\afs16\charscalex100\expndtw20\cf1\dn0 :\u20316 ?\u-28680 ?\u-30644 ?\u23637 ?\u24320 ?
+\u25551 ?\u-28688 ?}
+\par
+\pard\plain\li920\ri2800\fi-380\sl-264\slmult0\wrapdefault\s37\aspalpha\aspnum\faauto\adjustright\cgrid\lang2052\langfe2052\f0\b0\i0\ul0
+\strike0\scaps0\fs16\afs16\expndtw50
+{\cs18\lang2052\langfe2052\b0\i0\ul0\strike0\scaps0\fs16\afs16\charscalex100\expndtw50\cf1\dn0 \u9332 ?\u20215 ?\u20986 ?\u22914 ?\u19979 ?
+\u-29708 ?\u20998 ?\u25152 ?\u23545 ?\u20008 ?}
+{\cs18\lang1033\langfe1033\f1\b0\i0\ul0\strike0\scaps0\fs16\afs16\charscalex100\expndtw50\cf1\dn0 \u12289 ?}
+{\cs19\lang1033\langfe1033\f3\b0\i0\ul0\strike0\scaps0\fs21\afs21\charscalex60\expndtw0\cf1\dn0 V}
+{\cs20\lang1033\langfe1033\f1\b0\i0\ul0\strike0\scaps0\fs16\afs16\charscalex100\expndtw20\cf1\dn0 :}
+{\cs20\lang2052\langfe2052\b0\i0\ul0\strike0\scaps0\fs16\afs16\charscalex100\expndtw20\cf1\dn0 \u30340 ?\u-29777 ?\u20041 ?\u21160 ?\u20316 ?
+ }
+{\cs21\lang1033\langfe1033\f1\b0\i\ul0\strike0\scaps0\fs17\afs17\charscalex100\expndtw10\cf1\dn0 \'95 }
+{\cs22\lang1033\langfe1033\f5\b0\i\ul0\strike0\scaps0\fs34\afs34\charscalex100\expndtw0\cf1\dn0 m}
+{\cs21\lang2052\langfe2052\b0\i\ul0\strike0\scaps0\fs17\afs17\charscalex100\expndtw10\cf1\dn0 \u25968 ?\u-29693 ?\u29992 ?}
+\par
+\pard\plain\li920\sl-264\slmult0\wrapdefault\s38\aspalpha\aspnum\faauto\adjustright\cgrid\f2\b0\i0\ul0\strike0\scaps0\fs20\afs20
+{\cs23\lang1033\langfe1033\f3\b0\i0\ul0\strike0\scaps0\fs20\afs20\charscalex100\expndtw0\cf1\dn0 S \'97 call id ( Elist)
+ \{ S.code := Elist.code IlgenCgoto }
+{\cs23\lang1033\langfe1033\f3\super\b0\i0\ul0\strike0\scaps0\fs20\afs20\charscalex100\expndtw0\cf1\dn0 4}
+{\cs23\lang1033\langfe1033\f3\b0\i0\ul0\strike0\scaps0\fs20\afs20\charscalex100\expndtw0\cf1\dn0 pc+Elist.num+1\}||}
+\par
+\pard\plain\li920\sl-264\slmult0\wrapdefault\s38\aspalpha\aspnum\faauto\adjustright\cgrid\f2\b0\i0\ul0\strike0\scaps0\fs20\afs20
+{\cs23\lang1033\langfe1033\f3\b0\i0\ul0\strike0\scaps0\fs20\afs20\charscalex100\expndtw0\cf1\dn0 for }
+{\cs24\lang2052\langfe2052\f0\b0\i0\ul0\strike0\scaps0\fs18\afs18\charscalex100\expndtw10\cf1\dn0 \u-27105 ?\u21015 ?}
+{\cs25\lang1033\langfe1033\f3\b0\i0\ul0\strike0\scaps0\fs28\afs28\charscalex100\expndtw0\cf1\dn0 q}
+{\cs24\lang2052\langfe2052\f0\b0\i0\ul0\strike0\scaps0\fs18\afs18\charscalex100\expndtw10\cf1\dn0 \u20013 ?\u30340 ?\u27599 ?\u19968 ?\u-26503 ?}
+{\cs23\lang1033\langfe1033\f3\b0\i0\ul0\strike0\scaps0\fs20\afs20\charscalex100\expndtw0\cf1\dn0 t do gen(\'92param\'92t}
+{\cs24\lang1033\langfe1033\f1\b0\i0\ul0\strike0\scaps0\fs18\afs18\charscalex100\expndtw10\cf1\dn0 ) || }
+{\cs23\lang1033\langfe1033\f3\b0\i0\ul0\strike0\scaps0\fs20\afs20\charscalex100\expndtw0\cf1\dn0 gen( cair id.place'/Elist.num)\}}
+\par
+\pard\plain\li920\qj\sl-288\slmult0\wrapdefault\s38\aspalpha\aspnum\faauto\adjustright\cgrid\f2\b0\i0\ul0\strike0\scaps0\fs20\afs20
+{\cs23\lang1033\langfe1033\f3\b0\i0\ul0\strike0\scaps0\fs20\afs20\charscalex100\expndtw0\cf1\dn0 Elist E \{Elist.num := 1;
+ Elist.code := E.code || t}
+{\cs26\lang1033\langfe1033\f1\b0\i0\ul0\strike0\scaps0\fs18\afs18\charscalex100\expndtw60\cf1\dn0 \u-230 ?}
+{\cs23\lang1033\langfe1033\f3\b0\i0\ul0\strike0\scaps0\fs20\afs20\charscalex100\expndtw0\cf1\dn0 rnewtemp; gen(t\'92:=\'92E.place}
+{\cs26\lang1033\langfe1033\f1\b0\i0\ul0\strike0\scaps0\fs18\afs18\charscalex100\expndtw60\cf1\dn0 >:}
+{\cs26\lang2052\langfe2052\f0\b0\i0\ul0\strike0\scaps0\fs18\afs18\charscalex100\expndtw60\cf1\dn0 \u24314 ?}
+{\cs24\lang2052\langfe2052\f0\b0\i0\ul0\strike0\scaps0\fs18\afs18\charscalex100\expndtw10\cf1\dn0 \u31435 ?\u-27105 ?\u21015 ?}
+{\cs23\lang1033\langfe1033\f3\b0\i0\ul0\strike0\scaps0\fs20\afs20\charscalex100\expndtw0\cf1\dn0 q}
+{\cs26\lang1033\langfe1033\f1\b0\i0\ul0\strike0\scaps0\fs18\afs18\charscalex100\expndtw60\cf1\dn0 \u-244 ?}
+{\cs24\lang2052\langfe2052\f0\b0\i0\ul0\strike0\scaps0\fs18\afs18\charscalex100\expndtw10\cf1\dn0 \u24182 ?\u23558 ?}
+{\cs23\lang1033\langfe1033\f3\b0\i0\ul0\strike0\scaps0\fs20\afs20\charscalex100\expndtw0\cf1\dn0 t}
+{\cs24\lang2052\langfe2052\f0\b0\i0\ul0\strike0\scaps0\fs18\afs18\charscalex100\expndtw10\cf1\dn0 \u25918 ?\u20837 ?}
+{\cs23\lang1033\langfe1033\f3\b0\i0\ul0\strike0\scaps0\fs20\afs20\charscalex100\expndtw0\cf1\dn0 q\}}
+\par
+\pard\plain\li740\fi180\sl-200\slmult0\wrapdefault\s38\aspalpha\aspnum\faauto\adjustright\cgrid\f2\b0\i0\ul0\strike0\scaps0\fs20\afs20
+{\cs23\lang1033\langfe1033\f3\b0\i0\ul0\strike0\scaps0\fs20\afs20\charscalex100\expndtw0\cf1\dn0 Elist _Elist1\u-244 ?E \{Elist.num
+ := Elist l.num+1; Elist.code := Elist}
+\par
+\pard\plain\li740\keep\keepn\fi180\sl-260\slmult0\outlinelevel0\wrapdefault\s39\aspalpha\aspnum\faauto\adjustright\cgrid\f6\b0\i0\ul0\strike0
+\scaps0\fs26\afs26\charscalex100\expndtw-10
+{\*\bkmkstart bookmark0}
+{\cs27\lang1033\langfe1033\f7\b0\i0\ul0\strike0\scaps0\fs26\afs26\charscalex100\expndtw-10\cf1\dn0 II}
+{\*\bkmkend bookmark0}
+\par
+\pard\plain\li740\fi180\sl-200\slmult0\wrapdefault\s38\aspalpha\aspnum\faauto\adjustright\cgrid\f2\b0\i0\ul0\strike0\scaps0\fs20\afs20
+{\cs23\lang1033\langfe1033\f3\b0\i0\ul0\strike0\scaps0\fs20\afs20\charscalex100\expndtw0\cf1\dn0 E.code || t:=newtemp; gen(t\'92:=\'92
+ E.place);}
+{\cs24\lang2052\langfe2052\f0\b0\i0\ul0\strike0\scaps0\fs18\afs18\charscalex100\expndtw10\cf1\dn0 \u23558 ? }
+{\cs23\lang1033\langfe1033\f3\b0\i0\ul0\strike0\scaps0\fs20\afs20\charscalex100\expndtw0\cf1\dn0 t }
+{\cs24\lang2052\langfe2052\f0\b0\i0\ul0\strike0\scaps0\fs18\afs18\charscalex100\expndtw10\cf1\dn0 \u25918 ?\u20837 ?\u-27105 ?\u21015 ?
+ }
+{\cs23\lang1033\langfe1033\f3\b0\i0\ul0\strike0\scaps0\fs20\afs20\charscalex100\expndtw0\cf1\dn0 q\}}
+\par
+\pard\plain\li740\sl-264\slmult0\wrapdefault\s40\aspalpha\aspnum\faauto\adjustright\cgrid\lang2052\langfe2052\f0\b0\i\ul0\strike0\scaps0
+\fs17\afs17\expndtw10
+{\cs28\lang2052\langfe2052\b0\i\ul0\strike0\scaps0\fs17\afs17\charscalex100\expndtw10\cf1\dn0 \u8226 ?\u21464 ?\u32622 ?\u-29708 ?\u26126 ?}
+\par
+\pard\plain\li740\sl-264\slmult0\wrapdefault\s41\aspalpha\aspnum\faauto\adjustright\cgrid\f2\b0\i0\ul0\strike0\scaps0\fs17\afs17
+{\cs29\lang1033\langfe1033\f3\b0\i0\ul0\strike0\scaps0\fs17\afs17\charscalex100\expndtw0\cf1\dn0 PRO(\u-229 ?KAM => BLOCK;}
+\par
+\pard\plain\li740\sl-264\slmult0\wrapdefault\s42\aspalpha\aspnum\faauto\adjustright\cgrid\f8\b0\i0\ul0\strike0\scaps0\fs17\afs17
+{\cs31\lang1033\langfe1033\f3\b0\i0\ul0\strike0\scaps0\fs17\afs17\charscalex100\expndtw0\cf1\dn0 BLOCK }
+{\cs30\lang1033\langfe1033\f9\b0\i0\ul0\strike0\scaps0\fs17\afs17\charscalex100\expndtw0\cf1\dn0 =>I)KC IU.OC K;}
+\par
+\pard\plain\li740\keep\keepn\sa16\sl-200\slmult0\outlinelevel1\wrapdefault\s43\aspalpha\aspnum\faauto\adjustright\cgrid\f2\b0\i0\ul0\strike0
+\scaps0\fs20\afs20
+{\*\bkmkstart bookmark1}
+{\cs32\lang1033\langfe1033\f3\b0\i0\ul0\strike0\scaps0\fs20\afs20\charscalex100\expndtw0\cf1\dn0 \{}
+{\*\bkmkend bookmark1}
+\par
+\pard\plain\li740\sa12\sl-170\slmult0\wrapdefault\s42\aspalpha\aspnum\faauto\adjustright\cgrid\f8\b0\i0\ul0\strike0\scaps0\fs17\afs17
+{\cs30\lang1033\langfe1033\f9\b0\i0\ul0\strike0\scaps0\fs17\afs17\charscalex100\expndtw0\cf1\dn0 add iypet synil>\'BBIStack[lop],
+ symbolSt\'BBck(top*3|}
+\par
+\pard\plain\li740\keep\keepn\sl-220\slmult0\outlinelevel1\wrapdefault\s44\aspalpha\aspnum\faauto\adjustright\cgrid\f8\b0\i0\ul0\strike0
+\scaps0\fs22\afs22
+{\*\bkmkstart bookmark2}
+{\cs33\lang1033\langfe1033\f9\b0\i0\ul0\strike0\scaps0\fs22\afs22\charscalex100\expndtw0\cf1\dn0 I}
+{\*\bkmkend bookmark2}
+\par
+\pard\plain\li740\fi180\sl-288\slmult0\wrapdefault\s41\aspalpha\aspnum\faauto\adjustright\cgrid\f2\b0\i0\ul0\strike0\scaps0\fs17\afs17
+{\cs29\lang1033\langfe1033\f3\b0\i0\ul0\strike0\scaps0\fs17\afs17\charscalex100\expndtw0\cf1\dn0 BLOCK ->c DEC => TYPE id;
+ }
+{\cs34\lang1033\langfe1033\f3\b0\i0\ul0\strike0\scaps0\fs20\afs20\charscalex100\expndtw0\cf1\dn0 i}
+\par
+\pard\plain\li740\sa28\sl-170\slmult0\wrapdefault\s42\aspalpha\aspnum\faauto\adjustright\cgrid\f8\b0\i0\ul0\strike0\scaps0\fs17\afs17
+{\cs30\lang1033\langfe1033\f9\b0\i0\ul0\strike0\scaps0\fs17\afs17\charscalex100\expndtw0\cf1\dn0 addiype( synibolStackftop],
+ syniholStack((op*l |}
+\par
+\pard\plain\li740\keep\keepn\sl-200\slmult0\outlinelevel1\wrapdefault\s43\aspalpha\aspnum\faauto\adjustright\cgrid\f2\b0\i0\ul0\strike0
+\scaps0\fs20\afs20
+{\*\bkmkstart bookmark3}
+{\cs32\lang1033\langfe1033\f3\b0\i0\ul0\strike0\scaps0\fs20\afs20\charscalex100\expndtw0\cf1\dn0 \}}
+{\*\bkmkend bookmark3}
+\par
+\pard\plain\li740\sl-270\slmult0\wrapdefault\s42\aspalpha\aspnum\faauto\adjustright\cgrid\f8\b0\i0\ul0\strike0\scaps0\fs17\afs17
+{\cs30\lang1033\langfe1033\f9\b0\i0\ul0\strike0\scaps0\fs17\afs17\charscalex100\expndtw0\cf1\dn0 TYPK => int \{symholStuck[ti)p|
+ \'AB int\}}
+\par
+\pard\plain\li1000\sl-270\slmult0\wrapdefault\s42\aspalpha\aspnum\faauto\adjustright\cgrid\f8\b0\i0\ul0\strike0\scaps0\fs17\afs17
+{\cs30\lang1033\langfe1033\f9\b0\i0\ul0\strike0\scaps0\fs17\afs17\charscalex100\expndtw0\cf1\dn0 TYPE => float \{syiiilxilS(iick[top|
+ =f1oal\}}
+\par
+\pard\plain\li1000\sl-270\slmult0\wrapdefault\s42\aspalpha\aspnum\faauto\adjustright\cgrid\f8\b0\i0\ul0\strike0\scaps0\fs17\afs17
+{\cs30\lang1033\langfe1033\f9\b0\i0\ul0\strike0\scaps0\fs17\afs17\charscalex100\expndtw0\cf1\dn0 1*Y!*K => double \{syml)}
+{\cs35\lang1033\langfe1033\f1\b0\i0\ul0\strike0\scaps0\fs11\afs11\charscalex100\expndtw0\cf1\dn0 \u12295 ?}
+{\cs30\lang1033\langfe1033\f9\b0\i0\ul0\strike0\scaps0\fs17\afs17\charscalex100\expndtw0\cf1\dn0 ISluck[(op| = double\}}
+\par
+\pard\plain\li1000\sl-270\slmult0\wrapdefault\s42\aspalpha\aspnum\faauto\adjustright\cgrid\f8\b0\i0\ul0\strike0\scaps0\fs17\afs17
+{\cs30\lang1033\langfe1033\f9\b0\i0\ul0\strike0\scaps0\fs17\afs17\charscalex100\expndtw0\cf1\dn0 TYPK => di\'BBr \{syml>olStack((op|
+ = chur\}}
+\par
+}
