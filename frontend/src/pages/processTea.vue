@@ -12,38 +12,47 @@
 <div id="block">
     <span class="demonstration">开题提交截止日期</span>
               <el-divider direction="vertical"></el-divider>
-    <el-date-picker
+    <el-date-picker :readonly="editable"
       v-model="value1"
       type="datetime"
       placeholder="选择日期时间"
-      align="right"
-      :picker-options="pickerOptions">
+      align="right">
     </el-date-picker>
 </div>
 
 <div id="block">
     <span class="demonstration">中期提交截止日期</span>
               <el-divider direction="vertical"></el-divider>
-    <el-date-picker
+    <el-date-picker :readonly="editable"
       v-model="value2"
       type="datetime"
       placeholder="选择日期时间"
       align="right"
-      :picker-options="pickerOptions">
+      >
     </el-date-picker>
 
 </div>
             <div id="block">
     <span class="demonstration">结题提交截止日期</span>
               <el-divider direction="vertical"></el-divider>
-    <el-date-picker
+    <el-date-picker :readonly="editable"
       v-model="value3"
       type="datetime"
       placeholder="选择日期时间"
       align="right"
-      :picker-options="pickerOptions">
+      >
     </el-date-picker>
-</div>
+              <el-row>
+              <el-button type="primary" v-show="editable" @click="editable = false">编辑</el-button>
+      <el-button type="primary" v-show="!editable" @click="submitTime">确定</el-button>
+                <el-tooltip placement="top-start">
+  <div slot="content">请先在左侧设置每个阶段的截止日期，设置成功后可以通过下表查看每个同学的状态
+    <br/>红色代表该同学未在截止时间内提交报告
+  </div>
+  <el-button style="float: right" type="info" icon="el-icon-question" circle></el-button>
+</el-tooltip>
+</el-row>
+            </div>
             <el-divider><i class="el-icon-s-data"></i></el-divider>
     <el-table id="table"
     :data="tableData"
@@ -126,10 +135,10 @@ import flowTea from '../components/flowTea'
       },
     methods: {
       tableRowClassName({row, rowIndex}) {
-        if (rowIndex === 1) {
-          return 'warning-row';
-        } else if (rowIndex === 2) {
-          return 'success-row';
+        for (var i = 0;i<this.rowarning.length;i++) {
+          if (rowIndex == this.rowarning[i]) {
+            return 'success-row';
+          }
         }
         return '';
       },
@@ -152,35 +161,56 @@ import flowTea from '../components/flowTea'
               .then(function(response){
                     var res1 = JSON.parse(response.bodyText);
                     if(res1['err_code']==0) {
-
+                      this.value1 = res1['time1'];
+                      this.value2 = res1['time2'];
+                      this.value3 = res1['time3'];
+                      for (var i = 0;i<res1['stalist'].length;i++){
+                        this.tableData.push({number:res1['stalist'][i][0],
+                        name:res1['stalist'][i][1],
+                        status:res1['stalist'][i][2]})
+                        if(res1['stalist'][i][3] == 1){
+                          this.rowarning.push(i)
+                        }
+                      }
+                      console.log(this.rowarning);
+                    }
+                    else if(res1['err_code']==1){
+                      this.$message.error("没有查询到流程信息，请先完成双选阶段")
                     }
                     else{
-                      this.$message.error("获取流程信息失败")
+                      this.$message({
+                      type: 'info',
+                      message: '请完善各阶段时间'
+                        });
+                    }
+              })
+      },
+      submitTime(){
+        this.$http.post('/api/subTeacherProcess/',{'userId':this.watchId,'time1':String(this.value1),'time2':String(this.value2),'time3':String(this.value3)},{emulateJSON:true})
+              .then(function(response){
+                console.log(this.value1);
+                    var res1 = JSON.parse(response.bodyText);
+                    if(res1['err_code']==0) {
+                      this.$message({
+                      type: 'info',
+                      message: '提交成功'
+                        });
+                      this.editable = true;
+                    }
+                    else{
+                      this.$message.error("提交失败")
                     }
               })
       }
+
     },
     data() {
       return {
-        tableData: [{
-          number: '171110133',
-          name: '朱振南',
-          status: '选择题目 毕业设计全流程管理系统',
-        }, {
-          number: '171110114',
-          name: '航子',
-          status: '完成题目'
-        }, {
-          number: '182210922',
-          name: '王小虎',
-          status: '选择题目',
-        }, {
-          number: '198764522',
-          name: '王小虎',
-          status: '结题'
-        }],
+        tableData: [],
         watchId:'',
         role:'',
+        editable:true,
+        rowarning:[],
         pickerOptions: {
           shortcuts: [{
             text: '今天',

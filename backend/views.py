@@ -311,7 +311,8 @@ def getStudentStartbyTea(req):
         reclist = []
         for s in slist:
             info,rec = dbcontrol.getlatstrecordbystu(s)
-            reclist.append(rec)
+            if info == "succeed":
+                reclist.append(rec)
         response["rlist"] =json.loads(serializers.serialize("json", reclist))
     else:
         response['Msg'] = 'failed'
@@ -438,7 +439,40 @@ def getUser(req):
         response['err_num'] = 1
     return JsonResponse(response)
 
+def getTeacherProcess(req):
+    teaid = req.POST.get('userId')
+    info, time1,time2,time3,stalist = dbcontrol.getteaprocess(teaid)
+    response = {}
+    if info == "succeed":
+        response["Msg"] = "succeed"
+        response["err_code"] = 0
+        response["time1"] = time1
+        response["time2"] = time2
+        response["time3"] = time3
+        response["stalist"] = stalist
+    elif info == "no":
+        response['Msg'] = 'no stu'
+        response['err_code'] = 1
+    else:
+        response['Msg'] = 'failed'
+        response['err_code'] = 2
+    print(response)
+    return JsonResponse(response)
 
+def subTeacherProcess(req):
+    teaid = req.POST.get('userId')
+    time1 = req.POST.get('time1')
+    time2 = req.POST.get('time2')
+    time3 = req.POST.get('time3')
+    info = dbcontrol.subteaprocess(teaid,time1,time2,time3)
+    response = {}
+    if info == "succeed":
+        response["Msg"] = "succeed"
+        response["err_code"] = 0
+    else:
+        response['Msg'] = 'failed'
+        response['err_code'] = 1
+    return JsonResponse(response)
 
 
 

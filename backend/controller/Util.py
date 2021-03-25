@@ -1,5 +1,6 @@
 import hashlib
-
+import time
+from datetime import datetime
 def cryToMD5(str):
     '''
     描述：
@@ -49,3 +50,39 @@ def delUserForSession(req):
         return "no user in session"
     else:
         return "succeed"
+
+def getStatusItem(statuscode,work):
+    timenow = datetime.timestamp(datetime.now())
+    if work == None:
+        return ["未提交题目，请提醒学生尽快确定题目",1]
+    else:
+        workname = work.title
+    if statuscode == 10:
+        timeexp = work.start_point
+        timeexp = datetime.timestamp(timeexp)
+        if timeexp<=timenow:
+            return ["待开题",1]
+        else:
+            return ["待开题", 0]
+    elif statuscode == 20:
+        return ["为课题 " + workname + " 提交了开题报告",0]
+    elif statuscode == 40:
+        timeexp = work.middle_point
+        timeexp = datetime.timestamp(timeexp)
+        if timeexp <= timenow:
+            return  ["通过了开题，待提交中期报告",1]
+        else:
+            return ["通过了开题，待提交中期报告", 0]
+    elif statuscode == 50:
+        return ["为课题 " + workname + " 提交了中期报告",0]
+    elif statuscode == 70:
+        timeexp = work.end_point
+        timeexp = datetime.timestamp(timeexp)
+        if timeexp <= timenow:
+            return ["通过了中期，待提交结题报告",1]
+        else:
+            return ["通过了中期，待提交结题报告", 0]
+    elif statuscode == 80:
+        return ["为课题 " + workname + " 提交了结题报告",0]
+    elif statuscode == 100:
+        return ["完成了毕业设计",0]

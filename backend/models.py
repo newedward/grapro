@@ -49,6 +49,10 @@ class Student(models.Model):
         related_name='teacher_fol',
         null=True
     )
+    status = models.IntegerField(null=True)
+    # 10刚选老师 20已经提交开题报告 40.通过待提交中期报告
+        #       50              70
+    #           80
 # 老师给学生论文的评语
 class Record(models.Model):
     PROCESS_CHOICE = (

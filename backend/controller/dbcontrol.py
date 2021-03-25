@@ -1,9 +1,10 @@
 from backend.models import *
 from backend.controller import Util
 from django.utils import timezone
+import pytz
 import base64
 import os
-
+import datetime
 # user_tea = models.OneToOneField(
 #         User,
 #         on_delete=models.CASCADE,
@@ -189,6 +190,7 @@ def followteacher(stuid, teaid):
             return ("has")
         else:
             student.teacher_fol_id = teaid
+            student.status = 10
             student.save()
             return ("succeed")
     except:
@@ -263,6 +265,14 @@ def getrecordbystu(stuid):
 def addrecordstu(studentid, workid, path, process):
     try:
         record = Record(work_id=workid, student_id=studentid, path=path, process=process, content="暂无评价")
+        stu = Student.objects.get(id=studentid)
+        status = stu.status
+        if process == 'S' and status==10:
+            stu.status = 20
+        elif process == 'M' and status==40:
+            stu.status = 50
+        elif process == 'E' and status==70:
+            stu.status = 80
         record.save()
     except:
         return ("failed",None)
@@ -297,3 +307,46 @@ def getlatstrecordbystu(stu):
         return ("failed", None)
     else:
         return ("succeed", rec)
+
+def getteaprocess(tea):
+    try:
+        try:
+            stus = Student.objects.filter(teacher_fol_id=tea)
+        except:
+            return ("no",None,None,None,[])
+        else:
+            stu = stus[1]
+            work = stu.work
+            time1 = work.start_point
+            time2 = work.middle_point
+            time3 = work.end_point
+    except:
+        return ("failed",None,None,None,[])
+    else:
+        stalist = []
+        for s in stus:
+            sitem= [s.code,s.user_stu.name]
+            statuscode = s.status
+            work = s.work
+            one,two = Util.getStatusItem(statuscode,work)
+            sitem.append(one)
+            sitem.append(two)
+            stalist.append(sitem)
+        return ("succeed",time1,time2,time3,stalist)
+
+def subteaprocess(tea,time1,time2,time3):
+    time1 = datetime.datetime.strptime(time1,"%a %b %d %Y %H:%M:%S %Z+0800 (GMT+08:00)")
+    time2 = datetime.datetime.strptime(time2, "%a %b %d %Y %H:%M:%S %Z+0800 (GMT+08:00)")
+    time3 = datetime.datetime.strptime(time3, "%a %b %d %Y %H:%M:%S %Z+0800 (GMT+08:00)")
+    try:
+        stus = Student.objects.filter(teacher_fol_id=tea)
+        for s in stus:
+            work = s.work
+            work.start_point = time1
+            work.middle_point = time2
+            work.end_point = time3
+            work.save()
+    except:
+        return ("failed")
+    else:
+        return ("succeed")
