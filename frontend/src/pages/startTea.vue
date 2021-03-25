@@ -22,7 +22,7 @@
   v-model="item.com">
 </el-input>
       <el-divider></el-divider>
-      <el-button plain @click="submitcom">提交</el-button>
+      <el-button plain @click="submitcom(item.id,item.com)">提交</el-button>
     </el-tab-pane>
 
   </el-tabs>
@@ -39,65 +39,81 @@
 import flowTea from '../components/flowTea'
 
     export default {
-        name: "startTea",
+      name: "startTea",
       components: {
-      topNav,
-      flowTea,
-    },
-      data(){
-          return {
-      fileList: [],
-            list:[
-              // {code:"171110133",name:"朱振南2",file:"balaa",exp:"修改了",com:"szyd"},
-              // {code:"171110133",name:"朱振南4",file:"balaa"},
-              // {code:"171110133",name:"朱振南3",file:"balaa"},
-              // {code:"171110133",name:"朱振南1",file:"balaa"},
-            ],
-            currentdata:[],
-            watchId:"",
-            role:'',
-  }
+        topNav,
+        flowTea,
       },
-      created(){
+      data() {
+        return {
+          fileList: [],
+          list: [
+            // {code:"171110133",name:"朱振南2",file:"balaa",exp:"修改了",com:"szyd"},
+            // {code:"171110133",name:"朱振南4",file:"balaa"},
+            // {code:"171110133",name:"朱振南3",file:"balaa"},
+            // {code:"171110133",name:"朱振南1",file:"balaa"},
+          ],
+          currentdata: [],
+          watchId: "",
+          role: '',
+        }
+      },
+      created() {
         this.getCurUserID();
         // this.getstufile();
       },
-    methods: {
-          getCurUserID(){
-        this.$http.get('/api/getCurUserID')
-                .then((response) => {
-                  var res1 = JSON.parse(response.bodyText)
-                  if (res1['err_num'] == 0) {
-                    this.watchId = res1['userID'];
-                    this.role = res1['role'];
-                    this.getdata();
-                  }
-                })
-      },
-          getdata(){
-            this.$http.post('/api/getStudentStartbyTea/',{'teaId':this.watchId},{emulateJSON:true})
-              .then(function(response){
-                    var res1 = JSON.parse(response.bodyText);
-                    if(res1['err_code']==0) {
-                      for (var i = 0; i < res1['ulist'].length; i++) {
-                        this.list.push({name:res1['ulist'][i]['fields']['name']
-                        ,file:res1['rlist'][i]['fields']['path']}
-                        ,)
-                      }
-                    }
-                    else{
-                      this.$message.error("获取学生信息失败")
-                    }
-              })
-          },
-      downloadfile(path){
-            console.log(path);
-      },
-      handleClick(){}
+      methods: {
+        getCurUserID() {
+          this.$http.get('/api/getCurUserID')
+            .then((response) => {
+              var res1 = JSON.parse(response.bodyText)
+              if (res1['err_num'] == 0) {
+                this.watchId = res1['userID'];
+                this.role = res1['role'];
+                this.getdata();
+              }
+            })
+        },
+        getdata() {
+          this.$http.post('/api/getStudentStartbyTea/', {'teaId': this.watchId}, {emulateJSON: true})
+            .then(function (response) {
+              var res1 = JSON.parse(response.bodyText);
+              if (res1['err_code'] == 0) {
+                for (var i = 0; i < res1['ulist'].length; i++) {
+                  this.list.push({
+                    name: res1['ulist'][i]['fields']['name']
+                    , file: res1['rlist'][i]['fields']['path']
+                    , exp: res1['rlist'][i]['fields']['introduction']
+                    , id: res1['rlist'][i]['pk']
+                    , com: ""
+                  })
+                }
+              } else {
+                this.$message.error("获取学生信息失败")
+              }
+            })
+        },
+        downloadfile(path) {
+          console.log(path);
+        },
+        handleClick() {
 
-      },
-      submitcom(){
+        },
+        submitcom(id, content) {
+          this.$http.post('/api/addRecordContent/', {'recordId': id, 'content': content}, {emulateJSON: true})
+            .then(function (response) {
+              var res1 = JSON.parse(response.bodyText);
+              if (res1['err_code'] == 0) {
+                this.$message({
+                  type: 'info',
+                  message: '提交成功'
+                });
+              } else {
+                this.$message.error("提交失败,请重试")
+              }
 
+            })
+        },
       }
     }
 

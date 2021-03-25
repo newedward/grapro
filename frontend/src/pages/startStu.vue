@@ -7,16 +7,32 @@
         <flowStu></flowStu>
       </el-aside>
         <el-main>
+          <el-row type="flex"  justify="center">
+            <span id="alert">即将延期</span>
+          </el-row>
           <el-row style="margin-bottom:20px">
-            <el-col span="8">
+            <el-col :span="8">
             <el-input v-model="title" placeholder="请输入内容"></el-input>
             </el-col>
-            <el-col span="6">
+            <el-col :span="6">
               <el-button round @click="addtitle" v-if="isnew">提交题目</el-button>
               <el-button v-else @click="changetitle">更换题目</el-button>
             </el-col>
-            <el-col span="6">
-              <el-upload v-if="!isnew"
+            <el-button v-if="!isnew" type="success" @click="dialogVisible = true">点击提交开题相关文件</el-button>
+
+          </el-row>
+          <el-dialog
+  title="提交"
+  :visible="dialogVisible"
+  width="30%"
+  :before-close="handleClose">
+            <el-row>
+            <el-input type="textarea"
+  :rows="8" v-model="introduction" placeholder="请输入提交说明（可以为空）"></el-input>
+              </el-row>
+            <el-row >
+              <el-divider content-position="left">支持.doc/.docx/.pdf文件</el-divider>
+              <el-upload
                 :data="dataf"
                 :headers="headerf"
                 name = "work"
@@ -26,12 +42,18 @@
       :on-success="handlefileSuccess"
       :before-upload="beforefileUpload"
       >
-      <el-button size="small" type="primary">点击上传</el-button>
+      <el-button size="small" type="primary">点击上传文件</el-button>
 
 </el-upload>
-              <span v-if="!isnew"style="margin-left:10px">支持.doc/.docx/.pdf文件</span>
-            </el-col>
-          </el-row>
+            </el-row>
+  <template #footer>
+    <span class="dialog-footer">
+      <el-button @click="dialogVisible = false">取 消</el-button>
+      <el-button :disabled="uploaded" type="primary" @click="submit">确 定</el-button>
+    </span>
+  </template>
+</el-dialog>
+
 <el-collapse >
   <el-collapse-item v-for="(item,index) in list" :title="'第'+ (index+1) +'次提交'">
     <span class="check">{{item.content}}</span>
@@ -64,8 +86,12 @@ import flowStu from '../components/flowStu'
             headerf:{},
             title:"",
             workid:"",
+            recordid:"",
             watchId:"",
             role:"",
+            dialogVisible:false,
+            uploaded:true,
+            introduction:"",
             list:[
               // {content:"现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；"},
               // {content:"简化流程：设计简洁直观的操作流程清晰明确：语言表达清晰且表意明确，让用户快速理解进而作出决策帮助用户识别：界面简单直白，让用户快速识别而非回忆，减少用户记忆负担"},
@@ -99,7 +125,7 @@ import flowStu from '../components/flowStu'
               })
           },
       changetitle(){
-
+            console.log("TO DO");
       },
  beforefileUpload(file) {
 
@@ -112,11 +138,12 @@ import flowStu from '../components/flowStu'
                     var res1 = JSON.parse(response.bodyText);
                     if(res1['err_code']==0) {
                       this.dataf['next'] = this.dataf['next'] + 1;
+                      this.recordid = res1["recordid"];
                       this.$message({
                       type: 'info',
                       message: '上传成功'
                         });
-                      location.reload();
+                      this.uploaded = false;
                     }
                     else{
                       this.$message.error("添加失败,请重试")
@@ -162,7 +189,35 @@ import flowStu from '../components/flowStu'
                     }
 
               })
+      },
+      handleClose(done) {
+        this.$confirm('确认关闭？')
+          .then(_ => {
+            this.dialogVisible= false;
+            location.reload()
+            done()
+          })
+          .catch(_ => {});
+      },
+      submit(){
+            this.$http.post('/api/addRecordIntroduction/',{'recordId':this.recordid,'introduction':this.introduction},{emulateJSON:true})
+              .then(function(response){
+                    var res1 = JSON.parse(response.bodyText);
+                    if(res1['err_code']==0) {
+                      this.$message({
+                      type: 'info',
+                      message: '提交成功'
+                        });
+                      location.reload()
+                    }
+                    else{
+                      this.$message.error("提交失败,请重试")
+                    }
+
+              })
+
       }
+
     }
     }
 </script>
@@ -171,4 +226,8 @@ import flowStu from '../components/flowStu'
 .check{
   font-size: medium;
 }
+  /*#alert{*/
+     /*box-shadow: 0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04);*/
+    /**/
+  /*}*/
 </style>

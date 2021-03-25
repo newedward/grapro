@@ -7,7 +7,8 @@ import ElementUI from 'element-ui'	// 添加
 import 'element-ui/lib/theme-chalk/index.css'	// 添加
 import axios from 'axios'	// 添加
 import home from './pages/home.vue'
-import process from './pages/process.vue'
+import processTea from './pages/processTea'
+import processStu from './pages/processStu'
 import personinfo from './pages/personinfo'
 import selectstu from './pages/selectstu'
 import selectTea from './pages/selectTea'
@@ -37,9 +38,14 @@ const router = new VueRouter({
       component: home
     },
     {
-      path: '/process',
-      name: 'process',
-      component: process
+      path: '/processStu',
+      name: 'processStu',
+      component: processStu
+    },
+    {
+      path: '/processTea',
+      name: 'processTea',
+      component: processTea
     },
     {
       path: '/personinfo',

@@ -45,6 +45,7 @@ export default {
       return {
           input1:'',
           avatar:'',
+          role:'',
     }
     },
 
@@ -67,6 +68,7 @@ export default {
                   var res1 = JSON.parse(response.bodyText)
                   if (res1['err_num'] == 0) {
                     this.watchId = res1['userID'];
+                    this.role = res1['role'];
                     this.getUserAvater()
                   }
                 })
@@ -89,7 +91,13 @@ export default {
               //     this.$message({type:'error',message:"请先登录！",duration:600})
               // }
               // else{
-                  window.location.href="process";
+                  if(this.role==1){
+                    window.location.href="processStu";
+                  }
+                  else if(this.role==2){
+                    window.location.href="processTea";
+                  }
+
               // }
           }
           else if(name=="学校动态"){

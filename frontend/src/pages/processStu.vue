@@ -1,15 +1,15 @@
 <template>
-  <div id = "home">
+  <div id = "process">
 
     <el-container height= "100%" direction="vertical">
       <topNav></topNav>
       <el-container>
         <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-        <flowTea></flowTea>
+        <flowStu  ></flowStu>
       </el-aside>
         <el-main>
           <div class="block">
-  <el-timeline>
+  <el-timeline >
     <el-timeline-item timestamp="2020/10/12" placement="top">
       <el-card>
         <h4>题目选择</h4>
@@ -30,27 +30,7 @@
     </el-timeline-item>
   </el-timeline>
              </div>
-  <div id="stu">
-    <el-table
-    :data="tableData"
-    style="width: 100%"
-    :row-class-name="tableRowClassName">
-    <el-table-column
-      prop="number"
-      label="学号"
-      width="180">
-    </el-table-column>
-    <el-table-column
-      prop="name"
-      label="姓名"
-      width="180">
-    </el-table-column>
-    <el-table-column
-      prop="status"
-      label="状态">
-    </el-table-column>
-  </el-table>
-  </div>
+
 
         </el-main>
       </el-container>
@@ -66,7 +46,7 @@
   }
   .el-roe-title{
     margin-bottom: 20px;
-    
+
   }
   .el-col {
     border-radius: 4px;
@@ -98,12 +78,16 @@
 <script>
 import topNav from '../components/topNav'
 import flowTea from '../components/flowTea'
+import flowStu from '../components/flowStu'
   export default {
     name: 'home',
     components: {
       topNav,
-      flowTea,
+      flowStu,
     },
+    mounted() {
+          this.getCurUserID();
+      },
     methods: {
       tableRowClassName({row, rowIndex}) {
         if (rowIndex === 1) {
@@ -112,6 +96,20 @@ import flowTea from '../components/flowTea'
           return 'success-row';
         }
         return '';
+      },
+      getCurUserID(){
+        this.$http.get('/api/getCurUserID')
+                .then((response) => {
+                  var res1 = JSON.parse(response.bodyText)
+                  if (res1['err_num'] == 0) {
+                    this.watchId = res1['userID'];
+                    this.role = res1['role'];
+                    this.getdata();
+                  }
+                  else{
+                      this.$message.error("系统错误")
+                    }
+                })
       }
     },
     data() {
@@ -132,7 +130,9 @@ import flowTea from '../components/flowTea'
           number: '198764522',
           name: '王小虎',
           status: '结题'
-        }]
+        }],
+        watchId:'',
+        role:''
       }
     }
   }

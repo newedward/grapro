@@ -262,14 +262,32 @@ def getrecordbystu(stuid):
 
 def addrecordstu(studentid, workid, path, process):
     try:
-        print(workid, studentid, path, process)
         record = Record(work_id=workid, student_id=studentid, path=path, process=process, content="暂无评价")
+        record.save()
+    except:
+        return ("failed",None)
+    else:
+        return ("succeed",record.id)
+
+def addrecordintroduction(recordid,intro):
+    try:
+        record = Record.objects.get(id=recordid)
+        record.introduction = intro
         record.save()
     except:
         return ("failed")
     else:
         return ("succeed")
 
+def addrecordcontent(recordid,content):
+    try:
+        record = Record.objects.get(id=recordid)
+        record.content = content
+        record.save()
+    except:
+        return ("failed")
+    else:
+        return ("succeed")
 
 def getlatstrecordbystu(stu):
     try:

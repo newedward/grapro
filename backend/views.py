@@ -210,7 +210,21 @@ def addRecordStu(req):
     workid = req.POST.get("workId")
     process = req.POST.get("process")
     path = req.POST.get("path")
-    info = dbcontrol.addrecordstu(stuid,workid,path,process)
+    info,recordid = dbcontrol.addrecordstu(stuid,workid,path,process)
+    response = {}
+    if info == "succeed":
+        response["Msg"] = "succeed"
+        response["err_code"] = 0
+        response["recordid"] = recordid
+    else:
+        response['Msg'] = 'failed'
+        response['err_code'] = 1
+    return JsonResponse(response)
+
+def addRecordIntroduction(req):
+    recordid  = req.POST.get('recordId')
+    introduction = req.POST.get('introduction')
+    info= dbcontrol.addrecordintroduction(recordid, introduction)
     response = {}
     if info == "succeed":
         response["Msg"] = "succeed"
@@ -218,9 +232,22 @@ def addRecordStu(req):
     else:
         response['Msg'] = 'failed'
         response['err_code'] = 1
+    # print(response)
     return JsonResponse(response)
 
-
+def addRecordContent(req):
+    recordid = req.POST.get('recordId')
+    content = req.POST.get('content')
+    info = dbcontrol.addrecordcontent(recordid, content)
+    response = {}
+    if info == "succeed":
+        response["Msg"] = "succeed"
+        response["err_code"] = 0
+    else:
+        response['Msg'] = 'failed'
+        response['err_code'] = 1
+    print(response)
+    return JsonResponse(response)
 
 def uploadfile(req):
     work = req.FILES.get('work',None)

@@ -25,9 +25,9 @@ class Teacher(models.Model):
 
 class Work(models.Model):
     title = models.CharField(max_length=50)
-    start_point = models.IntegerField(null=True)
-    middle_point = models.IntegerField(null=True)
-    end_point = models.IntegerField(null=True)
+    start_point = models.DateTimeField(null=True)
+    middle_point = models.DateTimeField(null=True)
+    end_point = models.DateTimeField(null=True)
 
 class Student(models.Model):
     code = models.CharField(max_length=10,default="0000000")
@@ -75,6 +75,7 @@ class Record(models.Model):
     path = models.CharField(max_length=100,null=True)
     process = models.CharField(max_length=1,choices=PROCESS_CHOICE,null=True)
     content = models.TextField(null=True)
+    introduction = models.TextField(null=True)
 # 申请记录
 class Application(models.Model):
     time = models.DateTimeField()
