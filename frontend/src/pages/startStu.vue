@@ -8,7 +8,14 @@
       </el-aside>
         <el-main>
           <el-row type="flex"  justify="center">
-            <span id="alert">即将延期</span>
+            <el-alert
+    :title="status"
+    :type="statusicon"
+    :closable="false"
+            center
+            show-icon>
+  </el-alert>
+
           </el-row>
           <el-row style="margin-bottom:20px">
             <el-col :span="8">
@@ -91,6 +98,8 @@ import flowStu from '../components/flowStu'
             role:"",
             dialogVisible:false,
             uploaded:true,
+            status:"",
+            statusicon:"",
             introduction:"",
             list:[
               // {content:"现实生活一致：与现实生活的流程、逻辑保持一致，遵循用户习惯的语言和概念；"},
@@ -163,6 +172,14 @@ import flowStu from '../components/flowStu'
                   }
                 })
       },
+      getstatus(){
+            this.$http.post('/api/getStudentStartProcess/',{'stuId':this.watchId},{emulateJSON:true})
+              .then(function(response){
+                 var res1 = JSON.parse(response.bodyText)
+                this.status = res1["info"];
+                 this.statusicon = res1["type"];
+              })
+      },
       getdata(){
         //     读取record(list)和title
         // 设置布尔变量，进行修改或新增
@@ -182,7 +199,7 @@ import flowStu from '../components/flowStu'
                       }
                       this.dataf['next'] = this.list.length + 1;
                       this.dataf['stuid'] = this.watchId;
-                      console.log(this.dataf);
+                      this.getstatus();
                     }
                     else{
                       this.$message.error("获取信息失败")

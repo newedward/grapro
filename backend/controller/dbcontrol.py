@@ -350,3 +350,6 @@ def subteaprocess(tea,time1,time2,time3):
         return ("failed")
     else:
         return ("succeed")
+
+def getstuprocess(stu):
+    pass

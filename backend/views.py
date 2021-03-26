@@ -474,6 +474,17 @@ def subTeacherProcess(req):
         response['err_code'] = 1
     return JsonResponse(response)
 
+def getStudentStartProcess(req):
+    stuid = req.POST.get('stuId')
+    stu = Student.objects.get(user_stu_id=stuid)
+    info,type = Util.getStatusItemStuStart(stu.status,stu.work)
+    response = {}
+    response["info"] = info
+    response["type"] = type
+    return JsonResponse(response)
+
+
+
 
 
 

@@ -86,3 +86,92 @@ def getStatusItem(statuscode,work):
         return ["为课题 " + workname + " 提交了结题报告",0]
     elif statuscode == 100:
         return ["完成了毕业设计",0]
+
+def getStatusItemStuStart(statuscode,work):
+    timenow = datetime.timestamp(datetime.now())
+    if work == None:
+        return ["请尽快确定题目","warning"]
+    else:
+        workname = work.title
+    if statuscode == 10:
+        timeexp = work.start_point
+        timeexp = datetime.timestamp(timeexp)
+        if timeexp<=timenow:
+            return ["您的开题已延期，请尽快提交","error"]
+        else:
+            return ["请在完成开题报告后尽快提交", "info"]
+    elif statuscode == 20:
+        return ["为课题 " + workname + " 提交了开题报告","success"]
+
+
+def getStatusItemStuMedium(statuscode,work):
+    timenow = datetime.timestamp(datetime.now())
+    if work == None:
+        return ["请尽快确定题目", 1]
+    else:
+        workname = work.title
+    if statuscode == 10:
+        timeexp = work.start_point
+        timeexp = datetime.timestamp(timeexp)
+        if timeexp <= timenow:
+            return ["您的开题已延期，请尽快提交", 1]
+        else:
+            return ["请在完成开题报告后尽快提交", 0]
+    elif statuscode == 20:
+        return ["为课题 " + workname + " 提交了开题报告", 0]
+    elif statuscode == 40:
+        timeexp = work.middle_point
+        timeexp = datetime.timestamp(timeexp)
+        if timeexp <= timenow:
+            return ["您在规定时间内未提交中期报告，请尽快提交", 1]
+        else:
+            return ["通过了开题，待提交中期报告", 0]
+    elif statuscode == 50:
+        return ["为课题 " + workname + " 提交了中期报告", 0]
+    elif statuscode == 70:
+        timeexp = work.end_point
+        timeexp = datetime.timestamp(timeexp)
+        if timeexp <= timenow:
+            return ["请及时提交结题材料，否则有延毕风险", 1]
+        else:
+            return ["通过了中期，待提交结题报告", 0]
+    elif statuscode == 80:
+        return ["为课题 " + workname + " 提交了结题报告", 0]
+    elif statuscode == 100:
+        return ["完成了毕业设计", 0]
+
+def getStatusItemStuEnd(statuscode,work):
+    timenow = datetime.timestamp(datetime.now())
+    if work == None:
+        return ["请尽快确定题目", 1]
+    else:
+        workname = work.title
+    if statuscode == 10:
+        timeexp = work.start_point
+        timeexp = datetime.timestamp(timeexp)
+        if timeexp <= timenow:
+            return ["您的开题已延期，请尽快提交", 1]
+        else:
+            return ["请在完成开题报告后尽快提交", 0]
+    elif statuscode == 20:
+        return ["为课题 " + workname + " 提交了开题报告", 0]
+    elif statuscode == 40:
+        timeexp = work.middle_point
+        timeexp = datetime.timestamp(timeexp)
+        if timeexp <= timenow:
+            return ["您在规定时间内未提交中期报告，请尽快提交", 1]
+        else:
+            return ["通过了开题，待提交中期报告", 0]
+    elif statuscode == 50:
+        return ["为课题 " + workname + " 提交了中期报告", 0]
+    elif statuscode == 70:
+        timeexp = work.end_point
+        timeexp = datetime.timestamp(timeexp)
+        if timeexp <= timenow:
+            return ["请及时提交结题材料，否则有延毕风险", 1]
+        else:
+            return ["通过了中期，待提交结题报告", 0]
+    elif statuscode == 80:
+        return ["为课题 " + workname + " 提交了结题报告", 0]
+    elif statuscode == 100:
+        return ["完成了毕业设计", 0]

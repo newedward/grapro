@@ -26,6 +26,7 @@ urlpatterns = [
     path('getUser/', views.getUser, name = 'getUser'),
     path('getMyStudent/', views.getMyStudent, name = 'getMyStudent'),
     path('changeInfo/', views.changeInfo, name = 'changeInfo'),
+    path('getStudentStartProcess/', views.getStudentStartProcess, name = 'getStudentStartProcess'),
     path('subTeacherProcess/', views.subTeacherProcess, name = 'subTeacherProcess'),
     path('getTeacherProcess/', views.getTeacherProcess, name = 'getTeacherProcess'),
     path('addRecordContent/', views.addRecordContent, name = 'addRecordContent'),
