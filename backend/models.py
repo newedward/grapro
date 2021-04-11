@@ -12,6 +12,7 @@ class User(models.Model) :
     school = models.CharField(max_length=40)
     avater = models.CharField(max_length=100,null=True)
     credit = models.IntegerField(null=True)
+    valid = models.BooleanField(null=True)
 
 class Teacher(models.Model):
     user_tea = models.OneToOneField(

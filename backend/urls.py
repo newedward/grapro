@@ -32,4 +32,7 @@ urlpatterns = [
     path('addRecordContent/', views.addRecordContent, name = 'addRecordContent'),
     path('addRecordIntroduction/', views.addRecordIntroduction, name = 'addRecordIntroduction'),
     path('validateUserName/', views.validateUserName, name = 'validateUserName'),
+    path('initcheckman/', views.initcheckman, name = 'initcheckman'),
+    path('checkUser/', views.checkUser, name = 'checkUser'),
+    path('delUser/', views.delUser, name = 'delUser'),
 ]

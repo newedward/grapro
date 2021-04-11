@@ -90,6 +90,9 @@ export default {
               if(re.data=='succeed'){
               window.location.href = "/home";
             }
+              else if (re.data == 'not valid'){
+                this.$message({type:'error',message:"账号未审批，请联系管理员",duration:600})
+              }
             else{
               this.$message({type:'error',message:"用户名或密码有误！",duration:600})
             }

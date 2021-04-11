@@ -16,7 +16,7 @@
     <el-card v-for="item in groups" :key=index class="stu">
       <el-avatar shape="circle" :src="item.avater"></el-avatar>
       <span >{{item.code + "-" + item.name + item.uid}}</span>
-      <el-button style="float: right" icon="el-icon-close">移除</el-button>
+      <el-button style="float: right" icon="el-icon-close" @click="delqueue(index)">移除</el-button>
     </el-card>
 </draggable>
           </el-row>
@@ -121,6 +121,9 @@ import flowTea from '../components/flowTea'
                       this.$message.error("获取队列信息失败")
                     }
               })
+        },
+        delqueue(val){
+            this.queue.splice(val,1);
         },
         getCurUserID(){
         this.$http.get('/api/getCurUserID')

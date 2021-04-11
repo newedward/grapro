@@ -22,9 +22,13 @@ import endTea from "./pages/endTea";
 import register from "./pages/register";
 import login from "./pages/login"
 import VueResource from 'vue-resource';
+import checkMan from './pages/checkMan';
+import fileMan from './pages/fileMan';
+import greatPro from './pages/greatPro'
 
-axios.defaults.baseURL = 'http://127.0.0.1:8000'	// 指定后端的地址，也就是django运行的地址
-Vue.prototype.$axios = axios	// 添加
+axios.defaults.baseURL = 'http://127.0.0.1:8000';
+Vue.prototype.$axios = axios;
+	// 添加
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 Vue.use(ElementUI)	// 添加
 Vue.use(VueRouter)
@@ -106,6 +110,21 @@ const router = new VueRouter({
       path: '/login',
       name: 'login',
       component: login
+    },
+    {
+      path: '/checkMan',
+      name: 'checkMan',
+      component: checkMan
+    },
+    {
+      path: '/fileMan',
+      name: 'fileMan',
+      component: fileMan
+    },
+    {
+      path: '/greatPro',
+      name: 'greatPro',
+      component: greatPro
     }
   ],
   mode: 'history'

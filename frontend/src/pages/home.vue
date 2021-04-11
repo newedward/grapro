@@ -1,13 +1,13 @@
 <template >
   <div id = "home">
     <el-container direction="vertical">
-      <topNav v-bind:watchId="watchId"></topNav>
+      <topNav v-bind:watchId="watchId" v-if="role!=3"></topNav>
+      <manageNav  v-if="role==3"></manageNav>
        <el-container>
       <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
         <flowStu v-if="role==1" ></flowStu>
         <flowTea v-if="role==2" ></flowTea>
       </el-aside>
-
       <el-main style="height: 1000px;">
       <el-scrollbar
             style="height: 100%;">
@@ -52,12 +52,14 @@
 import topNav from '../components/topNav'
 import flowStu from '../components/flowStu'
 import flowTea from '../components/flowTea'
+import manageNav from '../components/manageNav'
   export default {
     name: 'home',
     components: {
       topNav,
       flowStu,
       flowTea,
+      manageNav,
     },
     data() {
       return {
@@ -105,7 +107,8 @@ import flowTea from '../components/flowTea'
                   var res1 = JSON.parse(response.bodyText)
                   if (res1['err_num'] == 0) {
                     this.watchId = res1['userID'];
-                    this.role = res1['role']
+                    this.role = res1['role'];
+                    console.log(this.role);
                   }
                 })
       }

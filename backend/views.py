@@ -483,6 +483,48 @@ def getStudentStartProcess(req):
     response["type"] = type
     return JsonResponse(response)
 
+def initcheckman(req):
+    manid = req.POST.get('manId')
+    info,clist,nlist,ids = dbcontrol.initcheckman(manid)
+    response = {}
+    if info == "succeed":
+        response["Msg"] = "succeed"
+        response["err_code"] = 0
+        response["nlist"] = nlist
+        response["clist"] = clist
+        response['ids'] = ids
+    else:
+        response['Msg'] = 'failed'
+        response['err_code'] = 1
+    return JsonResponse(response)
+
+def checkUser(req):
+    ids = str(req.POST.get('ids'))
+    idlist = filter(None,ids.split(','))
+    info = dbcontrol.checkuser(idlist)
+    response = {}
+    if info == "succeed":
+        response["Msg"] = "succeed"
+        response["err_code"] = 0
+    else:
+        response['Msg'] = 'failed'
+        response['err_code'] = 1
+    print(response)
+    return JsonResponse(response)
+
+def delUser(req):
+    ids = str(req.POST.get('ids'))
+    idlist = filter(None, ids.split(','))
+    info = dbcontrol.deluser(idlist)
+    response = {}
+    if info == "succeed":
+        response["Msg"] = "succeed"
+        response["err_code"] = 0
+    else:
+        response['Msg'] = 'failed'
+        response['err_code'] = 1
+    print(response)
+    return JsonResponse(response)
 
 
 

@@ -22,7 +22,10 @@ def login(username, password):
     else:
         realPassword = user.password
         if realPassword == Util.cryToMD5(password) :
-            return ("succeed", user)
+            if user.valid == False:
+                return ("not valid", user)
+            else:
+                return ("succeed", user)
         else:
             return ("wrong password for user " + username, None)
 
@@ -52,6 +55,7 @@ def validateUser(username):
 def addUser(username, password, name, email, avater, uni, school):
     password = Util.cryToMD5(password)
     user = User(username=username, password=password, name=name, email=email, avater=avater, uni=uni, school=school)
+    user.valid = False
     try:
         user.save()
     except:
@@ -353,3 +357,43 @@ def subteaprocess(tea,time1,time2,time3):
 
 def getstuprocess(stu):
     pass
+
+def initcheckman(manid):
+    try:
+        man = User.objects.get(id=manid)
+        mansuni = man.uni
+        mansschool = man.school
+        ulist = User.objects.filter(uni=mansuni,school=mansschool,valid=False)
+        codelist = []
+        namelist = []
+        ids = []
+        for u in ulist:
+            namelist.append(u.name)
+            ids.append(u.id)
+            codelist.append(u.user_stu.code)
+    except:
+        return ("failed",[],[],[])
+    else:
+        return ("succeed",codelist,namelist,ids)
+
+def checkuser(idlist):
+    try:
+        for id in idlist:
+            user = User.objects.get(id=id)
+            user.valid = True
+            user.save()
+    except:
+        return ("failed")
+    else:
+        return ("succeed")
+
+def deluser(idlist):
+    try:
+        for id in idlist:
+            user = User.objects.get(id=id)
+            user.delete()
+    except:
+        return ("failed")
+    else:
+        return ("succeed")
+
