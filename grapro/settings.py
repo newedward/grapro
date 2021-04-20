@@ -84,7 +84,7 @@ DATABASES = {
         'NAME': 'graDB',
         'USER': 'root',
         'PASSWORD': 'eWdy7;hC:q2w',
-        'HOST': '114.55.252.104',
+        'HOST': '47.98.150.77',
         'POST': 3306
 
     }

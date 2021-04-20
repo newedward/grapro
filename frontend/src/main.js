@@ -26,7 +26,8 @@ import checkMan from './pages/checkMan';
 import fileMan from './pages/fileMan';
 import greatPro from './pages/greatPro'
 
-axios.defaults.baseURL = 'http://127.0.0.1:8000';
+axios.defaults.baseURL = 'http://47.98.150.77:8001';
+// axios.defaults.baseURL = 'http://127.0.0.1:8000';
 Vue.prototype.$axios = axios;
 	// 添加
 axios.defaults.headers.post['Content-Type'] = 'application/json'

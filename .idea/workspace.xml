@@ -2,20 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e6287f1e-d1f6-4aaf-9959-f875e3f0a1f5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/manageNav.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/checkMan.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/fileMan.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/greatPro.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/pages/manage.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/controller/dbcontrol.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controller/dbcontrol.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/home.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/pages/mystudents.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/pages/mystudents.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,40 +30,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/frontend/src/pages/checkMan.vue">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/grapro/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="254">
-              <caret line="130" column="37" selection-start-line="130" selection-start-column="30" selection-end-line="130" selection-end-column="37" />
+            <state relative-caret-position="3010">
+              <caret line="86" column="29" selection-start-line="86" selection-start-column="29" selection-end-line="86" selection-end-column="29" />
               <folding>
-                <element signature="n#style#0;n#el-table#0;n#el-row#1;n#template#0;n#el-container#0;n#el-container#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="e#307#331#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/frontend/src/pages/mystudents.vue">
+        <entry file="file://$PROJECT_DIR$/manage.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1438">
-              <caret line="139" column="16" selection-start-line="139" selection-start-column="16" selection-end-line="139" selection-end-column="16" />
-              <folding>
-                <element signature="n#style#0;n#el-aside#0;n#el-container#0;n#el-container#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#el-button#0;n#el-card#0;n#draggable#0;n#el-row#1;n#el-main#0;n#el-container#0;n#el-container#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/backend/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
-              <caret line="515" column="34" selection-start-line="515" selection-start-column="34" selection-end-line="515" selection-end-column="34" />
-              <folding>
-                <element signature="e#0#35#0" expanded="true" />
-              </folding>
-            </state>
+            <state relative-caret-position="-210" />
           </provider>
         </entry>
       </file>
@@ -88,11 +58,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/frontend/src/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="29" column="29" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
+            <state relative-caret-position="980">
+              <caret line="28" column="50" selection-start-line="28" selection-start-column="50" selection-end-line="28" selection-end-column="50" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
                 <element signature="e#140#161#0" expanded="true" />
@@ -105,7 +75,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="501">
+            <state relative-caret-position="1155">
               <caret line="36" column="47" selection-start-line="36" selection-start-column="47" selection-end-line="36" selection-end-column="47" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
@@ -117,7 +87,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/frontend/src/pages/register.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="367">
+            <state relative-caret-position="8155">
               <caret line="233" column="45" selection-start-line="233" selection-start-column="35" selection-end-line="233" selection-end-column="45" />
             </state>
           </provider>
@@ -126,7 +96,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/controller/dbcontrol.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
+            <state relative-caret-position="353">
               <caret line="391" column="25" selection-start-line="391" selection-start-column="25" selection-end-line="391" selection-end-column="25" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
@@ -138,8 +108,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/frontend/src/pages/startStu.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="373">
-              <caret line="213" column="29" lean-forward="true" selection-start-line="213" selection-start-column="12" selection-end-line="213" selection-end-column="29" />
+            <state relative-caret-position="7420">
+              <caret line="213" column="29" selection-start-line="213" selection-start-column="12" selection-end-line="213" selection-end-column="29" />
             </state>
           </provider>
         </entry>
@@ -147,7 +117,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/frontend/src/pages/login.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
+            <state relative-caret-position="3045">
               <caret line="87" column="17" selection-start-line="87" selection-start-column="17" selection-end-line="87" selection-end-column="17" />
               <folding>
                 <element signature="n#style#0;n#el-button#0;n#el-row#2;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -224,7 +194,6 @@
         <option value="$PROJECT_DIR$/frontend/src/pages/process.vue" />
         <option value="$PROJECT_DIR$/frontend/src/components/topNav.vue" />
         <option value="$PROJECT_DIR$/frontend/src/pages/processStu.vue" />
-        <option value="$PROJECT_DIR$/grapro/settings.py" />
         <option value="$PROJECT_DIR$/frontend/src/pages/processTea.vue" />
         <option value="$PROJECT_DIR$/backend/controller/Util.py" />
         <option value="$PROJECT_DIR$/frontend/src/pages/startStu.vue" />
@@ -237,11 +206,12 @@
         <option value="$PROJECT_DIR$/frontend/src/pages/fileMan.vue" />
         <option value="$PROJECT_DIR$/backend/models.py" />
         <option value="$PROJECT_DIR$/frontend/src/pages/login.vue" />
-        <option value="$PROJECT_DIR$/frontend/src/main.js" />
         <option value="$PROJECT_DIR$/frontend/src/pages/checkMan.vue" />
         <option value="$PROJECT_DIR$/backend/urls.py" />
         <option value="$PROJECT_DIR$/backend/views.py" />
         <option value="$PROJECT_DIR$/backend/controller/dbcontrol.py" />
+        <option value="$PROJECT_DIR$/grapro/settings.py" />
+        <option value="$PROJECT_DIR$/frontend/src/main.js" />
       </list>
     </option>
   </component>
@@ -262,45 +232,6 @@
             <path>
               <item name="grapro" type="b2602c69:ProjectViewProjectNode" />
               <item name="grapro" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="grapro" type="b2602c69:ProjectViewProjectNode" />
-              <item name="grapro" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="grapro" type="b2602c69:ProjectViewProjectNode" />
-              <item name="grapro" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="grapro" type="b2602c69:ProjectViewProjectNode" />
-              <item name="grapro" type="462c0819:PsiDirectoryNode" />
-              <item name="frontend" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="grapro" type="b2602c69:ProjectViewProjectNode" />
-              <item name="grapro" type="462c0819:PsiDirectoryNode" />
-              <item name="frontend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="grapro" type="b2602c69:ProjectViewProjectNode" />
-              <item name="grapro" type="462c0819:PsiDirectoryNode" />
-              <item name="frontend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="grapro" type="b2602c69:ProjectViewProjectNode" />
-              <item name="grapro" type="462c0819:PsiDirectoryNode" />
-              <item name="grapro" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="grapro" type="b2602c69:ProjectViewProjectNode" />
-              <item name="grapro" type="462c0819:PsiDirectoryNode" />
-              <item name="media" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -447,7 +378,9 @@
       <workItem from="1617851243792" duration="986000" />
       <workItem from="1617930433561" duration="4599000" />
       <workItem from="1618019246121" duration="1650000" />
-      <workItem from="1618103307959" duration="14345000" />
+      <workItem from="1618103307959" duration="14996000" />
+      <workItem from="1618230906249" duration="594000" />
+      <workItem from="1618903412802" duration="3698000" />
     </task>
     <task id="LOCAL-00001" summary="熟悉环境">
       <created>1604737576114</created>
@@ -474,7 +407,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="358401000" />
+    <option name="totallyTimeSpent" value="363344000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -488,7 +421,7 @@
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24966533" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25635877" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -502,8 +435,8 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.58732396" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50334674" side_tool="true" weight="0.8647887" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.4966533" visible="true" weight="0.5633803" />
-      <window_info anchor="bottom" id="Python Console" order="12" weight="0.71971834" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4966533" weight="0.5605634" />
+      <window_info active="true" anchor="bottom" id="Python Console" order="12" visible="true" weight="0.71971834" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -632,17 +565,6 @@
     <entry file="file://$PROJECT_DIR$/grapro/asgi.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor />
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/manage.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/build/build.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1026" />
@@ -700,16 +622,6 @@
           <folding>
             <element signature="n#style#0;n#el-row#0;n#el-main#0;n#el-container#0;n#el-container#0;n#div#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#span#0;n#el-upload#0;n#el-col#1;n#el-row#0;n#el-main#0;n#el-container#0;n#el-container#0;n#div#0;n#template#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grapro/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1830">
-          <caret line="66" column="14" selection-start-line="66" selection-start-column="14" selection-end-line="66" selection-end-column="14" />
-          <folding>
-            <element signature="e#307#331#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -858,9 +770,19 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/pages/checkMan.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="130" column="37" selection-start-line="130" selection-start-column="30" selection-end-line="130" selection-end-column="37" />
+          <folding>
+            <element signature="n#style#0;n#el-table#0;n#el-row#1;n#template#0;n#el-container#0;n#el-container#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/src/pages/mystudents.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1438">
+        <state relative-caret-position="4795">
           <caret line="139" column="16" selection-start-line="139" selection-start-column="16" selection-end-line="139" selection-end-column="16" />
           <folding>
             <element signature="n#style#0;n#el-aside#0;n#el-container#0;n#el-container#0;n#div#0;n#template#0;n#!!top" expanded="true" />
@@ -869,20 +791,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/pages/login.vue">
+    <entry file="file://$PROJECT_DIR$/backend/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="87" column="17" selection-start-line="87" selection-start-column="17" selection-end-line="87" selection-end-column="17" />
+        <state relative-caret-position="17675">
+          <caret line="515" column="34" selection-start-line="515" selection-start-column="34" selection-end-line="515" selection-end-column="34" />
           <folding>
-            <element signature="n#style#0;n#el-button#0;n#el-row#2;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="e#0#35#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/pages/register.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="233" column="45" selection-start-line="233" selection-start-column="35" selection-end-line="233" selection-end-column="45" />
         </state>
       </provider>
     </entry>
@@ -893,28 +808,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="29" column="29" selection-start-line="29" selection-start-column="29" selection-end-line="29" selection-end-column="29" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#140#161#0" expanded="true" />
-            <element signature="e#350#385#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/pages/startStu.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="213" column="29" lean-forward="true" selection-start-line="213" selection-start-column="12" selection-end-line="213" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="501">
+        <state relative-caret-position="1155">
           <caret line="36" column="47" selection-start-line="36" selection-start-column="47" selection-end-line="36" selection-end-column="47" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
@@ -922,19 +818,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/views.py">
+    <entry file="file://$PROJECT_DIR$/frontend/src/pages/register.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
-          <caret line="515" column="34" selection-start-line="515" selection-start-column="34" selection-end-line="515" selection-end-column="34" />
+        <state relative-caret-position="8155">
+          <caret line="233" column="45" selection-start-line="233" selection-start-column="35" selection-end-line="233" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/pages/startStu.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7420">
+          <caret line="213" column="29" selection-start-line="213" selection-start-column="12" selection-end-line="213" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/pages/login.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3045">
+          <caret line="87" column="17" selection-start-line="87" selection-start-column="17" selection-end-line="87" selection-end-column="17" />
           <folding>
-            <element signature="e#0#35#0" expanded="true" />
+            <element signature="n#style#0;n#el-button#0;n#el-row#2;n#div#0;n#template#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manage.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-210" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grapro/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3010">
+          <caret line="86" column="29" selection-start-line="86" selection-start-column="29" selection-end-line="86" selection-end-column="29" />
+          <folding>
+            <element signature="e#307#331#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/controller/dbcontrol.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
+        <state relative-caret-position="353">
           <caret line="391" column="25" selection-start-line="391" selection-start-column="25" selection-end-line="391" selection-end-column="25" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
@@ -942,12 +867,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/pages/checkMan.vue">
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="130" column="37" selection-start-line="130" selection-start-column="30" selection-end-line="130" selection-end-column="37" />
+        <state relative-caret-position="980">
+          <caret line="28" column="50" selection-start-line="28" selection-start-column="50" selection-end-line="28" selection-end-column="50" />
           <folding>
-            <element signature="n#style#0;n#el-table#0;n#el-row#1;n#template#0;n#el-container#0;n#el-container#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#140#161#0" expanded="true" />
+            <element signature="e#350#385#0" expanded="true" />
           </folding>
         </state>
       </provider>
