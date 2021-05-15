@@ -35,4 +35,13 @@ urlpatterns = [
     path('initcheckman/', views.initcheckman, name = 'initcheckman'),
     path('checkUser/', views.checkUser, name = 'checkUser'),
     path('delUser/', views.delUser, name = 'delUser'),
+    path('initFileMan/', views.initFileMan, name = 'initFileMan'),
+    path('loginBacth/', views.loginBacth, name = 'loginBacth'),
+    path('getStudentMediumbyTea/', views.getStudentMediumbyTea, name = 'getStudentMediumbyTea'),
+    path('makeGreatPro/', views.makeGreatPro, name = 'makeGreatPro'),
+    path('storeArchive/', views.storeArchive, name = 'storeArchive'),
+    path('getStudentEndProcess/', views.getStudentEndProcess, name = 'getStudentEndProcess'),
+    path('initHome/', views.initHome, name = 'initHome'),
+    path('getStudentEndbyTea/', views.getStudentEndbyTea, name = 'getStudentEndbyTea'),
+    path('getStudentMediumProcess/', views.getStudentMediumProcess, name = 'getStudentMediumProcess'),
 ]

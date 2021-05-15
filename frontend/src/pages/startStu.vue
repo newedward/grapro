@@ -25,7 +25,13 @@
               <el-button round @click="addtitle" v-if="isnew">提交题目</el-button>
               <el-button v-else @click="changetitle">更换题目</el-button>
             </el-col>
-            <el-button v-if="!isnew" type="success" @click="dialogVisible = true">点击提交开题相关文件</el-button>
+
+      <el-button v-if="!isnew" type="success" @click="dialogVisible = true" :disabled="haspassed">点击提交开题相关文件</el-button>
+    <el-tooltip v-show="haspassed" effect="dark" content="您的开题报告已经存档，无法重复提交" placement="top-start">
+      <el-button style="float: right" type="info" icon="el-icon-question" circle></el-button>
+    </el-tooltip>
+
+
 
           </el-row>
           <el-dialog
@@ -65,8 +71,8 @@
   <el-collapse-item v-for="(item,index) in list" :title="'第'+ (index+1) +'次提交'">
     <span class="check">{{item.content}}</span>
     <br>
-    <el-button size="mini">下载原始文件</el-button>
-    <el-button size="mini">下载评阅文件</el-button>
+    <!--<el-button size="mini">下载原始文件</el-button>-->
+    <!--<el-button size="mini">下载评阅文件</el-button>-->
   </el-collapse-item>
 
 </el-collapse>
@@ -98,6 +104,7 @@ import flowStu from '../components/flowStu'
             role:"",
             dialogVisible:false,
             uploaded:true,
+            haspassed:false,
             status:"",
             statusicon:"",
             introduction:"",
@@ -175,15 +182,18 @@ import flowStu from '../components/flowStu'
       getstatus(){
             this.$http.post('/api/getStudentStartProcess/',{'stuId':this.watchId},{emulateJSON:true})
               .then(function(response){
-                 var res1 = JSON.parse(response.bodyText)
+                 var res1 = JSON.parse(response.bodyText);
                 this.status = res1["info"];
                  this.statusicon = res1["type"];
+                 if (res1["statuscode"] >= 40){
+                   this.haspassed = true;
+                 }
               })
       },
       getdata(){
         //     读取record(list)和title
         // 设置布尔变量，进行修改或新增
-            this.$http.post('/api/getRecordTitle/',{'stuId':this.watchId},{emulateJSON:true})
+            this.$http.post('/api/getRecordTitle/',{'stuId':this.watchId,'process':'S'},{emulateJSON:true})
               .then(function(response){
                     var res1 = JSON.parse(response.bodyText);
                     if(res1['err_code'] ==0) {
@@ -199,6 +209,7 @@ import flowStu from '../components/flowStu'
                       }
                       this.dataf['next'] = this.list.length + 1;
                       this.dataf['stuid'] = this.watchId;
+                      this.dataf['process'] = 'S';
                       this.getstatus();
                     }
                     else{

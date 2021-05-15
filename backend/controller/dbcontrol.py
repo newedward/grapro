@@ -52,6 +52,47 @@ def validateUser(username):
     else:
         return ("succeed")
 
+def registerStu(name,code,manid,suffix):
+    username = str(code) + suffix
+    info = validateUser(username)
+    if info == "failed":
+        return ("has")
+    man = User.objects.get(id=manid)
+    school = man.school
+    uni = man.uni
+    password = Util.cryToMD5(username)
+    newuser = User(username=username,password=password,name=name,uni=uni,school=school,credit=1)
+    newuser.valid = True
+    try:
+        newuser.save()
+        stu = Student(user_stu=newuser, code=code)
+        stu.save()
+    except:
+        return ("failed")
+    else:
+        return ("succeed")
+
+def registerTea(username,suffix,name,manid):
+    username = username + suffix
+    info = validateUser(username)
+    if info == "failed":
+        return ("has")
+    man = User.objects.get(id=manid)
+    school = man.school
+    uni = man.uni
+    password = Util.cryToMD5(username)
+    newuser = User(username=username, password=password, name=name, uni=uni, school=school, credit=2)
+    newuser.valid = True
+    try:
+        newuser.save()
+        tea = Teacher(user_tea=newuser)
+        tea.save()
+    except:
+        return ("failed")
+    else:
+        return ("succeed")
+
+
 def addUser(username, password, name, email, avater, uni, school):
     password = Util.cryToMD5(password)
     user = User(username=username, password=password, name=name, email=email, avater=avater, uni=uni, school=school)
@@ -256,10 +297,17 @@ def addworkbytitle(stuid, title):
     else:
         return ("succeed", work.id)
 
-
-def getrecordbystu(stuid):
+def getrecordbyid(id):
     try:
-        rlist = Record.objects.filter(student_id=stuid)
+        rec = Record.objects.get(id=id)
+    except:
+        return ("failed", None)
+    else:
+        return ("succeed", rec)
+
+def getrecordbystu(stuid,process):
+    try:
+        rlist = Record.objects.filter(student_id=stuid,process=process)
     except:
         return ("failed", [])
     else:
@@ -269,7 +317,9 @@ def getrecordbystu(stuid):
 def addrecordstu(studentid, workid, path, process):
     try:
         record = Record(work_id=workid, student_id=studentid, path=path, process=process, content="暂无评价")
-        stu = Student.objects.get(id=studentid)
+        print(studentid)
+        stu = Student.objects.get(user_stu_id=studentid)
+
         status = stu.status
         if process == 'S' and status==10:
             stu.status = 20
@@ -278,6 +328,7 @@ def addrecordstu(studentid, workid, path, process):
         elif process == 'E' and status==70:
             stu.status = 80
         record.save()
+        stu.save()
     except:
         return ("failed",None)
     else:
@@ -303,9 +354,9 @@ def addrecordcontent(recordid,content):
     else:
         return ("succeed")
 
-def getlatstrecordbystu(stu):
+def getlatstrecordbystu(stu,process):
     try:
-        reclist = Record.objects.filter(student=stu).order_by('-id')
+        reclist = Record.objects.filter(student=stu,process=process).order_by('-id')
         rec = reclist[0]
     except:
         return ("failed", None)
@@ -358,6 +409,25 @@ def subteaprocess(tea,time1,time2,time3):
 def getstuprocess(stu):
     pass
 
+def inithome(watchid):
+    data = []
+    user = User.objects.get(id=watchid)
+    uni = user.uni
+    school = user.school
+    try:
+        worklist = Work.objects.filter(great=1)
+        for w in worklist:
+            stu = Student.objects.get(work=w)
+            user = stu.user_stu
+            if user.uni != uni or user.school!= school:
+                continue
+            item = [user.name,stu.code,w.title,w.description]
+            data.append(item)
+    except:
+        return ("failed",[])
+    else:
+        return ("succeed", data)
+
 def initcheckman(manid):
     try:
         man = User.objects.get(id=manid)
@@ -397,3 +467,62 @@ def deluser(idlist):
     else:
         return ("succeed")
 
+def addarchive(recid,contrnt,teaid):
+    try:
+        record = Record.objects.get(id=recid)
+        stu = record.student
+        work = record.work
+        print(record.path,work.title,contrnt,stu,teaid,record.process)
+        newarch = archives(path=record.path,title=work.title,description=contrnt,student=stu,teacher_id=teaid,process=record.process)
+        print(newarch)
+        newarch.save()
+        Util.changestatusbytea(stu)
+    except:
+        return ("failed")
+    else:
+        return ("succeed")
+
+def showarchive(manid):
+    try:
+        manager = User.objects.get(id=manid)
+        uni = manager.uni
+        school = manager.school
+    except:
+        print("data failed")
+        return ("data failed",None)
+    else:
+        #组装数据
+        try:
+            data = []
+            teachers = archives.objects.values("teacher").distinct()
+            for tea in teachers:
+                userinfo = User.objects.get(id=tea['teacher'])
+                if userinfo.uni != uni or userinfo.school!=school:
+                    continue
+                item = (userinfo.name,tea['teacher'],[])
+                stus = archives.objects.filter(teacher_id=tea['teacher']).values('student').distinct()
+                for stu in stus:
+                    item2 = (User.objects.get(id=stu['student']).name,stu['student'],[])
+                    works = archives.objects.filter(student_id=item2[1])
+                    for w in works:
+                        item2[2].append((w.path,w.title,w.description,w.process))
+                    item[2].append(item2)
+                data.append(item)
+        except:
+            print("make failed")
+            return ("failed",None)
+        else:
+            # print(data)
+            return ("succeed",data)
+
+def makegreatproject(stuid):
+    try:
+        # print(stuid)
+        stu = Student.objects.get(user_stu_id=stuid)
+        work = stu.work
+        work.great = True
+        work.save()
+    except:
+        return ("failed")
+    else:
+        return ("succeed")

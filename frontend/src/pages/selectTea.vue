@@ -18,7 +18,7 @@
             <el-card class="teacher" v-for="cols in rows">
               <div slot="header" >
     <span >{{cols.name}}</span>
-    <el-button style="float: right; padding: 3px 0" type="text" @click="apply(cols.uid)">操作按钮</el-button>
+    <el-button style="float: right; padding: 3px 0" type="text" @click="apply(cols.uid)">申请</el-button>
   </div>
               <el-avatar :size="100" shape="circle" :src="cols.avater"></el-avatar>
               <span class="intro">{{cols.intro}}</span>

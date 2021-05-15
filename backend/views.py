@@ -9,6 +9,7 @@ from backend.controller import dbcontrol
 from backend.controller import Util
 import os
 import time
+import openpyxl
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Create your views here.
 
@@ -186,8 +187,9 @@ def addWorkTitle(req):
 
 def getRecordTitle(req):
     student = req.POST.get("stuId")
+    process = req.POST.get("process")
     info,stu = dbcontrol.getStuById(student)
-    info,relist =dbcontrol.getrecordbystu(student)
+    info,relist =dbcontrol.getrecordbystu(student,process)
     response = {}
     if stu.work != None and info == "succeed":
         response['rlist'] = json.loads(serializers.serialize("json", relist))
@@ -253,8 +255,10 @@ def uploadfile(req):
     work = req.FILES.get('work',None)
     nextnum = req.POST.get('next')
     username = req.POST.get('stuid')
+    process = req.POST.get('process')
     print("下一个文件",nextnum)
-    head_path = BASE_DIR + "\\media\\{}\\{}".format(username,nextnum).replace(" ", "")
+    # head_path = BASE_DIR + "\\{}".format(process).replace(" ", "")
+    head_path = BASE_DIR + "\\media\\{}\\{}\\{}".format(process,username,nextnum).replace(" ", "")
     print("head_path", head_path)
     if not os.path.exists(head_path):
         os.makedirs(head_path)
@@ -299,6 +303,61 @@ def getMyStudent(req):
     # print("my",response)
     return JsonResponse(response)
 
+def getStudentEndbyTea(req):
+    teaid = req.POST.get("teaId")
+    info, slist, ulist = dbcontrol.getStuByTea(teaid)
+    response = {}
+    if info == "succeed":
+        response["Msg"] = "succeed"
+        response["err_code"] = 0
+        response["ulist"] = json.loads(serializers.serialize("json", ulist))
+        response['slist'] = json.loads(serializers.serialize("json", slist))
+        reclist = []
+        ulist2 = []
+        slist2 = []
+        for s in slist:
+            info, rec = dbcontrol.getlatstrecordbystu(s,'E')
+            if info == "succeed":
+                reclist.append(rec)
+        for rec in reclist:
+            ulist2.append(User.objects.get(id=rec.student_id))
+            slist2.append(rec.student)
+        response["rlist"] = json.loads(serializers.serialize("json", reclist))
+        response["ulist"] = json.loads(serializers.serialize("json", ulist2))
+        response['slist'] = json.loads(serializers.serialize("json", slist2))
+    else:
+        response['Msg'] = 'failed'
+        response['err_code'] = 1
+    # print(response)
+    return JsonResponse(response)
+
+def getStudentMediumbyTea(req):
+    teaid = req.POST.get("teaId")
+    info, slist, ulist = dbcontrol.getStuByTea(teaid)
+    response = {}
+    if info == "succeed":
+        response["Msg"] = "succeed"
+        response["err_code"] = 0
+        response["ulist"] = json.loads(serializers.serialize("json", ulist))
+        response['slist'] = json.loads(serializers.serialize("json", slist))
+        reclist = []
+        ulist2 = []
+        slist2 = []
+        for s in slist:
+            info, rec = dbcontrol.getlatstrecordbystu(s,'M')
+            if info == "succeed":
+                reclist.append(rec)
+        for rec in reclist:
+            ulist2.append(User.objects.get(id=rec.student_id))
+            slist2.append(rec.student)
+        response["rlist"] =json.loads(serializers.serialize("json", reclist))
+        response["ulist"] = json.loads(serializers.serialize("json", ulist2))
+        response['slist'] = json.loads(serializers.serialize("json", slist2))
+    else:
+        response['Msg'] = 'failed'
+        response['err_code'] = 1
+    # print(response)
+    return JsonResponse(response)
 
 def getStudentStartbyTea(req):
     teaid = req.POST.get("teaId")
@@ -307,13 +366,19 @@ def getStudentStartbyTea(req):
     if info == "succeed":
         response["Msg"] = "succeed"
         response["err_code"] = 0
-        response["ulist"] = json.loads(serializers.serialize("json", ulist))
         reclist = []
+        ulist2 = []
+        slist2 = []
         for s in slist:
-            info,rec = dbcontrol.getlatstrecordbystu(s)
+            info,rec = dbcontrol.getlatstrecordbystu(s,'S')
             if info == "succeed":
                 reclist.append(rec)
+        for rec in reclist:
+            ulist2.append(User.objects.get(id=rec.student_id))
+            slist2.append(rec.student)
         response["rlist"] =json.loads(serializers.serialize("json", reclist))
+        response["ulist"] = json.loads(serializers.serialize("json", ulist2))
+        response['slist'] = json.loads(serializers.serialize("json", slist2))
     else:
         response['Msg'] = 'failed'
         response['err_code'] = 1
@@ -477,10 +542,59 @@ def subTeacherProcess(req):
 def getStudentStartProcess(req):
     stuid = req.POST.get('stuId')
     stu = Student.objects.get(user_stu_id=stuid)
-    info,type = Util.getStatusItemStuStart(stu.status,stu.work)
+    info,type = Util.getStatusItemStuStart(stu.status, stu.work)
     response = {}
     response["info"] = info
     response["type"] = type
+    response['statuscode'] = stu.status
+    return JsonResponse(response)
+
+def getStudentMediumProcess(req):
+    stuid = req.POST.get('stuId')
+    stu = Student.objects.get(user_stu_id=stuid)
+    info, type = Util.getStatusItemStuMedium(stu.status, stu.work)
+    response = {}
+    response["info"] = info
+    response["type"] = type
+    response['statuscode'] = stu.status
+    return JsonResponse(response)
+
+def getStudentEndProcess(req):
+    stuid = req.POST.get('stuId')
+    stu = Student.objects.get(user_stu_id=stuid)
+    info, type = Util.getStatusItemStuEnd(stu.status, stu.work)
+    response = {}
+    response["info"] = info
+    response["type"] = type
+    response['statuscode'] = stu.status
+    return JsonResponse(response)
+
+def initFileMan(req):
+    manid = req.POST.get('manId')
+    info,data = dbcontrol.showarchive(manid)
+    response = {}
+    if info == "succeed":
+        response["Msg"] = "succeed"
+        response["err_code"] = 0
+        response["data"] = data
+    else:
+        response['Msg'] = 'failed'
+        response['err_code'] = 1
+    # print(response)
+    return JsonResponse(response)
+
+def initHome(req):
+    watchid = req.POST.get('watchId')
+    info, data = dbcontrol.inithome(watchid)
+    response = {}
+    if info == "succeed":
+        response["Msg"] = "succeed"
+        response["err_code"] = 0
+        response["data"] = data
+    else:
+        response['Msg'] = 'failed'
+        response['err_code'] = 1
+    # print(response)
     return JsonResponse(response)
 
 def initcheckman(req):
@@ -496,6 +610,7 @@ def initcheckman(req):
     else:
         response['Msg'] = 'failed'
         response['err_code'] = 1
+    print(response)
     return JsonResponse(response)
 
 def checkUser(req):
@@ -523,11 +638,72 @@ def delUser(req):
     else:
         response['Msg'] = 'failed'
         response['err_code'] = 1
+    return JsonResponse(response)
+
+def storeArchive(req):
+    recid = req.POST.get('recId')
+    content = req.POST.get('content')
+    teaid = req.POST.get('teaId')
+    info = dbcontrol.addarchive(recid,content,teaid)
+    response = {}
+    if info == "succeed":
+        response["Msg"] = "succeed"
+        response["err_code"] = 0
+    else:
+        response['Msg'] = 'failed'
+        response['err_code'] = 1
     print(response)
     return JsonResponse(response)
 
+def loginBacth(req):
+    sheet = req.FILES.get('loginsheet', None)
+    manid = req.POST.get('manid')
+    suffix = req.POST.get('suffix')
+    response = {}
+    wb = openpyxl.load_workbook(sheet)
+    ws = wb.active
+    if sheet.name == "学生.xlsx" or sheet.name == "学生.xls":
+        code = ws['A']
+        name = ws['B']
+        for c,n in zip(code,name):
+            info = dbcontrol.registerStu(n.value,c.value,manid,suffix)
+            if info != "succeed":
+                response['Msg'] = 'error'
+                response['err_code'] = 1
+                return JsonResponse(response)
+        response["Msg"] = "succeed"
+        response["err_code"] = 0
+        return JsonResponse(response)
+    elif sheet.name == "导师.xlsx" or sheet.name == "导师.xls":
+        name = ws['A']
+        username = ws['B']
+        for n,u in zip(name,username):
+            info = dbcontrol.registerTea(u.value,suffix,n.value,manid)
+            if info != "succeed":
+                response['Msg'] = 'error'
+                response['err_code'] = 1
+                return JsonResponse(response)
+        response["Msg"] = "succeed"
+        response["err_code"] = 0
+        return JsonResponse(response)
+    else:
+        response['Msg'] = 'name error'
+        response['err_code'] = -1
+    return JsonResponse(response)
 
 
+def makeGreatPro(req):
+    stuid = req.POST.get('stuId')
+    info = dbcontrol.makegreatproject(stuid)
+    response = {}
+    if info == "succeed":
+        response["Msg"] = "succeed"
+        response["err_code"] = 0
+    else:
+        response['Msg'] = 'failed'
+        response['err_code'] = 1
+    # print(response)
+    return JsonResponse(response)
 
 
 

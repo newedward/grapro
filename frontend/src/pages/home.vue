@@ -19,10 +19,10 @@
         <el-row  >
             <el-card shadow="hover">
             <el-row>
-              <el-col>id</el-col> <el-col>{{item.id}}</el-col>
+              <el-col>学号</el-col> <el-col>{{item.user.code}}</el-col>
               <el-col>名字</el-col> <el-row>{{item.user.name}}</el-row>
             </el-row>
-              <el-row>标题</el-row>
+              <el-row>{{item.title}}</el-row>
               {{item.content}}
             </el-card>
         </el-row>
@@ -64,30 +64,22 @@ import manageNav from '../components/manageNav'
     data() {
       return {
         list:[
-            {id:"1",user:{name:"张三"},title:"毕设1",content:"管理系统",},
-            {id:"2",user:{name:"张三"},title:"毕设1",content:"管理系统",},
-            {id:"3",user:{name:"张三"},title:"毕设1",content:"管理系统",},
-            {id:"4",user:{name:"张三"},title:"毕设1",content:"管理系统",},
-          {id:"5",user:{name:"张三"},title:"毕设1",content:"管理系统",},
-          // {id:"6",user:{name:"张三"},title:"毕设1",content:"管理系统",},
-          // {id:"7",user:{name:"张三"},title:"毕设1",content:"管理系统",},
-          // {id:"8",user:{name:"张三"},title:"毕设1",content:"管理系统",},
-          // {id:"9",user:{name:"张三"},title:"毕设1",content:"管理系统",},
-          // {id:"10",user:{name:"张三"},title:"毕设1",content:"管理系统",},
-          // {id:"11",user:{name:"张三"},title:"毕设1",content:"管理系统",},
-          // {id:"12",user:{name:"张三"},title:"毕设1",content:"管理系统",},
+            // {user:{code:"17111012",name:"张三"},title:"毕设1",content:"管理系统",},
+
          ],
         loading: false,
         watchId:'',
         role:0,
+        alldata:[],
+        count:0,
       }
     },
     mounted: function () {
       this.getCurUserID()
     },
     computed:{
-      noMore () {
-        return this.list.length >= 14
+      noMore(){
+        return this.count >= this.alldata.length;
       },
       disabled () {
         return this.loading || this.noMore
@@ -95,11 +87,31 @@ import manageNav from '../components/manageNav'
     },
     methods: {
       load () {
-        this.loading = true
-        setTimeout(() => {
-          this.list.push({id:this.list.length+1,user:{name:"张三"},title:"毕设1",content:"管理系统",})
+        this.loading = true;
+        var i = this.count;
+        for (i =this.count;i<this.alldata.length&&i<this.count+3;i++)
+        {
+          this.list.push({user:{code:this.alldata[i][1],name:this.alldata[i][0]},
+          title:this.alldata[i][2],
+            content:this.alldata[i][3],
+          })
+        }
+        console.log(this.list);
+          this.count = i;
           this.loading = false
-        }, 1000)
+      },
+      inithome(){
+        this.$http.post('/api/initHome/',{'watchId':this.watchId},{emulateJSON:true})
+              .then(function(response){
+                    var res1 = JSON.parse(response.bodyText);
+                    if(res1['err_code']==0) {
+                      this.alldata = res1["data"];
+                    }
+                    else{
+                      this.$message.error("系统错误")
+                    }
+
+              })
       },
       getCurUserID(){
         this.$http.get('/api/getCurUserID')
@@ -108,7 +120,7 @@ import manageNav from '../components/manageNav'
                   if (res1['err_num'] == 0) {
                     this.watchId = res1['userID'];
                     this.role = res1['role'];
-                    console.log(this.role);
+                    this.inithome();
                   }
                 })
       }

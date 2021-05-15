@@ -84,7 +84,6 @@ export default {
             var params = new URLSearchParams();
             params.append('userName', this.ruleForm.userName)
             params.append('password', this.ruleForm.password)
-
             this.$axios.post('/api/login/', params)
             .then(re => {
               if(re.data=='succeed'){

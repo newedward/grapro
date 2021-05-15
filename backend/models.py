@@ -29,6 +29,8 @@ class Work(models.Model):
     start_point = models.DateTimeField(null=True)
     middle_point = models.DateTimeField(null=True)
     end_point = models.DateTimeField(null=True)
+    description = models.TextField(null=True)
+    great = models.BooleanField(null=True,default=False)
 
 class Student(models.Model):
     code = models.CharField(max_length=10,default="0000000")
@@ -96,3 +98,21 @@ class Application(models.Model):
     )
     # 记录是否操作过，这边做假删除
     check = models.BooleanField()
+
+class archives(models.Model):
+    teacher = models.ForeignKey(
+        Teacher,
+        on_delete=models.CASCADE,
+        related_name='teacher',
+    )
+    student = models.ForeignKey(
+        Student,
+        on_delete=models.CASCADE,
+        related_name='student',
+    )
+    path = models.CharField(max_length=100, null=True)
+    title = models.CharField(max_length=50)
+    process = models.CharField(max_length=1,null=True)
+    description = models.CharField(max_length=300,null=True)
+    uni = models.CharField(max_length=40,null=True)
+    school = models.CharField(max_length=40,null=True)

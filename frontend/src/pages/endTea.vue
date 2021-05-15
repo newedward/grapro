@@ -1,5 +1,5 @@
 <template>
-    <div id = "endTea">
+    <div id = "startTea">
        <el-container height= "100%" direction="vertical">
       <topNav></topNav>
       <el-container >
@@ -11,29 +11,22 @@
             <el-tabs   type="card" @tab-click="handleClick">
     <el-tab-pane v-for="item in list" :label="item.name">
       <el-row style="margin: 10px">
-        <el-col span="6"><span>{{item.file}}</span></el-col>
-        <el-col span="6"><el-button plain size="small">下载最新提交</el-button></el-col>
+        <el-col span="6"><span>{{item.exp}}</span></el-col>
+        <el-col span="6"><el-button plain size="small" @click="downloadfile(item.file)">下载最新提交</el-button></el-col>
       </el-row>
       <el-divider content-position="left">我的评阅</el-divider>
       <el-input
   type="textarea"
   :rows="20"
   placeholder="请输入内容"
-  v-model="textarea">
+  v-model="item.com">
 </el-input>
-      <el-upload
-     accept=".doc, .docx, .pdf"
-      action="#"
-      :before-upload="beforeAvatarUpload"
-      :http-request="getfileUpload"
-      :on-change="getValChange"
-      :file-list="fileList"
-      >
-      <el-button size="small" type="primary">点击上传</el-button>
-      <span style="margin-left:10px">支持.doc/.docx/.pdf文件</span>
-</el-upload>
       <el-divider></el-divider>
-      <el-button plain>提交</el-button>
+      <div v-if="item.status < 100">
+      <el-button plain @click="submitcom(item.id,item.com)">提交</el-button>
+      <el-button plain @click="storeinto(item.id,item.com) " >存入档案</el-button>
+      </div>
+      <span v-if="item.status>= 100">您已经归档，无法重复提交</span>
     </el-tab-pane>
 
   </el-tabs>
@@ -55,69 +48,98 @@ import flowTea from '../components/flowTea'
       topNav,
       flowTea,
     },
-      data(){
-          return {
-      fileList: [],
-            textarea:"",
-            list:[
-              {code:"171110133",name:"朱振南2",file:"balaa"},
-              {code:"171110133",name:"朱振南4",file:"balaa"},
-              {code:"171110133",name:"朱振南3",file:"balaa"},
-              {code:"171110133",name:"朱振南1",file:"balaa"},
-            ],
-            currentdata:[],
-            watchId:"",
-            role:"",
-  }
-      }
-      ,
-      created: function() {
-      this.getCurUserID();
-  },
-    methods: {
-          getCurUserID(){
-        this.$http.get('/api/getCurUserID')
-                .then((response) => {
-                  var res1 = JSON.parse(response.bodyText)
-                  if (res1['err_num'] == 0) {
-                    this.watchId = res1['userID'];
-                    this.role = res1['role'];
-                  }
-                })
+      data() {
+        return {
+          fileList: [],
+          list: [
+            // {code:"171110133",name:"朱振南2",file:"balaa",exp:"修改了",com:"szyd"},
+            // {code:"171110133",name:"朱振南4",file:"balaa"},
+            // {code:"171110133",name:"朱振南3",file:"balaa"},
+            // {code:"171110133",name:"朱振南1",file:"balaa"},
+          ],
+          currentdata: [],
+          watchId: "",
+          role: '',
+        }
       },
-          fileUpload(data){
-    let url = '/card/scrapApply/uploadScrapCards';
-    return postResponse(url,data,{contentType:'form'})
- },
-      // 上传触发前 对文件格式的校验只校验了excel文件
- beforeAvatarUpload(file) {
-      let FileExt = file.name.replace(/.+\./, "").toLowerCase();
-      let flag = ["doc", "docx","pdf"].includes(FileExt);
-      if (!flag) this.$message.error("只能上传doc\\docx\\pdf文件!");
-      return flag;
-    },
-// 文件值改变时触发 change事件
-    getValChange(file, fileList) {
-      if (fileList.length > 0) {
-        this.fileList = [fileList[fileList.length - 1]]
-      }else{
-        this.fileList = fileList[0]
-      }
-    },
-  // 上传调用后台接口
-  getfileUpload() {
-      let formData = new FormData();
-      formData.append("file",  this.fileList[0].raw);
-      this.fileUpload(formData).then((res) => {
-        this.$message.success("上传成功!");
-      });
-    },
-      handleClick(){
-            //更改currentuser,上传给不同的人
-        this.textarea = "";
+      created() {
+        this.getCurUserID();
+        // this.getstufile();
+      },
+      methods: {
+        getCurUserID() {
+          this.$http.get('/api/getCurUserID')
+            .then((response) => {
+              var res1 = JSON.parse(response.bodyText)
+              if (res1['err_num'] == 0) {
+                this.watchId = res1['userID'];
+                this.role = res1['role'];
+                this.getdata();
+              }
+            })
+        },
+        getdata() {
+          this.$http.post('/api/getStudentEndbyTea/', {'teaId': this.watchId}, {emulateJSON: true})
+            .then(function (response) {
+              var res1 = JSON.parse(response.bodyText);
+              if (res1['err_code'] == 0) {
+                for (var i = 0; i < res1['ulist'].length; i++) {
+                  this.list.push({
+                    stuid:res1['ulist'][i]['pk'],
+                    status:res1['slist'][i]['fields']['status'],
+                    name: res1['ulist'][i]['fields']['name']
+                    , file: res1['rlist'][i]['fields']['path']
+                    , exp: res1['rlist'][i]['fields']['introduction']
+                    , id: res1['rlist'][i]['pk']
+                    , com: ""
+                  })
+
+                }
+              } else {
+                this.$message.error("获取学生信息失败")
+              }
+            })
+        },
+        downloadfile(path) {
+          console.log(path);
+        },
+        handleClick() {
+
+        },
+        submitcom(id, content) {
+          this.$http.post('/api/addRecordContent/', {'recordId': id, 'content': content}, {emulateJSON: true})
+            .then(function (response) {
+              var res1 = JSON.parse(response.bodyText);
+              if (res1['err_code'] == 0) {
+                this.$message({
+                  type: 'info',
+                  message: '提交成功'
+                });
+              } else {
+                this.$message.error("提交失败,请重试")
+              }
+
+            })
+        },
+        storeinto(id,com){
+          this.$http.post('/api/storeArchive/', {'recId':id,'content':com,'teaId':this.watchId}, {emulateJSON: true})
+            .then(function (response) {
+              var res1 = JSON.parse(response.bodyText);
+              if (res1['err_code'] == 0) {
+                this.$message({
+                  type: 'info',
+                  message: '归档成功'
+                });
+                location.reload();
+              } else {
+                this.$message.error("系统错误")
+              }
+
+            })
+        }
       }
     }
-    }
+
 </script>
 
 <style scoped>
@@ -125,3 +147,5 @@ import flowTea from '../components/flowTea'
   font-size: medium;
 }
 </style>
+
+

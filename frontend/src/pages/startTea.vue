@@ -22,7 +22,11 @@
   v-model="item.com">
 </el-input>
       <el-divider></el-divider>
+      <div v-if="item.status < 40">
       <el-button plain @click="submitcom(item.id,item.com)">提交</el-button>
+      <el-button plain @click="storeinto(item.id,item.com) " >存入档案</el-button>
+      </div>
+      <span v-if="item.status>= 40">您已经归档，无法重复提交</span>
     </el-tab-pane>
 
   </el-tabs>
@@ -81,12 +85,15 @@ import flowTea from '../components/flowTea'
               if (res1['err_code'] == 0) {
                 for (var i = 0; i < res1['ulist'].length; i++) {
                   this.list.push({
+                    stuid:res1['ulist'][i]['pk'],
+                    status:res1['slist'][i]['fields']['status'],
                     name: res1['ulist'][i]['fields']['name']
                     , file: res1['rlist'][i]['fields']['path']
                     , exp: res1['rlist'][i]['fields']['introduction']
                     , id: res1['rlist'][i]['pk']
                     , com: ""
                   })
+
                 }
               } else {
                 this.$message.error("获取学生信息失败")
@@ -114,6 +121,22 @@ import flowTea from '../components/flowTea'
 
             })
         },
+        storeinto(id,com){
+          this.$http.post('/api/storeArchive/', {'recId':id,'content':com,'teaId':this.watchId}, {emulateJSON: true})
+            .then(function (response) {
+              var res1 = JSON.parse(response.bodyText);
+              if (res1['err_code'] == 0) {
+                this.$message({
+                  type: 'info',
+                  message: '归档成功'
+                });
+                location.reload();
+              } else {
+                this.$message.error("系统错误")
+              }
+
+            })
+        }
       }
     }
 
