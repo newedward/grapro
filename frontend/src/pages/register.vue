@@ -238,7 +238,7 @@ export default {
                   type: 'success',
                   message: res.data
                 });
-              window.location.href = "/home";
+              // window.location.href = "/home";
             }, err => {
               this.$message({
                 type: 'info',

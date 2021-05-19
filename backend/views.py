@@ -3,7 +3,8 @@ import json
 from django.http import HttpResponse
 from django.http import JsonResponse
 from django.core import serializers
-
+from django.http import StreamingHttpResponse
+from django.utils.encoding import escape_uri_path
 from backend.models import *
 from backend.controller import dbcontrol
 from backend.controller import Util
@@ -17,11 +18,31 @@ def getCurUserID(req):
     response = {}
     err, curUser = Util.getUserIDBySession(req)
     info,role = dbcontrol.getUserRole(curUser)
+    info2,avater = dbcontrol.getAvaterByID(curUser)
     if err == 'succeed':
         response['userID'] = curUser
         response['msg'] = 'succeed'
         response['role'] = role
         response['err_num'] = 0
+        response['avater'] = avater
+    else:
+        response['err_num'] = 1
+        response['msg'] = 'error'
+    # print(response)
+    return JsonResponse(response)
+
+def getCurUserIDMan(req):
+    response = {}
+    err, curUser = Util.getUserIDBySession(req)
+    info,role = dbcontrol.getUserRole(curUser)
+    now,recommend = dbcontrol.getcountbyId(curUser)
+    if err == 'succeed':
+        response['userID'] = curUser
+        response['msg'] = 'succeed'
+        response['role'] = role
+        response['err_num'] = 0
+        response['avater'] = now
+        response['count'] = recommend
     else:
         response['err_num'] = 1
         response['msg'] = 'error'
@@ -69,6 +90,9 @@ def applyTeacher(req):
     elif info == "has":
         response['Msg'] = 'has'
         response['err_code'] = 2
+    elif info == "not start":
+        response['Msg'] = 'not start'
+        response['err_code'] = 3
     else:
         response['Msg'] = 'failed'
         response['err_code'] = 1
@@ -104,6 +128,9 @@ def acceptStu(req):
     elif info == "has":
         response['Msg'] = 'has'
         response['err_code'] = 2
+    elif info == "wrong":
+        response['Msg'] = 'wrong'
+        response['err_code'] = 3
     else :
         response['Msg'] = 'failed'
         response['err_code'] = 1
@@ -251,6 +278,29 @@ def addRecordContent(req):
     print(response)
     return JsonResponse(response)
 
+def downloadfile(req,id):
+    print("here",id)
+    def down_chunk_file_manager(file_path, chuck_size=1024):
+        with open(file_path, "rb") as file:
+            while True:
+                chuck_stream = file.read(chuck_size)
+                if chuck_stream:
+                    yield chuck_stream
+                else:
+                    break
+
+    file_path = dbcontrol.getpathbyid(id)
+    if not os.path.exists(file_path):
+        return "no file 联系开发者"
+    names = file_path.split('/')
+    name = names[-1]
+    print(name)
+    response = StreamingHttpResponse(down_chunk_file_manager(file_path))
+    response['Content-Type'] = 'application/octet-stream'
+    response["Content-Disposition"] = "attachment; filename*=UTF-8''{}".format(escape_uri_path(name))
+
+    return response
+
 def uploadfile(req):
     work = req.FILES.get('work',None)
     nextnum = req.POST.get('next')
@@ -258,12 +308,12 @@ def uploadfile(req):
     process = req.POST.get('process')
     print("下一个文件",nextnum)
     # head_path = BASE_DIR + "\\{}".format(process).replace(" ", "")
-    head_path = BASE_DIR + "\\media\\{}\\{}\\{}".format(process,username,nextnum).replace(" ", "")
+    head_path = BASE_DIR + "/media/{}/{}/{}".format(process,username,nextnum).replace(" ", "")
     print("head_path", head_path)
     if not os.path.exists(head_path):
         os.makedirs(head_path)
     suffix = work.name.split(".")[1]
-    work_path = head_path + "\\"+work.name
+    work_path = head_path + "/"+work.name
     work_path = work_path.replace(" ", "")
     print("路径",work_path)
     response = {}
@@ -432,7 +482,7 @@ def createUser(req):
     role = str(req.POST.get('role'))
     requirement = str(req.POST.get('req'))
     code = str(req.POST.get('code'))
-    print("路径",avatarpath)
+    avatarpath = dbcontrol.changeavater(avatarpath)
     info,user = dbcontrol.addUser(userName,password,name,email,avatarpath,uni,school)
     if info == "succeed":
         if role == "学生":
@@ -440,8 +490,8 @@ def createUser(req):
             user.save()
             info = dbcontrol.addStudent(user,code)
             if info == "succeed":
-                print(Util.setUserForSession(req, user.id))
-                return HttpResponse("注册成功!")
+                # print(Util.setUserForSession(req, user.id))
+                return HttpResponse("注册成功!但仍需要管理员审批")
             else:
                 print("学生失败")
                 return HttpResponse("注册失败!")
@@ -450,8 +500,8 @@ def createUser(req):
             user.save()
             info = dbcontrol.addTeacher(user,requirement)
             if info == "succeed":
-                print(Util.setUserForSession(req, user.id))
-                return HttpResponse("注册成功!")
+                # print(Util.setUserForSession(req, user.id))
+                return HttpResponse("注册成功!但仍需要管理员审批")
             else:
                 print("教师失败")
                 return HttpResponse("注册失败!")
@@ -463,12 +513,15 @@ def createUser(req):
 def uploadAvater(req):
     avater = req.FILES.get('avater', None)
     timestamp = time.time()
-    head_path = BASE_DIR + "\\media\\{}".format(timestamp).replace(" ", "")
+    head_path = BASE_DIR + "/allstatic/{}".format(timestamp).replace(" ", "")
+    read_path = BASE_DIR + "/static/{}".format(timestamp).replace(" ", "")
     if not os.path.exists(head_path):
         os.makedirs(head_path)
     suffix = avater.name.split(".")[1]
-    work_path = head_path + "\\" + avater.name
+    work_path = head_path + "/" + avater.name
+    read_path2 = read_path + "/" + avater.name
     ava_path = work_path.replace(" ", "")
+    read_path3 = read_path2.replace(" ", "")
     print("路径0", ava_path)
     response = {}
     try:
@@ -481,15 +534,29 @@ def uploadAvater(req):
     else:
         response["Msg"] = "succeed"
         response["err_code"] = 0
-        response["path"] = ava_path
+        response["path"] = read_path3
     return JsonResponse(response)
 
 def changeInfo(req):
-    pass
+    name = str(req.POST.get('name'))
+    email = str(req.POST.get('email'))
+    avatarpath = str(req.POST.get('avatarpath'))
+    requirement = str(req.POST.get('req'))
+    code = str(req.POST.get('code'))
+    id = str(req.POST.get('userId'))
+    role =str(req.POST.get('roleId'))
+    avatarpath = dbcontrol.changeavater(avatarpath)
+    print("信息",id,avatarpath,requirement)
+    info = dbcontrol.changeuserinfo(id,role,avatarpath,requirement,email,name,code)
+    if info == "succeed":
+        return HttpResponse("修改成功!")
+    else:
+        return HttpResponse("修改失败!")
+
 
 def getUser(req):
     userid = req.POST.get('watchId')
-    info,user = dbcontrol.getUser(userid)
+    info,user,extra = dbcontrol.getUser(userid)
     response = {}
     if info == "succeed":
         response["Msg"] = "succeed"
@@ -499,6 +566,8 @@ def getUser(req):
         response["uni"] = user.uni
         response["school"] = user.school
         response["email"] = user.email
+        response["req"] = extra
+        response["code"] = extra
     else:
         response['Msg'] = 'failed'
         response['err_num'] = 1
@@ -704,6 +773,45 @@ def makeGreatPro(req):
         response['err_code'] = 1
     # print(response)
     return JsonResponse(response)
+
+def startnow(req):
+    manid = req.POST.get('manId')
+    count = req.POST.get('count')
+    info = dbcontrol.startnowbyman(manid,count)
+    response = {}
+    if info == "succeed":
+        response["Msg"] = "succeed"
+        response["err_code"] = 0
+    else:
+        response['Msg'] = 'failed'
+        response['err_code'] = 1
+    return JsonResponse(response)
+
+
+def endnow(req):
+    manid = req.POST.get('manId')
+    info = dbcontrol.endnowbyman(manid)
+    response = {}
+    if info == "succeed":
+        response["Msg"] = "succeed"
+        response["err_code"] = 0
+    else:
+        response['Msg'] = 'failed'
+        response['err_code'] = 1
+    return JsonResponse(response)
+
+def startprocess(req):
+    manid = req.POST.get('manId')
+    info = dbcontrol.startprocess(manid)
+    response = {}
+    if info == "succeed":
+        response["Msg"] = "succeed"
+        response["err_code"] = 0
+    else:
+        response['Msg'] = 'failed'
+        response['err_code'] = 1
+    return JsonResponse(response)
+
 
 
 

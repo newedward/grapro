@@ -104,7 +104,7 @@ import flowStu from '../components/flowStu'
                     if(res1['err_code']==0) {
 
                       for (var i = 0; i < res1['tealist'].length; i++) {
-                        this.data.push({avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+                        this.data.push({avater:res1['ulist'][i]['fields']['avater']
                         ,name:res1['ulist'][i]['fields']['name'],intro:res1['tealist'][i]['fields']['requirement']
                         ,uid:res1['ulist'][i]['pk']})
                       }
@@ -159,6 +159,9 @@ import flowStu from '../components/flowStu'
                     }
                     else if (res1['err_code']==2){
                       this.$message.error("已经申请过了")
+                    }
+                    else if (res1['err_code']==3){
+                      this.$message.error("毕设周期未开始")
                     }
                     else{
                       this.$message.error("申请失败")

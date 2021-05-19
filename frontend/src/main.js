@@ -37,6 +37,11 @@ Vue.use(VueResource)
 Vue.config.productionTip = false
 const router = new VueRouter({
   routes: [
+      {
+      path: '',
+      name: 'home',
+      component: home
+    },
     {
       path: '/home',
       name: 'home',

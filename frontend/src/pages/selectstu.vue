@@ -94,7 +94,7 @@ import flowTea from '../components/flowTea'
                     var res1 = JSON.parse(response.bodyText);
                     if(res1['err_code']==0) {
                       for (var i = 0; i < res1['apps'].length; i++) {
-                        this.data.push({avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+                        this.data.push({avater:res1['ulist'][i]['fields']['avater']
                         ,name:res1['ulist'][i]['fields']['name'],intro:"一期测试"
                         ,uid:res1['ulist'][i]['pk'],code:res1['slist'][i]['fields']['code']
                         ,appid:res1['apps'][i]['pk']})
@@ -151,6 +151,9 @@ import flowTea from '../components/flowTea'
                     }
                     else if (res1['err_code']==2){
                       this.$message.error("抱歉，该学生已经找到其他导师了")
+                    }
+                    else if (res1['err_code']==3){
+                      this.$message.error("毕设周期未开始")
                     }
                     else{
                       this.$message.error("请求失败")

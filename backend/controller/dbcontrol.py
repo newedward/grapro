@@ -40,10 +40,16 @@ def getUserRole(user):
 def getUser(userid):
     try:
         user = User.objects.get(id=userid)
+        if user.credit == 2:
+            tea = Teacher.objects.get(user_tea = user)
+            extra = tea.requirement
+        else:
+            stu = Student.objects.get(user_stu = user)
+            extra = stu.code
     except:
-        return ("failed",None)
+        return ("failed",None,None)
     else:
-        return ("succeed",user)
+        return ("succeed",user,extra)
 
 def validateUser(username):
     findUser = User.objects.filter(username=username)
@@ -118,6 +124,7 @@ def addTeacher(user, requirement):
 def addStudent(user, code):
     newStu = Student(user_stu=user, code=code)
     try:
+        newStu.status = -10
         newStu.save()
     except:
         return ("failed")
@@ -142,21 +149,48 @@ def getTeaById(teaid):
     else:
         return ("succeed", teacher)
 
+def changeavater(path):
+    pathnow = os.getcwd()
+    # print(pathnow)
+    pathres = path.replace(pathnow, '')
+    # print(pathres)
+    return pathres
+
+def getcountbyId(userid):
+    try:
+        usr = User.objects.get(id=userid)
+        uni = usr.uni
+        school = usr.school
+        sn = SchoolNow.objects.get(uni=uni, school=school)
+        now = sn.now
+        tcounts = User.objects.filter(credit=2,uni=uni,school=school).count()
+        scounts = User.objects.filter(credit=1,uni=uni,school=school).count()
+        print(tcounts,scounts)
+        if tcounts != 0:
+            recommend = (scounts//tcounts) + 1
+        else:
+            recommend = -1
+    except:
+        return (-1, -1)
+    else:
+        return (now,recommend)
+
 
 def getAvaterByID(userid):
     try:
-        path = User.objects.get(id=userid).avater
-        print(path)
-        pathnow = os.getcwd()
-        print(pathnow)
-        pathres = path.replace(pathnow,'')
-        print(pathres)
+        usr = User.objects.get(id=userid)
+        path = usr.avater
+        # print(path)
+        # pathnow = os.getcwd()
+        # print(pathnow)
+        # pathres = path.replace(pathnow,'')
+        # print(pathres)
         # with open( path, 'rb' ) as file:
         #     avater = file
     except:
         return ("avater error", None)
     else:
-        return ("succeed", pathres)
+        return ("succeed", path)
 
 
 def getTeaByStu(userid):
@@ -184,6 +218,8 @@ def getStuByTea(teaid):
 
 
 def addapplication(teaid, stuid):
+    if Student.objects.get(user_stu_id = stuid).status < 0:
+        return ("not start")
     try:
         print(Application.objects.get(stu_app_id=stuid, tea_app_id=teaid))
     except:
@@ -235,6 +271,8 @@ def followteacher(stuid, teaid):
             return ("has")
         else:
             student.teacher_fol_id = teaid
+            if student.status < 0 :
+                return ("wrong")
             student.status = 10
             student.save()
             return ("succeed")
@@ -526,3 +564,127 @@ def makegreatproject(stuid):
         return ("failed")
     else:
         return ("succeed")
+
+def getpathbyid(id):
+    try:
+        pt = Record.objects.get(id=id).path
+    except:
+        return "FAIL"
+    else:
+        return pt
+
+def changeuserinfo(id,role,avatarpath,requirement,email,name,code):
+    try:
+        print("陷入",role)
+        user = User.objects.get(id=id)
+        print("用户",user)
+        if role == '2':
+            tea = Teacher.objects.get(user_tea = user)
+            print("老师",tea)
+            tea.requirement = requirement
+            tea.save()
+        else:
+            print("学生")
+            stu = Student.objects.get(user_stu = user)
+            stu.code = code
+            stu.save()
+        print(avatarpath)
+        if avatarpath != "undefined":
+            user.avater = avatarpath
+        user.email = email
+        user.name = name
+        user.save()
+    except:
+        return ("failed")
+    else:
+        return ("succeed")
+
+def startnowbyman(manid,count):
+    try:
+        man = User.objects.get(id=manid)
+        sn = SchoolNow.objects.get(uni=man.uni,school=man.school)
+        sn.now = count
+        sn.save()
+        users = User.objects.filter(uni=man.uni,school=man.school,credit=1)
+        for user in users:
+            stu = Student.objects.get(user_stu = user)
+            if stu.status!=None and stu.status<0:
+                stu.status = 0
+                stu.save()
+    except:
+        return ("failed")
+    else:
+        return ("succeed")
+
+def endnowbyman(manid):
+    try:
+        man = User.objects.get(id=manid)
+        sn = SchoolNow.objects.get(uni=man.uni, school=man.school)
+        sn.now = 0
+        sn.save()
+        users = User.objects.filter(uni=man.uni,school=man.school,credit=1)
+        for user in users:
+            user.valid = 1
+            user.save()
+    except:
+        return ("failed")
+    else:
+        return ("succeed")
+
+def startprocess(manid):
+    try:
+        man = User.objects.get(id=manid)
+        sn = SchoolNow.objects.get(uni=man.uni, school=man.school)
+        maxlen = sn.now
+        uss = User.objects.filter(uni=man.uni,school=man.school,credit=1)
+        sfolt = {}
+        print("学生",uss)
+        for u in uss:
+            stu = Student.objects.get(user_stu = u)
+            if stu.teacher_fol != None:
+                if stu.teacher_fol_id in sfolt:
+                    sfolt[stu.teacher_fol_id].append(u.id)
+                else:
+                    sfolt[stu.teacher_fol_id] = []
+        uts = User.objects.filter(uni=man.uni, school=man.school,credit=2)
+        remain = []
+        print("导师",uts)
+        for u in uts:
+            if u.id not in sfolt:
+                sfolt[u.id] = []
+        print("字典", sfolt)
+        for u in uts:
+            tea = Teacher.objects.get(user_tea = u)
+            if u.id not in sfolt:
+                sfolt[u.id] = []
+            qs = tea.queue.split(',')
+            print("队列",qs)
+            for us in qs:
+                # 导师没满就在字典里加一个计数
+                stu = Student.objects.get(user_stu_id=us)
+                if stu.teacher_fol == None:
+                    if len(sfolt[u.id]) < maxlen:
+                        # 老师还有位置
+                        sfolt[u.id].append(us)
+                        stu.teacher_fol = u
+                    else:
+                        # 导师没位置了
+                        remain.append(stu)
+        # 处理剩下的学生
+        i = 0
+        for u in uts:
+            if len(sfolt[u.id]) < maxlen:
+                sfolt[u.id].append(remain[i].user_stu_id)
+                remain[i].teacher_fol_id = u.id
+                i = i+1;
+                if i >= len(remain):
+                    break
+
+        sn = SchoolNow.objects.get(uni=man.uni, school=man.school)
+        sn.now = -maxlen
+        sn.save()
+    except:
+        return ("failed")
+    else:
+        return ("succeed")
+

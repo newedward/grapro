@@ -1,6 +1,6 @@
 <template>
 <el-header height="60px">
-    <div id="topNav" >
+    <div id="topNav">
 
       <el-row type="flex"  justify="center" align="middle" >
         <el-col span="20" class="row-tn" >
@@ -10,7 +10,9 @@
         <el-button type="text" style="margin-left: 10%"  @click.native="jumpTo($event)" id="事件审批">事件审批</el-button>
         <el-button type="text"  style="margin-left: 10%" @click.native="jumpTo($event)" id="档案管理">档案管理</el-button>
           <el-button type="text" style="margin-left: 10%"  @click="loginbacth" >批量注册</el-button>
-        <el-button type="text" icon="el-icon-bell" style="margin-left: 10%"  @click="checkMessage"></el-button>
+        <el-button type="text"   @click="endnowopen" v-if="hasstart == 2">结束当前周期</el-button>
+            <el-button type="text"   @click="startprocess" v-if="hasstart == 1" v-loading.fullscreen.lock="loading" element-loading-text="正在完成师生双选">结束师生互选</el-button>
+            <el-button type="text"   @click="dialogVisible2 = true" v-if="hasstart == 0">开始当前周期</el-button>
 <el-button type="primary" @click="toLogin" v-if="!watchId" style="margin-left: 10%">登录</el-button>
           <el-button type="primary" @click="toLogout" v-if="watchId" style="margin-left: 10%">登出</el-button>
         </el-col>
@@ -18,7 +20,7 @@
         </el-row>
       <el-dialog
   title="请上传文件批量注册"
-  :visible="dialogVisible"
+  :visible="dialogVisible"l
   width="30%"
   :before-close="handleClose">
 
@@ -53,6 +55,19 @@
     <!--</span>-->
   <!--</template>-->
 </el-dialog>
+        <el-dialog
+  title="开始本次毕设周期"
+  :visible="dialogVisible2"
+  width="30%"
+  :before-close="handleClose2">
+
+              <span>请输入每位导师最多能带的学生</span>
+<el-row>
+            <el-input  v-model="count"></el-input>
+              </el-row>
+
+            <el-button type="primary" @click="startnow">确 定</el-button>
+</el-dialog>
     </div></el-header>
 </template>
 
@@ -84,21 +99,36 @@ export default {
           avatar:'',
           role:'',
         dialogVisible:false,
+          dialogVisible2:false,
         dataf:{},
          headerf:{},
         suffix:'',
         watchId:'',
+          hasstart:0,
+          count:'',
+          loading:false,
     }
     },
 
   methods:{
     getCurUserID(){
-        this.$http.get('/api/getCurUserID')
+        this.$http.get('/api/getCurUserIDMan')
                 .then((response) => {
                   var res1 = JSON.parse(response.bodyText)
                   if (res1['err_num'] == 0) {
                     this.watchId = res1['userID'];
                     this.role = res1['role'];
+                    if (res1['avater'] == 0){
+                        this.hasstart = 0;
+                        this.count = res1['count'];
+                    }
+                    else if (res1['avater'] > 0){
+                        this.hasstart = 1;
+                        this.count = res1['count'];
+                    }
+                    else{
+                        this.hasstart = 2
+                    }
                   }
                 })
       },
@@ -141,7 +171,15 @@ export default {
         this.$confirm('确认关闭？')
           .then(_ => {
             this.dialogVisible= false;
-            location.reload()
+            location.reload();
+            done()
+          })
+          .catch(_ => {});
+      },
+      handleClose2(done) {
+        this.$confirm('确认关闭？')
+          .then(_ => {
+            this.dialogVisible2= false;
             done()
           })
           .catch(_ => {});
@@ -173,7 +211,64 @@ export default {
     beforefileUpload(){
       this.dataf['manid'] = this.watchId;
       this.dataf['suffix'] = this.suffix;
-    }
+    },
+      startnow(){
+        this.$http.post('/api/startnow/',{'manId':this.watchId,'count':this.count},{emulateJSON:true})
+              .then(function(response){
+                 var res1 = JSON.parse(response.bodyText);
+                 if(res1["err_code"] == 0){
+                     this.$message({
+                      type: 'success',
+                      message: '成功开始'
+                        });
+                     this.hasstart = 1;
+                     location.reload();
+                 }
+
+              })
+      },
+      startprocess(){
+    this.loading = true;
+        this.$http.post('/api/startprocess/',{'manId':this.watchId},{emulateJSON:true})
+              .then(function(response){
+                 var res1 = JSON.parse(response.bodyText);
+                 if(res1["err_code"] == 0){
+                     this.$message({
+                      type: 'success',
+                      message: '操作成功'
+                        });
+                     this.hasstart = 2;
+                     this.loading = false;
+                 }
+
+              })
+      },
+      endnowopen(){
+        this.$confirm('此操作将结束本毕设周期, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$http.post('/api/endnow/',{'manId':this.watchId},{emulateJSON:true})
+              .then(function(response){
+                 var res1 = JSON.parse(response.bodyText);
+                 if(res1["err_code"] == 0){
+                     this.$message({
+                      type: 'success',
+                      message: '操作成功'
+                        });
+                     this.hasstart = 0;
+                     location.reload();
+                 }
+
+              })
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消结束'
+          });
+        });
+      }
 
   }
 }

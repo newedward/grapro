@@ -110,7 +110,7 @@ import flowTea from '../components/flowTea'
                     var res1 = JSON.parse(response.bodyText);
                     if(res1['err_code']==0) {
                       for (var i = 0; i < res1['ulist'].length; i++) {
-                        this.groups.push({avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+                        this.groups.push({avater:res1['ulist'][i]['fields']['avater']
                         ,name:res1['ulist'][i]['fields']['name'],intro:"一期测试"
                         ,uid:res1['ulist'][i]['pk'],code:res1['slist'][i]['fields']['code']
                         })
@@ -167,7 +167,7 @@ import flowTea from '../components/flowTea'
                     if(res1['err_code']==0) {
 
                       for (var i = 0; i < res1['slist'].length; i++) {
-                        this.list.push({avater:"https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
+                        this.list.push({avater:res1['ulist'][i]['fields']['avater']
                         ,name:res1['ulist'][i]['fields']['name'],code:res1['slist'][i]['fields']['code']
                         ,uid:res1['slist'][i]['pk']})
                       }

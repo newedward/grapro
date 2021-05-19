@@ -116,3 +116,8 @@ class archives(models.Model):
     description = models.CharField(max_length=300,null=True)
     uni = models.CharField(max_length=40,null=True)
     school = models.CharField(max_length=40,null=True)
+
+class SchoolNow(models.Model):
+    uni = models.CharField(max_length=40, null=True)
+    school = models.CharField(max_length=40, null=True)
+    now = models.IntegerField(null=True)

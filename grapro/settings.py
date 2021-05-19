@@ -26,7 +26,7 @@ SECRET_KEY = '&5n47l9m0y&yn%r&i%#6lq$o=1luaapn@f+sr5zm*yn)dldh4t'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['47.98.150.77']
 
 
 # Application definition
@@ -128,8 +128,8 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'allstatic')
 # set for vue.js
-STATICFILES_DIRS = [
+STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'frontend/dist/static'),
-]
+)

@@ -12,7 +12,7 @@
     <el-tab-pane v-for="item in list" :label="item.name">
       <el-row style="margin: 10px">
         <el-col span="6"><span>{{item.exp}}</span></el-col>
-        <el-col span="6"><el-button plain size="small" @click="downloadfile(item.file)">下载最新提交</el-button></el-col>
+        <el-col span="6"><el-button plain size="small" @click="downloadfile(item.id)">下载最新提交</el-button></el-col>
       </el-row>
       <el-divider content-position="left">我的评阅</el-divider>
       <el-input
@@ -100,8 +100,8 @@ import flowTea from '../components/flowTea'
               }
             })
         },
-        downloadfile(path) {
-          console.log(path);
+        downloadfile(id) {
+            window.location.href="download/" + id;
         },
         handleClick() {
 

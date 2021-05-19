@@ -161,7 +161,7 @@ import flowStu from '../components/flowStu'
                  var res1 = JSON.parse(response.bodyText);
                 this.status = res1["info"];
                  this.statusicon = res1["type"];
-                 if (res1["statuscode"] >= 70){
+                 if (res1["statuscode"] >= 70 || res1["statuscode"]<40){
                    this.haspassed = true;
                  }
               })

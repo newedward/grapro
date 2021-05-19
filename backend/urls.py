@@ -42,6 +42,11 @@ urlpatterns = [
     path('storeArchive/', views.storeArchive, name = 'storeArchive'),
     path('getStudentEndProcess/', views.getStudentEndProcess, name = 'getStudentEndProcess'),
     path('initHome/', views.initHome, name = 'initHome'),
+    path('downloadfile/', views.downloadfile, name = 'downloadfile'),
+    path('startnow/', views.startnow, name = 'startnow'),
+    path('startprocess/', views.startprocess, name = 'startprocess'),
+    path('endnow/', views.endnow, name = 'endnow'),
+    path('getCurUserIDMan/', views.getCurUserIDMan, name = 'getCurUserIDMan'),
     path('getStudentEndbyTea/', views.getStudentEndbyTea, name = 'getStudentEndbyTea'),
     path('getStudentMediumProcess/', views.getStudentMediumProcess, name = 'getStudentMediumProcess'),
 ]
